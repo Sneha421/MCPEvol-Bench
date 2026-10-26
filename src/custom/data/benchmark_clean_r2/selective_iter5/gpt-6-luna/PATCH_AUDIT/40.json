@@ -1,0 +1,71 @@
+{
+  "task_id": 40,
+  "strategy": "selective_patch",
+  "stage": "late",
+  "mutation_depth": 2,
+  "routing_events": [
+    {
+      "depth": 2,
+      "server": "clojars-deps-server",
+      "before": [
+        "get_clojars_latest_version"
+      ],
+      "after": [
+        "get_clojars_latest_version",
+        "get_clojars_artifact_info"
+      ],
+      "change_class": "TOOL"
+    }
+  ],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "clojars-deps-server",
+      "tool": "get_clojars_artifact_info",
+      "change_classes": [
+        "TOOL"
+      ],
+      "field_paths": [
+        "$"
+      ],
+      "old_hash": null,
+      "candidate_hash": "f7e54b64dcc1a40ad21f8dfc5505b6813bba25cfb74062cc213498eda8b453f3",
+      "live_hash": "f7e54b64dcc1a40ad21f8dfc5505b6813bba25cfb74062cc213498eda8b453f3",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "dependency": "metosin/reitit"
+        }
+      },
+      "final_hash": "f7e54b64dcc1a40ad21f8dfc5505b6813bba25cfb74062cc213498eda8b453f3"
+    }
+  ],
+  "changed_card_count": 1,
+  "changed_field_count": 1,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 2542,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 131,
+      "output_tokens": 87,
+      "latency_ms": 2536,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 1,
+    "input_tokens": 131,
+    "output_tokens": 87,
+    "latency_ms": 2536,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "837d3c4d43f7b5d58223c717110156986f0aed43643af27c848e69f2e31f4d57"
+}

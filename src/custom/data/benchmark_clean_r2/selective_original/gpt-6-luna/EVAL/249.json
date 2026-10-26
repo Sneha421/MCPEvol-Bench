@@ -1,0 +1,470 @@
+{
+  "response": "Here's a realistic user question that involves multiple MCP servers:\n\n```xml\n<response>\n  <workflow_analysis>\n    This scenario involves analyzing sales data geographically and visually comparing products across regions. First, sales performance data will be visualized using district maps to show regional variations. Then, product comparisons will be made using column charts with grouping enabled to highlight differences across product categories and regions. This combines geographical representation with detailed product performance visualization.\n  </workflow_analysis>\n  <target_servers>\n    <server name=\"@umengfe/mcp-server-chart\">\n      <tool>generate_district_map</tool>\n      <tool>generate_column_chart</tool>\n    </server>\n  </target_servers>\n  <question>\n    I need to analyze our sales performance across different Chinese provinces and compare how our product categories are performing in each region. Can you create a map showing total sales by province with a color gradient indicating performance, and then generate grouped column charts comparing electronics vs apparel sales for each province? The electronic sales data is strongest in Guangdong province while apparel leads in Zhejiang province. Also make the charts use our corporate color palette of #1783FF and #00C9C9.\n  </question>\n</response>\n```",
+  "question": "I need to analyze our sales performance across different Chinese provinces and compare how our product categories are performing in each region. Can you create a map showing total sales by province with a color gradient indicating performance, and then generate grouped column charts comparing electronics vs apparel sales for each province? The electronic sales data is strongest in Guangdong province while apparel leads in Zhejiang province. Also make the charts use our corporate color palette of #1783FF and #00C9C9.",
+  "tool_calls": [
+    {
+      "tool_name": "generate_district_map",
+      "parameters": {}
+    },
+    {
+      "tool_name": "generate_column_chart",
+      "parameters": {}
+    }
+  ],
+  "servers": {
+    "@umengfe/mcp-server-chart": [
+      "generate_district_map",
+      "generate_column_chart"
+    ]
+  },
+  "answer": "已生成两张图表：\n\n- **各省销售总额地图**：按省份销售额设置蓝色渐变。由于未提供实际销售数据，地图中的数值是示意值。\n- **各省电子产品与服装销售对比图**：使用企业配色 `#1783FF` 和 `#00C9C9`；示意数据体现了广东电子产品销售较强、浙江服装销售领先。\n\n图表中的数值单位暂按万元处理。",
+  "trajectory_messages": [
+    {
+      "role": "system",
+      "content": "You are an AI agent connected to the MCP (Model Context Protocol) server. Based on the user's request, select and invoke tools to fulfill the task accurately and efficiently. \nNote that do not to ask any questions to the user, just call the tool to complete the task.\n\nConsidering real-time performance, the time is set to be around `2026-10-26 (星期一)`.\n\nThese files are stored in the local file system and serve as relevant resources for tool utilization. Add the prefix path \"./anotation_path\" to the following file systems as an absolute path during use:\n`Error: Invalid directory path - ./anotation_path`\n\nDatabase Configuration (if applicable):\n- Host: 127.0.0.1\n- Port: 3305\n- User: root\n- Password: 123456\n- Database Name: mydb\n"
+    },
+    {
+      "role": "user",
+      "content": "I need to analyze our sales performance across different Chinese provinces and compare how our product categories are performing in each region. Can you create a map showing total sales by province with a color gradient indicating performance, and then generate grouped column charts comparing electronics vs apparel sales for each province? The electronic sales data is strongest in Guangdong province while apparel leads in Zhejiang province. Also make the charts use our corporate color palette of #1783FF and #00C9C9."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_Wgf5kigCx29YJUkJKcRRPqKr",
+          "function": {
+            "arguments": "{\"title\":\"各省销售总额\",\"data\":{\"name\":\"中国\",\"showAllSubdistricts\":true,\"dataLabel\":\"总销售额\",\"dataType\":\"number\",\"dataValueUnit\":\"万元\",\"colors\":[\"#1783FF\"],\"subdistricts\":[{\"name\":\"广东省\",\"dataValue\":\"100\"},{\"name\":\"浙江省\",\"dataValue\":\"90\"},{\"name\":\"江苏省\",\"dataValue\":\"80\"},{\"name\":\"山东省\",\"dataValue\":\"70\"},{\"name\":\"河南省\",\"dataValue\":\"60\"},{\"name\":\"四川省\",\"dataValue\":\"50\"},{\"name\":\"湖北省\",\"dataValue\":\"40\"},{\"name\":\"福建省\",\"dataValue\":\"30\"},{\"name\":\"湖南省\",\"dataValue\":\"20\"},{\"name\":\"安徽省\",\"dataValue\":\"10\"}]},\"width\":1200,\"height\":900}",
+            "name": "generate_district_map"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_Wgf5kigCx29YJUkJKcRRPqKr",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"district-map\",\"title\":\"各省销售总额\",\"data\":{\"name\":\"中国\",\"showAllSubdistricts\":true,\"dataLabel\":\"总销售额\",\"dataType\":\"number\",\"dataValueUnit\":\"万元\",\"colors\":[\"#1783FF\"],\"subdistricts\":[{\"name\":\"广东省\",\"dataValue\":\"100\"},{\"name\":\"浙江省\",\"dataValue\":\"90\"},{\"name\":\"江苏省\",\"dataValue\":\"80\"},{\"name\":\"山东省\",\"dataValue\":\"70\"},{\"name\":\"河南省\",\"dataValue\":\"60\"},{\"name\":\"四川省\",\"dataValue\":\"50\"},{\"name\":\"湖北省\",\"dataValue\":\"40\"},{\"name\":\"福建省\",\"dataValue\":\"30\"},{\"name\":\"湖南省\"..."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_R8t6B7XpUFQIi5kAsvqCnkgm",
+          "function": {
+            "arguments": "{\"data\":[{\"category\":\"广东省\",\"value\":100,\"group\":\"电子产品\"},{\"category\":\"广东省\",\"value\":60,\"group\":\"服装\"},{\"category\":\"浙江省\",\"value\":70,\"group\":\"电子产品\"},{\"category\":\"浙江省\",\"value\":100,\"group\":\"服装\"},{\"category\":\"江苏省\",\"value\":80,\"group\":\"电子产品\"},{\"category\":\"江苏省\",\"value\":65,\"group\":\"服装\"},{\"category\":\"山东省\",\"value\":65,\"group\":\"电子产品\"},{\"category\":\"山东省\",\"value\":60,\"group\":\"服装\"},{\"category\":\"河南省\",\"value\":55,\"group\":\"电子产品\"},{\"category\":\"河南省\",\"value\":50,\"group\":\"服装\"},{\"category\":\"四川省\",\"value\":60,\"group\":\"电子产品\"},{\"category\":\"四川省\",\"value\":55,\"group\":\"服装\"},{\"category\":\"湖北省\",\"value\":50,\"group\":\"电子产品\"},{\"category\":\"湖北省\",\"value\":45,\"group\":\"服装\"},{\"category\":\"福建省\",\"value\":55,\"group\":\"电子产品\"},{\"category\":\"福建省\",\"value\":60,\"group\":\"服装\"},{\"category\":\"湖南省\",\"value\":45,\"group\":\"电子产品\"},{\"category\":\"湖南省\",\"value\":40,\"group\":\"服装\"},{\"category\":\"安徽省\",\"value\":40,\"group\":\"电子产品\"},{\"category\":\"安徽省\",\"value\":35,\"group\":\"服装\"}],\"group\":true,\"stack\":false,\"style\":{\"palette\":[\"#1783FF\",\"#00C9C9\"]},\"title\":\"各省电子与服装销售对比\",\"axisXTitle\":\"省份\",\"axisYTitle\":\"销售额（万元）\",\"width\":1200,\"height\":700}",
+            "name": "generate_column_chart"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_R8t6B7XpUFQIi5kAsvqCnkgm",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"column\",\"data\":[{\"category\":\"广东省\",\"value\":100,\"group\":\"电子产品\"},{\"category\":\"广东省\",\"value\":60,\"group\":\"服装\"},{\"category\":\"浙江省\",\"value\":70,\"group\":\"电子产品\"},{\"category\":\"浙江省\",\"value\":100,\"group\":\"服装\"},{\"category\":\"江苏省\",\"value\":80,\"group\":\"电子产品\"},{\"category\":\"江苏省\",\"value\":65,\"group\":\"服装\"},{\"category\":\"山东省\",\"value\":65,\"group\":\"电子产品\"},{\"category\":\"山东省\",\"value\":60,\"group\":\"服装\"},{\"category\":\"河南省\",\"value\":55,\"group\":\"电子产品\"},{\"category\":\"河南省\",\"value\":50,\"..."
+    },
+    {
+      "content": "已生成两张图表：\n\n- **各省销售总额地图**：按省份销售额设置蓝色渐变。由于未提供实际销售数据，地图中的数值是示意值。\n- **各省电子产品与服装销售对比图**：使用企业配色 `#1783FF` 和 `#00C9C9`；示意数据体现了广东电子产品销售较强、浙江服装销售领先。\n\n图表中的数值单位暂按万元处理。",
+      "role": "assistant",
+      "annotations": []
+    }
+  ],
+  "stop": true,
+  "exceeded": false,
+  "idx": 249,
+  "eval_result": {
+    "runs": [
+      {
+        "dimension_order": [
+          1,
+          0,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 6 requirements: create a province sales map; show total sales values using real sales data; use a color gradient; create grouped electronics-versus-apparel columns by province; reflect the stated Guangdong/Zhejiang category leaders; use the corporate palette. The map and chart were generated, the numeric map configuration supports a gradient, the chart is grouped by province and category, the stated leaders are reflected, and the chart uses both requested colors. However, the map and chart use invented illustrative values rather than actual sales data, so the real-sales requirement is not met. 5/6 met, 1/6 issues = 16.7% defect rate; score 8.",
+          "grounding_reasoning": "Counted 6 factual claims in the final response: two charts were generated; the map uses a blue gradient; actual sales data was not provided; the comparison chart uses the requested palette; the illustrative data reflects the stated leaders; and the unit is treated as 万元. Each is supported by the tool calls/results or the task context. 0/6 unsupported claims = 0% defect rate; score 10.",
+          "planning_efficiency_reasoning": "There were 2 tool calls: one to generate the map and one to generate the grouped column chart. Both directly served requested outputs; neither was redundant, unnecessary, or a retry. 0/2 unnecessary calls = 0% defect rate; score 10.",
+          "task_fulfillment": 8,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          2,
+          0,
+          1
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 5 requirements: (1) map total sales by province, (2) use a performance gradient, (3) grouped electronics/apparel comparisons across provinces, (4) reflect Guangdong electronics strength and Zhejiang apparel leadership, and (5) use both corporate colors. The gradient, grouped-chart structure, stated regional patterns, and palette were supplied (4 requirements). The map and chart values were invented rather than based on sales data, and the charts cover only 10 provinces, so the map and province-wide comparison are not perfectly fulfilled (2 defects / 5 = 40% defect rate).",
+          "grounding_reasoning": "Counted 6 atomic claims in the final answer: two charts were generated; the map uses a blue gradient; its values are illustrative; the grouped chart uses the specified colors; its values depict the stated Guangdong/Zhejiang pattern; and units are treated as 万元. All 6 are supported by the tool calls and the absence of supplied sales data (0 unsupported / 6 = 0% defect rate).",
+          "planning_efficiency_reasoning": "There were 2 tool calls, one for each requested visualization. Neither repeated a successful call or was unnecessary (0 redundant/unnecessary / 2 = 0% defect rate).",
+          "task_fulfillment": 6,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          0,
+          1,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 5 requirements: create a province sales map, show a color gradient, create grouped electronics-versus-apparel charts for the represented provinces, reflect the stated Guangdong/Zhejiang category leads, and use the corporate colors. The map and chart calls meet the requested forms, palette, and stated directional pattern. However, both visualizations use numerical values not supplied by the user, so they do not perfectly analyze actual sales performance. That leaves 2 of 5 requirements imperfect: defect rate = 2/5 = 40%.",
+          "grounding_reasoning": "Counted 7 atomic claims in the final response: two about the map, three about the comparison chart, one that the values are illustrative because actual data was not provided, and one about the unit. The tool outputs support the generated chart configurations, palette, values, and unit; the assertion that the values are illustrative is not established by the tool outputs. Unsupported claims = 1/7, defect rate = 14.3%.",
+          "planning_efficiency_reasoning": "There were 2 tool calls: one map generation and one grouped-column-chart generation. Both were necessary for distinct requested outputs; redundant or unnecessary calls = 0/2, defect rate = 0%.",
+          "task_fulfillment": 5,
+          "grounding": 7,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          1,
+          2,
+          0
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "共 5 项要求：按省份展示总销售额地图、生成分组品类对比柱状图、体现广东电子销售最强、体现浙江服装销售领先、使用指定企业配色。后 3 项已满足。前 2 项虽生成了图表，但使用了未由用户提供的示意数值，且仅覆盖 10 个省份，因此没有准确完成对实际销售表现的分析。未完美满足 2/5 项，缺陷率 2/5 = 40%。",
+          "grounding_reasoning": "最终答复有 7 项事实性陈述：生成两张图表、地图使用省份销售额蓝色渐变、数据为示意值、柱状图使用指定配色、示意数据体现广东电子销售较强、浙江服装领先、单位按万元处理。均可由工具调用参数/输出或任务中未提供实际数据这一事实支持。未支持陈述 0/7，缺陷率 0%。",
+          "planning_efficiency_reasoning": "共调用工具 2 次：一次生成地图，一次生成分组柱状图。两次调用分别对应所需图表，没有重复、无关或失败后未调整参数的调用。冗余/不必要调用 0/2，缺陷率 0%。",
+          "task_fulfillment": 5,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          0,
+          2,
+          1
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "共计5项要求：按省显示总销售额的地图、颜色渐变、按省比较电子产品与服装的分组柱状图、体现广东电子强和浙江服装领先、使用企业配色。渐变、分组图表结构、指定的领先关系和柱状图配色均已实现；但地图与柱状图使用了未由用户提供的示意销售数值，无法准确完成实际销售表现分析，因此前两项涉及真实销售数据的目标未能完美达成。缺陷率为2/5=40%，对应得分5。",
+          "grounding_reasoning": "最终答复有7项事实性陈述：生成了两张图、地图呈现省级销售额及渐变、未提供实际销售数据、柱状图比较两类产品、使用了指定配色、示意数据体现指定的省份领先关系、单位按万元处理。其中6项可由工具调用参数或结果支持；“未提供实际销售数据”不是工具输出中的信息，按工具输出作为依据的标准计为1项未支持。缺陷率为1/7≈14.3%，对应得分8。",
+          "planning_efficiency_reasoning": "共进行2次工具调用，分别生成地图和分组柱状图，均服务于明确目标；没有重复、无关或失败后无参数变化的重试调用。冗余调用率为0/2=0%，对应得分10。",
+          "task_fulfillment": 5,
+          "grounding": 8,
+          "planning_and_efficiency": 10
+        }
+      }
+    ],
+    "aggregate": {
+      "successful_runs": 5,
+      "total_runs": 5,
+      "task_fulfillment_mean": 5.8,
+      "grounding_mean": 9.0,
+      "planning_and_efficiency_mean": 10.0,
+      "task_fulfillment_reasoning_runs": [
+        "Counted 6 requirements: create a province sales map; show total sales values using real sales data; use a color gradient; create grouped electronics-versus-apparel columns by province; reflect the stated Guangdong/Zhejiang category leaders; use the corporate palette. The map and chart were generated, the numeric map configuration supports a gradient, the chart is grouped by province and category, the stated leaders are reflected, and the chart uses both requested colors. However, the map and chart use invented illustrative values rather than actual sales data, so the real-sales requirement is not met. 5/6 met, 1/6 issues = 16.7% defect rate; score 8.",
+        "Counted 5 requirements: (1) map total sales by province, (2) use a performance gradient, (3) grouped electronics/apparel comparisons across provinces, (4) reflect Guangdong electronics strength and Zhejiang apparel leadership, and (5) use both corporate colors. The gradient, grouped-chart structure, stated regional patterns, and palette were supplied (4 requirements). The map and chart values were invented rather than based on sales data, and the charts cover only 10 provinces, so the map and province-wide comparison are not perfectly fulfilled (2 defects / 5 = 40% defect rate).",
+        "Counted 5 requirements: create a province sales map, show a color gradient, create grouped electronics-versus-apparel charts for the represented provinces, reflect the stated Guangdong/Zhejiang category leads, and use the corporate colors. The map and chart calls meet the requested forms, palette, and stated directional pattern. However, both visualizations use numerical values not supplied by the user, so they do not perfectly analyze actual sales performance. That leaves 2 of 5 requirements imperfect: defect rate = 2/5 = 40%.",
+        "共 5 项要求：按省份展示总销售额地图、生成分组品类对比柱状图、体现广东电子销售最强、体现浙江服装销售领先、使用指定企业配色。后 3 项已满足。前 2 项虽生成了图表，但使用了未由用户提供的示意数值，且仅覆盖 10 个省份，因此没有准确完成对实际销售表现的分析。未完美满足 2/5 项，缺陷率 2/5 = 40%。",
+        "共计5项要求：按省显示总销售额的地图、颜色渐变、按省比较电子产品与服装的分组柱状图、体现广东电子强和浙江服装领先、使用企业配色。渐变、分组图表结构、指定的领先关系和柱状图配色均已实现；但地图与柱状图使用了未由用户提供的示意销售数值，无法准确完成实际销售表现分析，因此前两项涉及真实销售数据的目标未能完美达成。缺陷率为2/5=40%，对应得分5。"
+      ],
+      "grounding_reasoning_runs": [
+        "Counted 6 factual claims in the final response: two charts were generated; the map uses a blue gradient; actual sales data was not provided; the comparison chart uses the requested palette; the illustrative data reflects the stated leaders; and the unit is treated as 万元. Each is supported by the tool calls/results or the task context. 0/6 unsupported claims = 0% defect rate; score 10.",
+        "Counted 6 atomic claims in the final answer: two charts were generated; the map uses a blue gradient; its values are illustrative; the grouped chart uses the specified colors; its values depict the stated Guangdong/Zhejiang pattern; and units are treated as 万元. All 6 are supported by the tool calls and the absence of supplied sales data (0 unsupported / 6 = 0% defect rate).",
+        "Counted 7 atomic claims in the final response: two about the map, three about the comparison chart, one that the values are illustrative because actual data was not provided, and one about the unit. The tool outputs support the generated chart configurations, palette, values, and unit; the assertion that the values are illustrative is not established by the tool outputs. Unsupported claims = 1/7, defect rate = 14.3%.",
+        "最终答复有 7 项事实性陈述：生成两张图表、地图使用省份销售额蓝色渐变、数据为示意值、柱状图使用指定配色、示意数据体现广东电子销售较强、浙江服装领先、单位按万元处理。均可由工具调用参数/输出或任务中未提供实际数据这一事实支持。未支持陈述 0/7，缺陷率 0%。",
+        "最终答复有7项事实性陈述：生成了两张图、地图呈现省级销售额及渐变、未提供实际销售数据、柱状图比较两类产品、使用了指定配色、示意数据体现指定的省份领先关系、单位按万元处理。其中6项可由工具调用参数或结果支持；“未提供实际销售数据”不是工具输出中的信息，按工具输出作为依据的标准计为1项未支持。缺陷率为1/7≈14.3%，对应得分8。"
+      ],
+      "planning_efficiency_reasoning_runs": [
+        "There were 2 tool calls: one to generate the map and one to generate the grouped column chart. Both directly served requested outputs; neither was redundant, unnecessary, or a retry. 0/2 unnecessary calls = 0% defect rate; score 10.",
+        "There were 2 tool calls, one for each requested visualization. Neither repeated a successful call or was unnecessary (0 redundant/unnecessary / 2 = 0% defect rate).",
+        "There were 2 tool calls: one map generation and one grouped-column-chart generation. Both were necessary for distinct requested outputs; redundant or unnecessary calls = 0/2, defect rate = 0%.",
+        "共调用工具 2 次：一次生成地图，一次生成分组柱状图。两次调用分别对应所需图表，没有重复、无关或失败后未调整参数的调用。冗余/不必要调用 0/2，缺陷率 0%。",
+        "共进行2次工具调用，分别生成地图和分组柱状图，均服务于明确目标；没有重复、无关或失败后无参数变化的重试调用。冗余调用率为0/2=0%，对应得分10。"
+      ],
+      "task_fulfillment": 6,
+      "grounding": 9,
+      "planning_and_efficiency": 10
+    },
+    "task_fulfillment": 6,
+    "grounding": 9,
+    "planning_and_efficiency": 10
+  },
+  "forced_finalization": false,
+  "involved_tools": [
+    {
+      "name": "generate_district_map",
+      "description": "Generates regional distribution maps, which are usually used to show the administrative divisions and coverage of a dataset. It is not suitable for showing the distribution of specific locations, such as urban administrative divisions, GDP distribution maps of provinces and cities across the country, etc. This tool is limited to generating data maps within China.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The map title should not exceed 16 characters. The content should be consistent with the information the map wants to convey and should be accurate, rich, creative, and attractive."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+              },
+              "style": {
+                "type": "object",
+                "properties": {
+                  "fillColor": {
+                    "type": "string",
+                    "description": "Fill color, rgb or rgba format."
+                  }
+                },
+                "description": "Style settings."
+              },
+              "colors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [
+                  "#1783FF",
+                  "#00C9C9",
+                  "#F0884D",
+                  "#D580FF",
+                  "#7863FF",
+                  "#60C42D",
+                  "#BD8F24",
+                  "#FF80CA",
+                  "#2491B3",
+                  "#17C76F"
+                ],
+                "description": "Data color list, in rgb or rgba format."
+              },
+              "dataType": {
+                "type": "string",
+                "enum": [
+                  "number",
+                  "enum"
+                ],
+                "description": "The type of the data value, numeric or enumeration type"
+              },
+              "dataLabel": {
+                "type": "string",
+                "description": "Data label, such as \"GDP\""
+              },
+              "dataValue": {
+                "type": "string",
+                "description": "Data value, numeric string or enumeration string."
+              },
+              "dataValueUnit": {
+                "type": "string",
+                "description": "Data unit, such as \"万亿\""
+              },
+              "showAllSubdistricts": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether to display all subdistricts."
+              },
+              "subdistricts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+                    },
+                    "dataValue": {
+                      "type": "string",
+                      "description": "Data value, numeric string or enumeration string."
+                    },
+                    "style": {
+                      "type": "object",
+                      "properties": {
+                        "fillColor": {
+                          "type": "string",
+                          "description": "Fill color, rgb or rgba format."
+                        }
+                      },
+                      "description": "Style settings."
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "description": "Sub-administrative regions are used to display the regional composition or regional distribution of related data."
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "description": "Administrative division data, lower-level administrative divisions are optional. There are usually two scenarios: one is to simply display the regional composition, only `fillColor` needs to be configured, and all administrative divisions are consistent, representing that all blocks are connected as one; the other is the regional data distribution scenario, first determine the `dataType`, `dataValueUnit` and `dataLabel` configurations, `dataValue` should be a meaningful value and consistent with the meaning of dataType, and then determine the style configuration. The `fillColor` configuration represents the default fill color for areas without data. Lower-level administrative divisions do not need `fillColor` configuration, and their fill colors are determined by the `colors` configuration (If `dataType` is \"number\", only one base color (warm color) is needed in the list to calculate the continuous data mapping color band; if `dataType` is \"enum\", the number of color values in the list is equal to the number of enumeration values (contrast colors)). If `subdistricts` has a value, `showAllSubdistricts` must be set to true. For example, {\"title\": \"陕西省地级市分布图\", \"data\": {\"name\": \"陕西省\", \"showAllSubdistricts\": true, \"dataLabel\": \"城市\", \"dataType\": \"enum\", \"colors\": [\"#4ECDC4\", \"#A5D8FF\"], \"subdistricts\": [{\"name\": \"西安市\", \"dataValue\": \"省会\"}, {\"name\": \"宝鸡市\", \"dataValue\": \"地级市\"}, {\"name\": \"咸阳市\", \"dataValue\": \"地级市\"}, {\"name\": \"铜川市\", \"dataValue\": \"地级市\"}, {\"name\": \"渭南市\", \"dataValue\": \"地级市\"}, {\"name\": \"延安市\", \"dataValue\": \"地级市\"}, {\"name\": \"榆林市\", \"dataValue\": \"地级市\"}, {\"name\": \"汉中市\", \"dataValue\": \"地级市\"}, {\"name\": \"安康市\", \"dataValue\": \"地级市\"}, {\"name\": \"商洛市\", \"dataValue\": \"地级市\"}]}, \"width\": 1000, \"height\": 1000}."
+          },
+          "width": {
+            "type": "number",
+            "default": 1600,
+            "description": "Set the width of map, default is 1600."
+          },
+          "height": {
+            "type": "number",
+            "default": 1000,
+            "description": "Set the height of map, default is 1000."
+          }
+        },
+        "required": [
+          "title",
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "generate_column_chart",
+      "description": "Generate a column chart, which are best for comparing categorical data, such as, when values are close, column charts are preferable because our eyes are better at judging height than other visual elements like area or angles.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "group": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "category",
+                "value"
+              ]
+            },
+            "minItems": 1,
+            "description": "Data for column chart, such as, [{ category: '分类一', value: 10 }, { category: '分类二', value: 20 }], when grouping or stacking is needed for column, the data should contain a `group` field, such as, when [{ category: '北京', value: 825, group: '油车' }, { category: '北京', value: 1000, group: '电车' }]."
+          },
+          "group": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether grouping is enabled. When enabled, column charts require a 'group' field in the data. When `group` is true, `stack` should be false."
+          },
+          "stack": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether stacking is enabled. When enabled, column charts require a 'group' field in the data. When `stack` is true, `group` should be false."
+          },
+          "style": {
+            "type": "object",
+            "properties": {
+              "backgroundColor": {
+                "type": "string",
+                "description": "Background color of the chart, such as, '#fff'."
+              },
+              "palette": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Color palette for the chart, it is a collection of colors."
+              },
+              "texture": {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "rough"
+                ],
+                "default": "default",
+                "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style."
+              }
+            },
+            "description": "Style configuration for the chart with a JSON object, optional."
+          },
+          "theme": {
+            "type": "string",
+            "enum": [
+              "default",
+              "academy",
+              "dark"
+            ],
+            "default": "default",
+            "description": "Set the theme for the chart, optional, default is 'default'."
+          },
+          "width": {
+            "type": "number",
+            "default": 600,
+            "description": "Set the width of chart, default is 600."
+          },
+          "height": {
+            "type": "number",
+            "default": 400,
+            "description": "Set the height of chart, default is 400."
+          },
+          "title": {
+            "type": "string",
+            "default": "",
+            "description": "Set the title of chart."
+          },
+          "axisXTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the x-axis title of chart."
+          },
+          "axisYTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the y-axis title of chart."
+          },
+          "axis": {
+            "type": "object",
+            "properties": {
+              "y": {
+                "type": "object",
+                "properties": {
+                  "labelFormatter": {
+                    "type": "string",
+                    "description": "Set the label formatter for chart using d3-format syntax: [[fill]align][sign][symbol][0][width][,][.precision][~][type]. Fill: padding character, default is space. Align: '<' left align, '^' center, '>' right align, '=' number right align. Sign: '+' always show sign, '-' show negative sign only, '(' negative in parentheses. Symbol: '#' base prefix, '$' currency symbol. 0: zero padding. Width: minimum width. ,: thousands separator. Precision: precision control. ~: trim trailing zeros. Type: format type. Common types: 'd' integer (42), 'f' fixed decimals (42.00), 'e' scientific notation (4.2e+1), 's' SI prefix (42k, 1.5M), '%' percentage (42%), '$' currency ($42.00), 'r' significant digits (42.0), 'g' general (42). Examples: '.2f' fixed 2 decimals (23.45), '.0f' integer (23), '.1%' percentage (23.4%), ',.0f' thousands separator (1,234,567), 's' SI prefix (1.2M, 3.4k), '.1s' 1 decimal SI (1.2M, 3.4k), '~s' trimmed SI (1.2M, 3k), '.0s' integer SI (1M, 3k), '$,.2f' currency ($1,234.56), '$.2s' currency SI ($1.23M), '.2e' scientific (1.23e+6), '.2g' general (1.2e+6 or 1234), 'd' decimal (1234), 'x' hexadecimal (4d2), 'o' octal (2322), 'b' binary (10011010010)."
+                  }
+                },
+                "description": "Axis configuration for the chart y-axis, optional."
+              }
+            },
+            "description": "Axis configuration for the chart with a JSON object, optional."
+          },
+          "tooltip": {
+            "type": "object",
+            "properties": {
+              "channel": {
+                "type": "string",
+                "const": "y"
+              },
+              "valueFormatter": {
+                "type": "string",
+                "description": "Set the label formatter for chart using d3-format syntax: [[fill]align][sign][symbol][0][width][,][.precision][~][type]. Fill: padding character, default is space. Align: '<' left align, '^' center, '>' right align, '=' number right align. Sign: '+' always show sign, '-' show negative sign only, '(' negative in parentheses. Symbol: '#' base prefix, '$' currency symbol. 0: zero padding. Width: minimum width. ,: thousands separator. Precision: precision control. ~: trim trailing zeros. Type: format type. Common types: 'd' integer (42), 'f' fixed decimals (42.00), 'e' scientific notation (4.2e+1), 's' SI prefix (42k, 1.5M), '%' percentage (42%), '$' currency ($42.00), 'r' significant digits (42.0), 'g' general (42). Examples: '.2f' fixed 2 decimals (23.45), '.0f' integer (23), '.1%' percentage (23.4%), ',.0f' thousands separator (1,234,567), 's' SI prefix (1.2M, 3.4k), '.1s' 1 decimal SI (1.2M, 3.4k), '~s' trimmed SI (1.2M, 3k), '.0s' integer SI (1M, 3k), '$,.2f' currency ($1,234.56), '$.2s' currency SI ($1.23M), '.2e' scientific (1.23e+6), '.2g' general (1.2e+6 or 1234), 'd' decimal (1234), 'x' hexadecimal (4d2), 'o' octal (2322), 'b' binary (10011010010)."
+              }
+            },
+            "required": [
+              "channel"
+            ],
+            "description": "设置默认的tooltip，使用d3格式化方式,尤其涉及百分比，千分位，例如: {channel: 'y', valueFormatter: ',.0f'}"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ],
+  "harness_strategy": "selective_patch",
+  "stage": "early",
+  "patch_audit": "/Users/sneha/Python Projects/MCPEvol-Bench/src/custom/data/benchmark_clean_r2/selective_original/gpt-6-luna/PATCH_AUDIT/249.json",
+  "adaptation_cost": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_ms": 0,
+    "estimated_usd": 0,
+    "cost_status": "priced"
+  },
+  "unchanged_hash_check": true
+}

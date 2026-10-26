@@ -1,0 +1,418 @@
+{
+  "response": "```xml\n<response>\n  <workflow_analysis>\n    This scenario involves analyzing and visualizing sales trends across Chinese provinces using two complementary servers: First, the district map will display regional sales distribution geographically, then a line chart will show the temporal sales trends for selected provinces. The servers interact by sharing geographic data context (province names) between visualizations.\n  </workflow_analysis>\n  <target_servers>\n    <server name=\"@umengfe/mcp-server-chart\">\n      <tool>generate_district_map</tool>\n      <tool>generate_line_chart</tool>\n    </server>\n  </target_servers>\n  <question>\n    \"I need to visualize our Q1 2026 sales performance across China - first show me a color-coded provincial distribution map highlighting top-performing regions, then create a separate line chart comparing weekly sales trends for Guangdong, Zhejiang, and Jiangsu provinces from January to March.\"\n  </question>\n</response>\n```",
+  "question": "\"I need to visualize our Q1 2026 sales performance across China - first show me a color-coded provincial distribution map highlighting top-performing regions, then create a separate line chart comparing weekly sales trends for Guangdong, Zhejiang, and Jiangsu provinces from January to March.\"",
+  "tool_calls": [
+    {
+      "tool_name": "generate_district_map",
+      "parameters": {}
+    },
+    {
+      "tool_name": "generate_line_chart",
+      "parameters": {}
+    }
+  ],
+  "servers": {
+    "@umengfe/mcp-server-chart": [
+      "generate_district_map",
+      "generate_line_chart"
+    ]
+  },
+  "answer": "已生成两张图表，但目前没有提供实际销售数据，因此不能准确标出高绩效省份或比较真实趋势：\n\n1. **中国省级销售分布图**：广东、浙江、江苏已列出，但销售表现标为“待提供数据”。\n2. **三省销售趋势图**：当前使用零值占位，且按月而非按周展示，不能代表实际周销售趋势。\n\n请提供各省一季度销售数据，以及广东、浙江、江苏从1月至3月的每周销售额，我就能据此生成准确图表。",
+  "trajectory_messages": [
+    {
+      "role": "system",
+      "content": "You are an AI agent connected to the MCP (Model Context Protocol) server. Based on the user's request, select and invoke tools to fulfill the task accurately and efficiently. \nNote that do not to ask any questions to the user, just call the tool to complete the task.\n\nConsidering real-time performance, the time is set to be around `2026-10-26 (星期一)`.\n\nThese files are stored in the local file system and serve as relevant resources for tool utilization. Add the prefix path \"./anotation_path\" to the following file systems as an absolute path during use:\n`Error: Invalid directory path - ./anotation_path`\n\nDatabase Configuration (if applicable):\n- Host: 127.0.0.1\n- Port: 3305\n- User: root\n- Password: 123456\n- Database Name: mydb\n"
+    },
+    {
+      "role": "user",
+      "content": "\"I need to visualize our Q1 2026 sales performance across China - first show me a color-coded provincial distribution map highlighting top-performing regions, then create a separate line chart comparing weekly sales trends for Guangdong, Zhejiang, and Jiangsu provinces from January to March.\""
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_dTaB3O8vAKtDPaHGkFNvmlWS",
+          "function": {
+            "arguments": "{\"title\":\"2026年一季度省级销售表现\",\"data\":{\"name\":\"中国\",\"showAllSubdistricts\":true,\"dataLabel\":\"销售表现\",\"dataType\":\"enum\",\"colors\":[\"#D9EAF7\",\"#8CC8E8\",\"#2F80C0\",\"#F2994A\"],\"subdistricts\":[{\"name\":\"广东省\",\"dataValue\":\"待提供数据\"},{\"name\":\"浙江省\",\"dataValue\":\"待提供数据\"},{\"name\":\"江苏省\",\"dataValue\":\"待提供数据\"}]},\"width\":1200,\"height\":800}",
+            "name": "generate_district_map"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_dTaB3O8vAKtDPaHGkFNvmlWS",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"district-map\",\"title\":\"2026年一季度省级销售表现\",\"data\":{\"name\":\"中国\",\"showAllSubdistricts\":true,\"dataLabel\":\"销售表现\",\"dataType\":\"enum\",\"colors\":[\"#D9EAF7\",\"#8CC8E8\",\"#2F80C0\",\"#F2994A\"],\"subdistricts\":[{\"name\":\"广东省\",\"dataValue\":\"待提供数据\"},{\"name\":\"浙江省\",\"dataValue\":\"待提供数据\"},{\"name\":\"江苏省\",\"dataValue\":\"待提供数据\"}]},\"width\":1200,\"height\":800}\\n```', annotations=None, meta=None)]..."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_QtcRNrQwkQpZNTWaPCJBbk36",
+          "function": {
+            "arguments": "{\"data\":[{\"time\":\"Jan\",\"value\":0,\"group\":\"广东\"},{\"time\":\"Feb\",\"value\":0,\"group\":\"广东\"},{\"time\":\"Mar\",\"value\":0,\"group\":\"广东\"},{\"time\":\"Jan\",\"value\":0,\"group\":\"浙江\"},{\"time\":\"Feb\",\"value\":0,\"group\":\"浙江\"},{\"time\":\"Mar\",\"value\":0,\"group\":\"浙江\"},{\"time\":\"Jan\",\"value\":0,\"group\":\"江苏\"},{\"time\":\"Feb\",\"value\":0,\"group\":\"江苏\"},{\"time\":\"Mar\",\"value\":0,\"group\":\"江苏\"}],\"title\":\"2026年1—3月三省周销售趋势\",\"axisXTitle\":\"周（1—3月）\",\"axisYTitle\":\"销售额\",\"width\":1000,\"height\":600}",
+            "name": "generate_line_chart"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_QtcRNrQwkQpZNTWaPCJBbk36",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"line\",\"data\":[{\"time\":\"Jan\",\"value\":0,\"group\":\"广东\"},{\"time\":\"Feb\",\"value\":0,\"group\":\"广东\"},{\"time\":\"Mar\",\"value\":0,\"group\":\"广东\"},{\"time\":\"Jan\",\"value\":0,\"group\":\"浙江\"},{\"time\":\"Feb\",\"value\":0,\"group\":\"浙江\"},{\"time\":\"Mar\",\"value\":0,\"group\":\"浙江\"},{\"time\":\"Jan\",\"value\":0,\"group\":\"江苏\"},{\"time\":\"Feb\",\"value\":0,\"group\":\"江苏\"},{\"time\":\"Mar\",\"value\":0,\"group\":\"江苏\"}],\"title\":\"2026年1—3月三省周销售趋势\",\"axisXTitle\":\"周（1—3月）\",\"axisYTitle\":\"销售额\",\"width\":1000,\"heigh..."
+    },
+    {
+      "content": "已生成两张图表，但目前没有提供实际销售数据，因此不能准确标出高绩效省份或比较真实趋势：\n\n1. **中国省级销售分布图**：广东、浙江、江苏已列出，但销售表现标为“待提供数据”。\n2. **三省销售趋势图**：当前使用零值占位，且按月而非按周展示，不能代表实际周销售趋势。\n\n请提供各省一季度销售数据，以及广东、浙江、江苏从1月至3月的每周销售额，我就能据此生成准确图表。",
+      "role": "assistant",
+      "annotations": []
+    }
+  ],
+  "stop": true,
+  "exceeded": false,
+  "idx": 291,
+  "eval_result": {
+    "runs": [
+      {
+        "dimension_order": [
+          0,
+          2,
+          1
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 5 explicit requirements: a China provincial distribution map, color-coding that identifies top-performing regions, a separate line chart, comparison of Guangdong/Zhejiang/Jiangsu, and weekly trends from January through March. Only the existence of a separate line chart was met (1/5); the map used placeholder labels and did not identify top performers, while the line chart used zero values and monthly labels rather than weekly sales. Defect rate: 4/5 = 80%.",
+          "grounding_reasoning": "Counted 9 factual claims in the final response: that two charts were generated; sales data was not provided; accurate top-performer identification and trend comparison were therefore unavailable; the map lists Guangdong, Zhejiang, and Jiangsu; those entries are marked as awaiting data; the line chart uses zero placeholders; it is monthly rather than weekly; it does not represent actual weekly trends; and the response requests the missing sales data. All 9 are supported by the task or tool outputs. Defect rate: 0/9 = 0%.",
+          "planning_efficiency_reasoning": "There were 2 tool calls and neither was a duplicate. However, both generated charts from placeholder values despite no sales data being available, so neither call could produce the requested accurate visualization; counted both as unnecessary for fulfilling the task accurately. Defect rate: 2/2 = 100%.",
+          "task_fulfillment": 2,
+          "grounding": 10,
+          "planning_and_efficiency": 1
+        }
+      },
+      {
+        "dimension_order": [
+          0,
+          1,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 5 requirements: generate a provincial map; highlight top-performing regions with color; create a separate line chart; compare Guangdong, Zhejiang, and Jiangsu; show weekly trends from January through March. The map and separate line chart were generated (2/5 met). The map uses placeholder labels rather than performance data, and the line chart uses zero values and monthly labels, so it does not fulfill the highlighting, meaningful comparison, or weekly-trend requirements. Defect rate: 3/5 = 60%.",
+          "grounding_reasoning": "Counted 9 factual claims in the final response: that charts were generated; no actual sales data was provided; accurate performance identification and trend comparison are therefore unavailable; the map lists Guangdong, Zhejiang, and Jiangsu; the map labels are placeholders; the trend chart uses zero values; it uses months rather than weeks; and it does not represent actual weekly trends. All are supported by the tool outputs or task input. Unsupported claims: 0/9. Defect rate: 0%.",
+          "planning_efficiency_reasoning": "There were 2 tool calls total: one map generation and one line-chart generation. Neither repeated a prior call, and each addressed a requested visualization. Redundant or unnecessary calls: 0/2. Defect rate: 0%.",
+          "task_fulfillment": 4,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          1,
+          0,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 4 requirements: a color-coded provincial distribution map, highlighting top-performing regions, a separate line chart, and weekly January–March comparisons for Guangdong, Zhejiang, and Jiangsu. 0 of 4 were perfectly met: the map used placeholder values and did not identify top performers; the line chart used zero values and monthly labels rather than weekly sales data. Defect rate: 4/4 = 100%.",
+          "grounding_reasoning": "Counted 6 factual claims in the final response: that two charts were generated, no actual sales data was provided, accurate performance comparison was therefore unavailable, the map listed the three provinces with pending-data labels, and the line chart used zero values and monthly rather than weekly labels. All 6 are supported by the task context or tool outputs. Unsupported claims: 0/6. Defect rate: 0%.",
+          "planning_efficiency_reasoning": "There were 2 tool calls. Both generated charts from placeholder or zero data despite the absence of actual sales figures, so neither was useful for fulfilling the requested data-based visualizations; asking for the missing data first would have avoided these unnecessary calls. Redundant/unnecessary calls: 2/2. Defect rate: 100%.",
+          "task_fulfillment": 1,
+          "grounding": 10,
+          "planning_and_efficiency": 1
+        }
+      },
+      {
+        "dimension_order": [
+          1,
+          0,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 7 requirements: a China provincial sales map, color-coding, highlighting top performers, a separate line chart, comparing the three named provinces, weekly granularity, and the January–March period. Only the separate line-chart output was fully achieved as requested: the map used placeholder values, and the line chart used zero-valued monthly points rather than actual weekly sales. Met 1/7; defect rate = 6/7 = 85.7%.",
+          "grounding_reasoning": "Counted 5 factual claims in the final response: two charts were generated; actual sales data was absent; the map marked the three provinces as awaiting data; the line chart used zero placeholders; and it showed months rather than weeks. Each is supported by the tool outputs or the supplied task context. Unsupported claims: 0/5; defect rate = 0%.",
+          "planning_efficiency_reasoning": "There were 2 tool calls, one for each requested chart, and neither repeated a prior call. Redundant or unnecessary calls: 0/2; defect rate = 0%.",
+          "task_fulfillment": 2,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          2,
+          0,
+          1
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "共计6项要求：生成省级地图、对地区进行有意义的颜色编码、突出高绩效地区、生成独立折线图、比较广东/浙江/江苏、展示1月至3月的每周趋势。完成2项（生成地图、生成独立折线图），未完成4项：地图各省都标为“待提供数据”，无法编码实际表现或突出高绩效地区；折线图虽列出三省，但使用零值且仅按Jan/Feb/Mar展示，没有周度销售趋势。缺陷率=(6-2)/6=66.7%，对应1–3分。",
+          "grounding_reasoning": "最终答复的6项事实性陈述均有轨迹依据：工具输出确认生成了地图和折线图，地图数据标为“待提供数据”，折线图数据为零且时间点只有Jan、Feb、Mar；任务中也未提供销售数据。因此不支持的陈述为0/6，缺陷率=0%，对应9–10分。",
+          "planning_efficiency_reasoning": "共调用工具2次，分别用于地图和折线图，均对应用户要求且没有重复或无关调用。冗余/不必要调用为0/2，缺陷率=0%，对应9–10分。",
+          "task_fulfillment": 2,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      }
+    ],
+    "aggregate": {
+      "successful_runs": 5,
+      "total_runs": 5,
+      "task_fulfillment_mean": 2.2,
+      "grounding_mean": 10.0,
+      "planning_and_efficiency_mean": 6.4,
+      "task_fulfillment_reasoning_runs": [
+        "Counted 5 explicit requirements: a China provincial distribution map, color-coding that identifies top-performing regions, a separate line chart, comparison of Guangdong/Zhejiang/Jiangsu, and weekly trends from January through March. Only the existence of a separate line chart was met (1/5); the map used placeholder labels and did not identify top performers, while the line chart used zero values and monthly labels rather than weekly sales. Defect rate: 4/5 = 80%.",
+        "Counted 5 requirements: generate a provincial map; highlight top-performing regions with color; create a separate line chart; compare Guangdong, Zhejiang, and Jiangsu; show weekly trends from January through March. The map and separate line chart were generated (2/5 met). The map uses placeholder labels rather than performance data, and the line chart uses zero values and monthly labels, so it does not fulfill the highlighting, meaningful comparison, or weekly-trend requirements. Defect rate: 3/5 = 60%.",
+        "Counted 4 requirements: a color-coded provincial distribution map, highlighting top-performing regions, a separate line chart, and weekly January–March comparisons for Guangdong, Zhejiang, and Jiangsu. 0 of 4 were perfectly met: the map used placeholder values and did not identify top performers; the line chart used zero values and monthly labels rather than weekly sales data. Defect rate: 4/4 = 100%.",
+        "Counted 7 requirements: a China provincial sales map, color-coding, highlighting top performers, a separate line chart, comparing the three named provinces, weekly granularity, and the January–March period. Only the separate line-chart output was fully achieved as requested: the map used placeholder values, and the line chart used zero-valued monthly points rather than actual weekly sales. Met 1/7; defect rate = 6/7 = 85.7%.",
+        "共计6项要求：生成省级地图、对地区进行有意义的颜色编码、突出高绩效地区、生成独立折线图、比较广东/浙江/江苏、展示1月至3月的每周趋势。完成2项（生成地图、生成独立折线图），未完成4项：地图各省都标为“待提供数据”，无法编码实际表现或突出高绩效地区；折线图虽列出三省，但使用零值且仅按Jan/Feb/Mar展示，没有周度销售趋势。缺陷率=(6-2)/6=66.7%，对应1–3分。"
+      ],
+      "grounding_reasoning_runs": [
+        "Counted 9 factual claims in the final response: that two charts were generated; sales data was not provided; accurate top-performer identification and trend comparison were therefore unavailable; the map lists Guangdong, Zhejiang, and Jiangsu; those entries are marked as awaiting data; the line chart uses zero placeholders; it is monthly rather than weekly; it does not represent actual weekly trends; and the response requests the missing sales data. All 9 are supported by the task or tool outputs. Defect rate: 0/9 = 0%.",
+        "Counted 9 factual claims in the final response: that charts were generated; no actual sales data was provided; accurate performance identification and trend comparison are therefore unavailable; the map lists Guangdong, Zhejiang, and Jiangsu; the map labels are placeholders; the trend chart uses zero values; it uses months rather than weeks; and it does not represent actual weekly trends. All are supported by the tool outputs or task input. Unsupported claims: 0/9. Defect rate: 0%.",
+        "Counted 6 factual claims in the final response: that two charts were generated, no actual sales data was provided, accurate performance comparison was therefore unavailable, the map listed the three provinces with pending-data labels, and the line chart used zero values and monthly rather than weekly labels. All 6 are supported by the task context or tool outputs. Unsupported claims: 0/6. Defect rate: 0%.",
+        "Counted 5 factual claims in the final response: two charts were generated; actual sales data was absent; the map marked the three provinces as awaiting data; the line chart used zero placeholders; and it showed months rather than weeks. Each is supported by the tool outputs or the supplied task context. Unsupported claims: 0/5; defect rate = 0%.",
+        "最终答复的6项事实性陈述均有轨迹依据：工具输出确认生成了地图和折线图，地图数据标为“待提供数据”，折线图数据为零且时间点只有Jan、Feb、Mar；任务中也未提供销售数据。因此不支持的陈述为0/6，缺陷率=0%，对应9–10分。"
+      ],
+      "planning_efficiency_reasoning_runs": [
+        "There were 2 tool calls and neither was a duplicate. However, both generated charts from placeholder values despite no sales data being available, so neither call could produce the requested accurate visualization; counted both as unnecessary for fulfilling the task accurately. Defect rate: 2/2 = 100%.",
+        "There were 2 tool calls total: one map generation and one line-chart generation. Neither repeated a prior call, and each addressed a requested visualization. Redundant or unnecessary calls: 0/2. Defect rate: 0%.",
+        "There were 2 tool calls. Both generated charts from placeholder or zero data despite the absence of actual sales figures, so neither was useful for fulfilling the requested data-based visualizations; asking for the missing data first would have avoided these unnecessary calls. Redundant/unnecessary calls: 2/2. Defect rate: 100%.",
+        "There were 2 tool calls, one for each requested chart, and neither repeated a prior call. Redundant or unnecessary calls: 0/2; defect rate = 0%.",
+        "共调用工具2次，分别用于地图和折线图，均对应用户要求且没有重复或无关调用。冗余/不必要调用为0/2，缺陷率=0%，对应9–10分。"
+      ],
+      "task_fulfillment": 2,
+      "grounding": 10,
+      "planning_and_efficiency": 6
+    },
+    "task_fulfillment": 2,
+    "grounding": 10,
+    "planning_and_efficiency": 6
+  },
+  "involved_tools": [
+    {
+      "name": "generate_district_map",
+      "description": "Generates regional distribution maps, which are usually used to show the administrative divisions and coverage of a dataset. It is not suitable for showing the distribution of specific locations, such as urban administrative divisions, GDP distribution maps of provinces and cities across the country, etc. This tool is limited to generating data maps within China.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The map title should not exceed 16 characters. The content should be consistent with the information the map wants to convey and should be accurate, rich, creative, and attractive."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+              },
+              "style": {
+                "type": "object",
+                "properties": {
+                  "fillColor": {
+                    "type": "string",
+                    "description": "Fill color, rgb or rgba format."
+                  }
+                },
+                "description": "Style settings."
+              },
+              "colors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [
+                  "#1783FF",
+                  "#00C9C9",
+                  "#F0884D",
+                  "#D580FF",
+                  "#7863FF",
+                  "#60C42D",
+                  "#BD8F24",
+                  "#FF80CA",
+                  "#2491B3",
+                  "#17C76F"
+                ],
+                "description": "Data color list, in rgb or rgba format."
+              },
+              "dataType": {
+                "type": "string",
+                "enum": [
+                  "number",
+                  "enum"
+                ],
+                "description": "The type of the data value, numeric or enumeration type"
+              },
+              "dataLabel": {
+                "type": "string",
+                "description": "Data label, such as \"GDP\""
+              },
+              "dataValue": {
+                "type": "string",
+                "description": "Data value, numeric string or enumeration string."
+              },
+              "dataValueUnit": {
+                "type": "string",
+                "description": "Data unit, such as \"万亿\""
+              },
+              "showAllSubdistricts": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether to display all subdistricts."
+              },
+              "subdistricts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+                    },
+                    "dataValue": {
+                      "type": "string",
+                      "description": "Data value, numeric string or enumeration string."
+                    },
+                    "style": {
+                      "type": "object",
+                      "properties": {
+                        "fillColor": {
+                          "type": "string",
+                          "description": "Fill color, rgb or rgba format."
+                        }
+                      },
+                      "description": "Style settings."
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "description": "Sub-administrative regions are used to display the regional composition or regional distribution of related data."
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "description": "Administrative division data, lower-level administrative divisions are optional. There are usually two scenarios: one is to simply display the regional composition, only `fillColor` needs to be configured, and all administrative divisions are consistent, representing that all blocks are connected as one; the other is the regional data distribution scenario, first determine the `dataType`, `dataValueUnit` and `dataLabel` configurations, `dataValue` should be a meaningful value and consistent with the meaning of dataType, and then determine the style configuration. The `fillColor` configuration represents the default fill color for areas without data. Lower-level administrative divisions do not need `fillColor` configuration, and their fill colors are determined by the `colors` configuration (If `dataType` is \"number\", only one base color (warm color) is needed in the list to calculate the continuous data mapping color band; if `dataType` is \"enum\", the number of color values in the list is equal to the number of enumeration values (contrast colors)). If `subdistricts` has a value, `showAllSubdistricts` must be set to true. For example, {\"title\": \"陕西省地级市分布图\", \"data\": {\"name\": \"陕西省\", \"showAllSubdistricts\": true, \"dataLabel\": \"城市\", \"dataType\": \"enum\", \"colors\": [\"#4ECDC4\", \"#A5D8FF\"], \"subdistricts\": [{\"name\": \"西安市\", \"dataValue\": \"省会\"}, {\"name\": \"宝鸡市\", \"dataValue\": \"地级市\"}, {\"name\": \"咸阳市\", \"dataValue\": \"地级市\"}, {\"name\": \"铜川市\", \"dataValue\": \"地级市\"}, {\"name\": \"渭南市\", \"dataValue\": \"地级市\"}, {\"name\": \"延安市\", \"dataValue\": \"地级市\"}, {\"name\": \"榆林市\", \"dataValue\": \"地级市\"}, {\"name\": \"汉中市\", \"dataValue\": \"地级市\"}, {\"name\": \"安康市\", \"dataValue\": \"地级市\"}, {\"name\": \"商洛市\", \"dataValue\": \"地级市\"}]}, \"width\": 1000, \"height\": 1000}."
+          },
+          "width": {
+            "type": "number",
+            "default": 1600,
+            "description": "Set the width of map, default is 1600."
+          },
+          "height": {
+            "type": "number",
+            "default": 1000,
+            "description": "Set the height of map, default is 1000."
+          }
+        },
+        "required": [
+          "title",
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "generate_line_chart",
+      "description": "Generate a line chart to show trends over time, such as, the ratio of Apple computer sales to Apple's profits changed from 2000 to 2016.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "time": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "group": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "time",
+                "value"
+              ]
+            },
+            "minItems": 1,
+            "description": "Data for line chart, it should be an array of objects, each object contains a `time` field and a `value` field, such as, [{ time: '2015', value: 23 }, { time: '2016', value: 32 }]."
+          },
+          "style": {
+            "type": "object",
+            "properties": {
+              "texture": {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "rough"
+                ],
+                "default": "default",
+                "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style."
+              },
+              "backgroundColor": {
+                "type": "string",
+                "description": "Background color of the chart, such as, '#fff'."
+              },
+              "palette": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Color palette for the chart, it is a collection of colors."
+              },
+              "lineWidth": {
+                "type": "number",
+                "description": "Line width for the lines of chart, such as 4."
+              }
+            },
+            "description": "Style configuration for the chart with a JSON object, optional."
+          },
+          "theme": {
+            "type": "string",
+            "enum": [
+              "default",
+              "academy",
+              "dark"
+            ],
+            "default": "default",
+            "description": "Set the theme for the chart, optional, default is 'default'."
+          },
+          "width": {
+            "type": "number",
+            "default": 600,
+            "description": "Set the width of chart, default is 600."
+          },
+          "height": {
+            "type": "number",
+            "default": 400,
+            "description": "Set the height of chart, default is 400."
+          },
+          "title": {
+            "type": "string",
+            "default": "",
+            "description": "Set the title of chart."
+          },
+          "axisXTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the x-axis title of chart."
+          },
+          "axisYTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the y-axis title of chart."
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ]
+}

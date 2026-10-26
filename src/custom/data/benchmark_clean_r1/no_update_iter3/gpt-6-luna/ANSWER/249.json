@@ -1,0 +1,349 @@
+{
+  "question": "I need to analyze our sales performance across different Chinese provinces and compare how our product categories are performing in each region. Can you create a map showing total sales by province with a color gradient indicating performance, and then generate grouped column charts comparing electronics vs apparel sales for each province? The electronic sales data is strongest in Guangdong province while apparel leads in Zhejiang province. Also make the charts use our corporate color palette of #1783FF and #00C9C9.",
+  "tool_calls": [
+    {
+      "tool_name": "generate_district_map",
+      "parameters": {}
+    },
+    {
+      "tool_name": "generate_column_chart",
+      "parameters": {}
+    }
+  ],
+  "servers": {
+    "@umengfe/mcp-server-chart": [
+      "generate_district_map",
+      "generate_column_chart"
+    ]
+  },
+  "idx": 249,
+  "answer": "Created the **province sales map** and **grouped category comparison chart** using the requested corporate colors.\n\nNote: No actual sales figures were provided, so the visuals use illustrative values to reflect the stated pattern—electronics strongest in Guangdong and apparel leading in Zhejiang. The map’s province values are also illustrative, not measured totals.",
+  "trajectory_messages": [
+    {
+      "role": "system",
+      "content": "You are an AI agent connected to the MCP (Model Context Protocol) server. Based on the user's request, select and invoke tools to fulfill the task accurately and efficiently. \nNote that do not to ask any questions to the user, just call the tool to complete the task.\n\nConsidering real-time performance, the time is set to be around `2026-10-26 (星期一)`.\n\nThese files are stored in the local file system and serve as relevant resources for tool utilization. Add the prefix path \"./anotation_path\" to the following file systems as an absolute path during use:\n`Error: Invalid directory path - ./anotation_path`\n\nDatabase Configuration (if applicable):\n- Host: 127.0.0.1\n- Port: 3305\n- User: root\n- Password: 123456\n- Database Name: mydb\n"
+    },
+    {
+      "role": "user",
+      "content": "I need to analyze our sales performance across different Chinese provinces and compare how our product categories are performing in each region. Can you create a map showing total sales by province with a color gradient indicating performance, and then generate grouped column charts comparing electronics vs apparel sales for each province? The electronic sales data is strongest in Guangdong province while apparel leads in Zhejiang province. Also make the charts use our corporate color palette of #1783FF and #00C9C9."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_kwGAzRwaJPsf6zwabrS1BgE5",
+          "function": {
+            "arguments": "{\"title\":\"各省总销售额\",\"data\":{\"name\":\"中国\",\"dataType\":\"number\",\"dataLabel\":\"总销售额\",\"dataValueUnit\":\"销售额\",\"colors\":[\"#1783FF\"],\"subdistricts\":[{\"name\":\"广东省\",\"dataValue\":\"最高\"},{\"name\":\"浙江省\",\"dataValue\":\"高\"},{\"name\":\"江苏省\",\"dataValue\":\"中\"},{\"name\":\"山东省\",\"dataValue\":\"中\"},{\"name\":\"河南省\",\"dataValue\":\"中\"},{\"name\":\"四川省\",\"dataValue\":\"中\"},{\"name\":\"湖北省\",\"dataValue\":\"中\"},{\"name\":\"福建省\",\"dataValue\":\"中\"},{\"name\":\"湖南省\",\"dataValue\":\"中\"},{\"name\":\"安徽省\",\"dataValue\":\"中\"},{\"name\":\"河北省\",\"dataValue\":\"中\"},{\"name\":\"辽宁省\",\"dataValue\":\"中\"},{\"name\":\"江西省\",\"dataValue\":\"中\"},{\"name\":\"陕西省\",\"dataValue\":\"中\"},{\"name\":\"北京市\",\"dataValue\":\"中\"},{\"name\":\"上海市\",\"dataValue\":\"中\"},{\"name\":\"重庆市\",\"dataValue\":\"中\"},{\"name\":\"天津市\",\"dataValue\":\"中\"},{\"name\":\"云南省\",\"dataValue\":\"中\"},{\"name\":\"广西壮族自治区\",\"dataValue\":\"中\"},{\"name\":\"贵州省\",\"dataValue\":\"中\"},{\"name\":\"山西省\",\"dataValue\":\"中\"},{\"name\":\"黑龙江省\",\"dataValue\":\"中\"},{\"name\":\"吉林省\",\"dataValue\":\"中\"},{\"name\":\"甘肃省\",\"dataValue\":\"中\"},{\"name\":\"内蒙古自治区\",\"dataValue\":\"中\"},{\"name\":\"新疆维吾尔自治区\",\"dataValue\":\"中\"},{\"name\":\"宁夏回族自治区\",\"dataValue\":\"中\"},{\"name\":\"青海省\",\"dataValue\":\"中\"},{\"name\":\"海南省\",\"dataValue\":\"中\"},{\"name\":\"西藏自治区\",\"dataValue\":\"中\"}],\"showAllSubdistricts\":true},\"width\":1200,\"height\":800}",
+            "name": "generate_district_map"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_kwGAzRwaJPsf6zwabrS1BgE5",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"district-map\",\"title\":\"各省总销售额\",\"data\":{\"name\":\"中国\",\"dataType\":\"number\",\"dataLabel\":\"总销售额\",\"dataValueUnit\":\"销售额\",\"colors\":[\"#1783FF\"],\"subdistricts\":[{\"name\":\"广东省\",\"dataValue\":\"最高\"},{\"name\":\"浙江省\",\"dataValue\":\"高\"},{\"name\":\"江苏省\",\"dataValue\":\"中\"},{\"name\":\"山东省\",\"dataValue\":\"中\"},{\"name\":\"河南省\",\"dataValue\":\"中\"},{\"name\":\"四川省\",\"dataValue\":\"中\"},{\"name\":\"湖北省\",\"dataValue\":\"中\"},{\"name\":\"福建省\",\"dataValue\":\"中\"},{\"name\":\"湖南省\",\"dataValue\":\"中\"},{\"name\":\"安徽省\",\"d..."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_VgXZ311gsqVlB8rozNZnyrVw",
+          "function": {
+            "arguments": "{\"data\":[{\"category\":\"广东省\",\"value\":100,\"group\":\"电子产品\"},{\"category\":\"广东省\",\"value\":70,\"group\":\"服装\"},{\"category\":\"浙江省\",\"value\":75,\"group\":\"电子产品\"},{\"category\":\"浙江省\",\"value\":100,\"group\":\"服装\"},{\"category\":\"江苏省\",\"value\":70,\"group\":\"电子产品\"},{\"category\":\"江苏省\",\"value\":65,\"group\":\"服装\"},{\"category\":\"山东省\",\"value\":60,\"group\":\"电子产品\"},{\"category\":\"山东省\",\"value\":55,\"group\":\"服装\"},{\"category\":\"河南省\",\"value\":55,\"group\":\"电子产品\"},{\"category\":\"河南省\",\"value\":50,\"group\":\"服装\"},{\"category\":\"四川省\",\"value\":65,\"group\":\"电子产品\"},{\"category\":\"四川省\",\"value\":60,\"group\":\"服装\"},{\"category\":\"湖北省\",\"value\":60,\"group\":\"电子产品\"},{\"category\":\"湖北省\",\"value\":55,\"group\":\"服装\"},{\"category\":\"福建省\",\"value\":65,\"group\":\"电子产品\"},{\"category\":\"福建省\",\"value\":70,\"group\":\"服装\"},{\"category\":\"湖南省\",\"value\":55,\"group\":\"电子产品\"},{\"category\":\"湖南省\",\"value\":60,\"group\":\"服装\"},{\"category\":\"安徽省\",\"value\":50,\"group\":\"电子产品\"},{\"category\":\"安徽省\",\"value\":45,\"group\":\"服装\"},{\"category\":\"河北省\",\"value\":50,\"group\":\"电子产品\"},{\"category\":\"河北省\",\"value\":45,\"group\":\"服装\"},{\"category\":\"辽宁省\",\"value\":45,\"group\":\"电子产品\"},{\"category\":\"辽宁省\",\"value\":50,\"group\":\"服装\"},{\"category\":\"江西省\",\"value\":45,\"group\":\"电子产品\"},{\"category\":\"江西省\",\"value\":50,\"group\":\"服装\"},{\"category\":\"陕西省\",\"value\":50,\"group\":\"电子产品\"},{\"category\":\"陕西省\",\"value\":45,\"group\":\"服装\"},{\"category\":\"北京市\",\"value\":70,\"group\":\"电子产品\"},{\"category\":\"北京市\",\"value\":65,\"group\":\"服装\"},{\"category\":\"上海市\",\"value\":80,\"group\":\"电子产品\"},{\"category\":\"上海市\",\"value\":75,\"group\":\"服装\"},{\"category\":\"重庆市\",\"value\":55,\"group\":\"电子产品\"},{\"category\":\"重庆市\",\"value\":50,\"group\":\"服装\"},{\"category\":\"天津市\",\"value\":45,\"group\":\"电子产品\"},{\"category\":\"天津市\",\"value\":40,\"group\":\"服装\"},{\"category\":\"云南省\",\"value\":40,\"group\":\"电子产品\"},{\"category\":\"云南省\",\"value\":45,\"group\":\"服装\"},{\"category\":\"广西壮族自治区\",\"value\":45,\"group\":\"电子产品\"},{\"category\":\"广西壮族自治区\",\"value\":50,\"group\":\"服装\"},{\"category\":\"贵州省\",\"value\":35,\"group\":\"电子产品\"},{\"category\":\"贵州省\",\"value\":40,\"group\":\"服装\"},{\"category\":\"山西省\",\"value\":40,\"group\":\"电子产品\"},{\"category\":\"山西省\",\"value\":35,\"group\":\"服装\"},{\"category\":\"黑龙江省\",\"value\":35,\"group\":\"电子产品\"},{\"category\":\"黑龙江省\",\"value\":40,\"group\":\"服装\"},{\"category\":\"吉林省\",\"value\":35,\"group\":\"电子产品\"},{\"category\":\"吉林省\",\"value\":40,\"group\":\"服装\"},{\"category\":\"甘肃省\",\"value\":30,\"group\":\"电子产品\"},{\"category\":\"甘肃省\",\"value\":35,\"group\":\"服装\"},{\"category\":\"内蒙古自治区\",\"value\":35,\"group\":\"电子产品\"},{\"category\":\"内蒙古自治区\",\"value\":30,\"group\":\"服装\"},{\"category\":\"新疆维吾尔自治区\",\"value\":30,\"group\":\"电子产品\"},{\"category\":\"新疆维吾尔自治区\",\"value\":35,\"group\":\"服装\"},{\"category\":\"宁夏回族自治区\",\"value\":25,\"group\":\"电子产品\"},{\"category\":\"宁夏回族自治区\",\"value\":30,\"group\":\"服装\"},{\"category\":\"青海省\",\"value\":20,\"group\":\"电子产品\"},{\"category\":\"青海省\",\"value\":25,\"group\":\"服装\"},{\"category\":\"海南省\",\"value\":35,\"group\":\"电子产品\"},{\"category\":\"海南省\",\"value\":40,\"group\":\"服装\"},{\"category\":\"西藏自治区\",\"value\":15,\"group\":\"电子产品\"},{\"category\":\"西藏自治区\",\"value\":20,\"group\":\"服装\"}],\"group\":true,\"stack\":false,\"style\":{\"palette\":[\"#1783FF\",\"#00C9C9\"]},\"title\":\"各省电子产品与服装销售对比\",\"axisXTitle\":\"省份\",\"axisYTitle\":\"销售额\",\"width\":1400,\"height\":700}",
+            "name": "generate_column_chart"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_VgXZ311gsqVlB8rozNZnyrVw",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"column\",\"data\":[{\"category\":\"广东省\",\"value\":100,\"group\":\"电子产品\"},{\"category\":\"广东省\",\"value\":70,\"group\":\"服装\"},{\"category\":\"浙江省\",\"value\":75,\"group\":\"电子产品\"},{\"category\":\"浙江省\",\"value\":100,\"group\":\"服装\"},{\"category\":\"江苏省\",\"value\":70,\"group\":\"电子产品\"},{\"category\":\"江苏省\",\"value\":65,\"group\":\"服装\"},{\"category\":\"山东省\",\"value\":60,\"group\":\"电子产品\"},{\"category\":\"山东省\",\"value\":55,\"group\":\"服装\"},{\"category\":\"河南省\",\"value\":55,\"group\":\"电子产品\"},{\"category\":\"河南省\",\"value\":50,\"..."
+    },
+    {
+      "content": "Created the **province sales map** and **grouped category comparison chart** using the requested corporate colors.\n\nNote: No actual sales figures were provided, so the visuals use illustrative values to reflect the stated pattern—electronics strongest in Guangdong and apparel leading in Zhejiang. The map’s province values are also illustrative, not measured totals.",
+      "role": "assistant",
+      "annotations": []
+    }
+  ],
+  "stop": true,
+  "exceeded": false,
+  "involved_tools": [
+    {
+      "name": "generate_column_chart",
+      "description": "Generate a column chart, which are best for comparing categorical data, such as, when values are close, column charts are preferable because our eyes are better at judging height than other visual elements like area or angles.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "group": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "category",
+                "value"
+              ]
+            },
+            "minItems": 1,
+            "description": "Data for column chart, such as, [{ category: '分类一', value: 10 }, { category: '分类二', value: 20 }], when grouping or stacking is needed for column, the data should contain a `group` field, such as, when [{ category: '北京', value: 825, group: '油车' }, { category: '北京', value: 1000, group: '电车' }]."
+          },
+          "group": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether grouping is enabled. When enabled, column charts require a 'group' field in the data. When `group` is true, `stack` should be false."
+          },
+          "stack": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether stacking is enabled. When enabled, column charts require a 'group' field in the data. When `stack` is true, `group` should be false."
+          },
+          "style": {
+            "type": "object",
+            "properties": {
+              "backgroundColor": {
+                "type": "string",
+                "description": "Background color of the chart, such as, '#fff'."
+              },
+              "palette": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Color palette for the chart, it is a collection of colors."
+              },
+              "texture": {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "rough"
+                ],
+                "default": "default",
+                "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style."
+              }
+            },
+            "description": "Style configuration for the chart with a JSON object, optional."
+          },
+          "theme": {
+            "type": "string",
+            "enum": [
+              "default",
+              "academy",
+              "dark"
+            ],
+            "default": "default",
+            "description": "Set the theme for the chart, optional, default is 'default'."
+          },
+          "width": {
+            "type": "number",
+            "default": 600,
+            "description": "Set the width of chart, default is 600."
+          },
+          "height": {
+            "type": "number",
+            "default": 400,
+            "description": "Set the height of chart, default is 400."
+          },
+          "title": {
+            "type": "string",
+            "default": "",
+            "description": "Set the title of chart."
+          },
+          "axisXTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the x-axis title of chart."
+          },
+          "axisYTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the y-axis title of chart."
+          },
+          "axis": {
+            "type": "object",
+            "properties": {
+              "y": {
+                "type": "object",
+                "properties": {
+                  "labelFormatter": {
+                    "type": "string",
+                    "description": "Set the label formatter for chart using d3-format syntax: [[fill]align][sign][symbol][0][width][,][.precision][~][type]. Fill: padding character, default is space. Align: '<' left align, '^' center, '>' right align, '=' number right align. Sign: '+' always show sign, '-' show negative sign only, '(' negative in parentheses. Symbol: '#' base prefix, '$' currency symbol. 0: zero padding. Width: minimum width. ,: thousands separator. Precision: precision control. ~: trim trailing zeros. Type: format type. Common types: 'd' integer (42), 'f' fixed decimals (42.00), 'e' scientific notation (4.2e+1), 's' SI prefix (42k, 1.5M), '%' percentage (42%), '$' currency ($42.00), 'r' significant digits (42.0), 'g' general (42). Examples: '.2f' fixed 2 decimals (23.45), '.0f' integer (23), '.1%' percentage (23.4%), ',.0f' thousands separator (1,234,567), 's' SI prefix (1.2M, 3.4k), '.1s' 1 decimal SI (1.2M, 3.4k), '~s' trimmed SI (1.2M, 3k), '.0s' integer SI (1M, 3k), '$,.2f' currency ($1,234.56), '$.2s' currency SI ($1.23M), '.2e' scientific (1.23e+6), '.2g' general (1.2e+6 or 1234), 'd' decimal (1234), 'x' hexadecimal (4d2), 'o' octal (2322), 'b' binary (10011010010)."
+                  }
+                },
+                "description": "Axis configuration for the chart y-axis, optional."
+              }
+            },
+            "description": "Axis configuration for the chart with a JSON object, optional."
+          },
+          "tooltip": {
+            "type": "object",
+            "properties": {
+              "channel": {
+                "type": "string",
+                "const": "y"
+              },
+              "valueFormatter": {
+                "type": "string",
+                "description": "Set the label formatter for chart using d3-format syntax: [[fill]align][sign][symbol][0][width][,][.precision][~][type]. Fill: padding character, default is space. Align: '<' left align, '^' center, '>' right align, '=' number right align. Sign: '+' always show sign, '-' show negative sign only, '(' negative in parentheses. Symbol: '#' base prefix, '$' currency symbol. 0: zero padding. Width: minimum width. ,: thousands separator. Precision: precision control. ~: trim trailing zeros. Type: format type. Common types: 'd' integer (42), 'f' fixed decimals (42.00), 'e' scientific notation (4.2e+1), 's' SI prefix (42k, 1.5M), '%' percentage (42%), '$' currency ($42.00), 'r' significant digits (42.0), 'g' general (42). Examples: '.2f' fixed 2 decimals (23.45), '.0f' integer (23), '.1%' percentage (23.4%), ',.0f' thousands separator (1,234,567), 's' SI prefix (1.2M, 3.4k), '.1s' 1 decimal SI (1.2M, 3.4k), '~s' trimmed SI (1.2M, 3k), '.0s' integer SI (1M, 3k), '$,.2f' currency ($1,234.56), '$.2s' currency SI ($1.23M), '.2e' scientific (1.23e+6), '.2g' general (1.2e+6 or 1234), 'd' decimal (1234), 'x' hexadecimal (4d2), 'o' octal (2322), 'b' binary (10011010010)."
+              }
+            },
+            "required": [
+              "channel"
+            ],
+            "description": "设置默认的tooltip，使用d3格式化方式,尤其涉及百分比，千分位，例如: {channel: 'y', valueFormatter: ',.0f'}"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "generate_district_map",
+      "description": "Generates regional distribution maps, which are usually used to show the administrative divisions and coverage of a dataset. It is not suitable for showing the distribution of specific locations, such as urban administrative divisions, GDP distribution maps of provinces and cities across the country, etc. This tool is limited to generating data maps within China.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The map title should not exceed 16 characters. The content should be consistent with the information the map wants to convey and should be accurate, rich, creative, and attractive."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+              },
+              "style": {
+                "type": "object",
+                "properties": {
+                  "fillColor": {
+                    "type": "string",
+                    "description": "Fill color, rgb or rgba format."
+                  }
+                },
+                "description": "Style settings."
+              },
+              "colors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [
+                  "#1783FF",
+                  "#00C9C9",
+                  "#F0884D",
+                  "#D580FF",
+                  "#7863FF",
+                  "#60C42D",
+                  "#BD8F24",
+                  "#FF80CA",
+                  "#2491B3",
+                  "#17C76F"
+                ],
+                "description": "Data color list, in rgb or rgba format."
+              },
+              "dataType": {
+                "type": "string",
+                "enum": [
+                  "number",
+                  "enum"
+                ],
+                "description": "The type of the data value, numeric or enumeration type"
+              },
+              "dataLabel": {
+                "type": "string",
+                "description": "Data label, such as \"GDP\""
+              },
+              "dataValue": {
+                "type": "string",
+                "description": "Data value, numeric string or enumeration string."
+              },
+              "dataValueUnit": {
+                "type": "string",
+                "description": "Data unit, such as \"万亿\""
+              },
+              "showAllSubdistricts": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether to display all subdistricts."
+              },
+              "subdistricts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+                    },
+                    "dataValue": {
+                      "type": "string",
+                      "description": "Data value, numeric string or enumeration string."
+                    },
+                    "style": {
+                      "type": "object",
+                      "properties": {
+                        "fillColor": {
+                          "type": "string",
+                          "description": "Fill color, rgb or rgba format."
+                        }
+                      },
+                      "description": "Style settings."
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "description": "Sub-administrative regions are used to display the regional composition or regional distribution of related data."
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "description": "Administrative division data, lower-level administrative divisions are optional. There are usually two scenarios: one is to simply display the regional composition, only `fillColor` needs to be configured, and all administrative divisions are consistent, representing that all blocks are connected as one; the other is the regional data distribution scenario, first determine the `dataType`, `dataValueUnit` and `dataLabel` configurations, `dataValue` should be a meaningful value and consistent with the meaning of dataType, and then determine the style configuration. The `fillColor` configuration represents the default fill color for areas without data. Lower-level administrative divisions do not need `fillColor` configuration, and their fill colors are determined by the `colors` configuration (If `dataType` is \"number\", only one base color (warm color) is needed in the list to calculate the continuous data mapping color band; if `dataType` is \"enum\", the number of color values in the list is equal to the number of enumeration values (contrast colors)). If `subdistricts` has a value, `showAllSubdistricts` must be set to true. For example, {\"title\": \"陕西省地级市分布图\", \"data\": {\"name\": \"陕西省\", \"showAllSubdistricts\": true, \"dataLabel\": \"城市\", \"dataType\": \"enum\", \"colors\": [\"#4ECDC4\", \"#A5D8FF\"], \"subdistricts\": [{\"name\": \"西安市\", \"dataValue\": \"省会\"}, {\"name\": \"宝鸡市\", \"dataValue\": \"地级市\"}, {\"name\": \"咸阳市\", \"dataValue\": \"地级市\"}, {\"name\": \"铜川市\", \"dataValue\": \"地级市\"}, {\"name\": \"渭南市\", \"dataValue\": \"地级市\"}, {\"name\": \"延安市\", \"dataValue\": \"地级市\"}, {\"name\": \"榆林市\", \"dataValue\": \"地级市\"}, {\"name\": \"汉中市\", \"dataValue\": \"地级市\"}, {\"name\": \"安康市\", \"dataValue\": \"地级市\"}, {\"name\": \"商洛市\", \"dataValue\": \"地级市\"}]}, \"width\": 1000, \"height\": 1000}."
+          },
+          "width": {
+            "type": "number",
+            "default": 1600,
+            "description": "Set the width of map, default is 1600."
+          },
+          "height": {
+            "type": "number",
+            "default": 1000,
+            "description": "Set the height of map, default is 1000."
+          }
+        },
+        "required": [
+          "title",
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ],
+  "harness_strategy": "no_update",
+  "harness_snapshot": {
+    "path": "/Users/sneha/Python Projects/MCPEvol-Bench/src/custom/data/harness_snapshots/original.json",
+    "captured_at_utc": "2026-10-24T06:59:09.327320+00:00",
+    "tool_count": 1384
+  }
+}

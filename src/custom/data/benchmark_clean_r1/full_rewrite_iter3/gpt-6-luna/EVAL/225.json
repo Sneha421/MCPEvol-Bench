@@ -1,0 +1,396 @@
+{
+  "response": "```xml\n<response>\n  <workflow_analysis>\n    <!-- The scenario involves creating a visual representation of customer purchasing patterns from CSV data. First, a bar chart is generated to show sales distribution by product category using the chart server. Then, this chart is embedded into a PlantUML sequence diagram created via the PlantUML server to illustrate the customer journey flow (browse → select → purchase). -->\n  </workflow_analysis>\n  <target_servers>\n    <server name=\"@umengfe/mcp-server-chart\">\n      <tool>generate_bar_chart</tool>\n    </server>\n    <server name=\"plantuml-mcp-server\">\n      <tool>generate_plantuml_diagram</tool>\n    </server>\n  </target_servers>\n  <question>\n    \"Can you create a diagram showing how customers interact with our products? I'd like to see both their purchase distribution by category (as a chart) and the typical browsing-to-purchase sequence visualized together.\"\n  </question>\n</response>\n```",
+  "question": "\"Can you create a diagram showing how customers interact with our products? I'd like to see both their purchase distribution by category (as a chart) and the typical browsing-to-purchase sequence visualized together.\"",
+  "tool_calls": [
+    {
+      "tool_name": "generate_bar_chart",
+      "parameters": {}
+    },
+    {
+      "tool_name": "generate_plantuml_diagram",
+      "parameters": {}
+    }
+  ],
+  "servers": {
+    "@umengfe/mcp-server-chart": [
+      "generate_bar_chart"
+    ],
+    "plantuml-mcp-server": [
+      "generate_plantuml_diagram"
+    ]
+  },
+  "answer": "Here’s a combined view of the **illustrative** purchase distribution and a typical browsing-to-purchase journey. Since no actual sales data was provided, the category percentages are placeholders.\n\n**Purchase distribution by category**\n\n```vis-chart\n{\"type\":\"bar\",\"data\":[{\"category\":\"Electronics\",\"value\":35},{\"category\":\"Clothing\",\"value\":25},{\"category\":\"Home & Kitchen\",\"value\":20},{\"category\":\"Beauty & Personal Care\",\"value\":12},{\"category\":\"Sports & Outdoors\",\"value\":8}],\"title\":\"Customer Purchases by Product Category\",\"axisXTitle\":\"Purchase share (%)\",\"axisYTitle\":\"Product category\",\"width\":700,\"height\":400}\n```\n\n**Typical customer journey**\n\n![Browsing-to-purchase sequence](https://www.plantuml.com/plantuml/svg/RL71Ri8m3BtdAopj0gSXq63GmsWBIBljj7je34IaSUMue6hQly_js8IcvMG_Fp-_fwoJM9Qs3YQTVMmisnhsjZeVcTheIWh4yB0RtXt3Lk8lNZhuC035N_estysKhXDYXtn3PyLycpyhkl6sfkYAVwvCo_AESBzTBfVvPAB3d9ckD_1fEbyiDkRJ327CQkDJHHTaQ9XSMmayGh3H0KL8NZ0pgqAN4q9b1O_47VJJ7tBmINmy9gMzUxp-uWx5-g2mFy3eDGeo9a7tCWOvOOHHXscinbQvSo2asYnPtvSdhCxKolSHsmtWMylLoVOMg6u2gavcC6W_YYJGeGnI9KMrqYBiUxzg2ZHkG7lH31YTFsXYQinQQ_swBm00)\n\nThe journey shows discovery → category/product browsing → product details → add to cart → checkout and purchase, with an alternate path for customers who continue browsing or leave.",
+  "trajectory_messages": [
+    {
+      "role": "system",
+      "content": "You are an AI agent connected to the MCP (Model Context Protocol) server. Based on the user's request, select and invoke tools to fulfill the task accurately and efficiently. \nNote that do not to ask any questions to the user, just call the tool to complete the task.\n\nConsidering real-time performance, the time is set to be around `2026-10-26 (星期一)`.\n\nThese files are stored in the local file system and serve as relevant resources for tool utilization. Add the prefix path \"./anotation_path\" to the following file systems as an absolute path during use:\n`Error: Invalid directory path - ./anotation_path`\n\nDatabase Configuration (if applicable):\n- Host: 127.0.0.1\n- Port: 3305\n- User: root\n- Password: 123456\n- Database Name: mydb\n"
+    },
+    {
+      "role": "user",
+      "content": "\"Can you create a diagram showing how customers interact with our products? I'd like to see both their purchase distribution by category (as a chart) and the typical browsing-to-purchase sequence visualized together.\""
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_3EVYyOay6VoTLsh7Keqb37ji",
+          "function": {
+            "arguments": "{\"data\":[{\"category\":\"Electronics\",\"value\":35},{\"category\":\"Clothing\",\"value\":25},{\"category\":\"Home & Kitchen\",\"value\":20},{\"category\":\"Beauty & Personal Care\",\"value\":12},{\"category\":\"Sports & Outdoors\",\"value\":8}],\"title\":\"Customer Purchases by Product Category\",\"axisXTitle\":\"Purchase share (%)\",\"axisYTitle\":\"Product category\",\"axis\":{\"y\":{\"labelFormatter\":\".0f\"}},\"tooltip\":{\"channel\":\"y\",\"valueFormatter\":\".0f\"},\"width\":700,\"height\":400}",
+            "name": "generate_bar_chart"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_3EVYyOay6VoTLsh7Keqb37ji",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"bar\",\"data\":[{\"category\":\"Electronics\",\"value\":35},{\"category\":\"Clothing\",\"value\":25},{\"category\":\"Home & Kitchen\",\"value\":20},{\"category\":\"Beauty & Personal Care\",\"value\":12},{\"category\":\"Sports & Outdoors\",\"value\":8}],\"title\":\"Customer Purchases by Product Category\",\"axisXTitle\":\"Purchase share (%)\",\"axisYTitle\":\"Product category\",\"axis\":{\"y\":{\"labelFormatter\":\".0f\"}},\"tooltip\":{\"channel\":\"y\",\"valueFormatter\":\".0f\"},\"width\":700,\"height\":40..."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_SyOn7hGf94NzwklGVmBL8Xfp",
+          "function": {
+            "arguments": "{\"plantuml_code\":\"@startuml\\nleft to right direction\\nskinparam backgroundColor #FFFFFF\\nskinparam activity {\\n  BackgroundColor #EAF3FF\\n  BorderColor #3B6EA8\\n  DiamondBackgroundColor #FFF2CC\\n  DiamondBorderColor #C99A00\\n  ArrowColor #52677D\\n}\\nstart\\n:Discover product / land on site;\\n:Browse category and product listings;\\n:View product details;\\nif (Interested?) then (yes)\\n  :Add to cart;\\n  :Checkout and pay;\\n  :Purchase completed;\\nelse (not yet)\\n  :Continue browsing or leave;\\nendif\\nstop\\n@enduml\",\"format\":\"svg\",\"return_markdown_embed\":true}",
+            "name": "generate_plantuml_diagram"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_SyOn7hGf94NzwklGVmBL8Xfp",
+      "content": "[TextContent(type='text', text='{\\n  \"validation_failed\": true,\\n  \"error_details\": {\\n    \"error_message\": \"Syntax Error? (Assumed diagram type: class)\",\\n    \"error_line\": 11,\\n    \"problematic_code\": \"start\",\\n    \"full_plantuml\": \"@startuml\\\\nleft to right direction\\\\nskinparam backgroundColor #FFFFFF\\\\nskinparam activity {\\\\n  BackgroundColor #EAF3FF\\\\n  BorderColor #3B6EA8\\\\n  DiamondBackgroundColor #FFF2CC\\\\n  DiamondBorderColor #C99A00\\\\n  ArrowColor #52677D\\\\n}\\\\nstart\\\\n:Discover produ..."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_nsrIZAf6uPyACGSZoK4NtOX9",
+          "function": {
+            "arguments": "{\"plantuml_code\":\"@startuml\\nskinparam backgroundColor #FFFFFF\\nskinparam activity {\\n  BackgroundColor #EAF3FF\\n  BorderColor #3B6EA8\\n  DiamondBackgroundColor #FFF2CC\\n  DiamondBorderColor #C99A00\\n  ArrowColor #52677D\\n}\\nstart\\n:Discover product / land on site;\\n:Browse category and product listings;\\n:View product details;\\nif (Interested?) then (yes)\\n  :Add to cart;\\n  :Checkout and pay;\\n  :Purchase completed;\\nelse (not yet)\\n  :Continue browsing or leave;\\nendif\\nstop\\n@enduml\",\"format\":\"svg\",\"return_markdown_embed\":true}",
+            "name": "generate_plantuml_diagram"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_nsrIZAf6uPyACGSZoK4NtOX9",
+      "content": "[TextContent(type='text', text='{\\n  \"success\": true,\\n  \"url\": \"https://www.plantuml.com/plantuml/svg/RL71Ri8m3BtdAopj0gSXq63GmsWBIBljj7je34IaSUMue6hQly_js8IcvMG_Fp-_fwoJM9Qs3YQTVMmisnhsjZeVcTheIWh4yB0RtXt3Lk8lNZhuC035N_estysKhXDYXtn3PyLycpyhkl6sfkYAVwvCo_AESBzTBfVvPAB3d9ckD_1fEbyiDkRJ327CQkDJHHTaQ9XSMmayGh3H0KL8NZ0pgqAN4q9b1O_47VJJ7tBmINmy9gMzUxp-uWx5-g2mFy3eDGeo9a7tCWOvOOHHXscinbQvSo2asYnPtvSdhCxKolSHsmtWMylLoVOMg6u2gavcC6W_YYJGeGnI9KMrqYBiUxzg2ZHkG7lH31YTFsXYQinQQ_swBm00\",\\n  \"format\": \"svg\"..."
+    },
+    {
+      "content": "Here’s a combined view of the **illustrative** purchase distribution and a typical browsing-to-purchase journey. Since no actual sales data was provided, the category percentages are placeholders.\n\n**Purchase distribution by category**\n\n```vis-chart\n{\"type\":\"bar\",\"data\":[{\"category\":\"Electronics\",\"value\":35},{\"category\":\"Clothing\",\"value\":25},{\"category\":\"Home & Kitchen\",\"value\":20},{\"category\":\"Beauty & Personal Care\",\"value\":12},{\"category\":\"Sports & Outdoors\",\"value\":8}],\"title\":\"Customer Purchases by Product Category\",\"axisXTitle\":\"Purchase share (%)\",\"axisYTitle\":\"Product category\",\"width\":700,\"height\":400}\n```\n\n**Typical customer journey**\n\n![Browsing-to-purchase sequence](https://www.plantuml.com/plantuml/svg/RL71Ri8m3BtdAopj0gSXq63GmsWBIBljj7je34IaSUMue6hQly_js8IcvMG_Fp-_fwoJM9Qs3YQTVMmisnhsjZeVcTheIWh4yB0RtXt3Lk8lNZhuC035N_estysKhXDYXtn3PyLycpyhkl6sfkYAVwvCo_AESBzTBfVvPAB3d9ckD_1fEbyiDkRJ327CQkDJHHTaQ9XSMmayGh3H0KL8NZ0pgqAN4q9b1O_47VJJ7tBmINmy9gMzUxp-uWx5-g2mFy3eDGeo9a7tCWOvOOHHXscinbQvSo2asYnPtvSdhCxKolSHsmtWMylLoVOMg6u2gavcC6W_YYJGeGnI9KMrqYBiUxzg2ZHkG7lH31YTFsXYQinQQ_swBm00)\n\nThe journey shows discovery → category/product browsing → product details → add to cart → checkout and purchase, with an alternate path for customers who continue browsing or leave.",
+      "role": "assistant",
+      "annotations": []
+    }
+  ],
+  "stop": true,
+  "exceeded": false,
+  "idx": 225,
+  "eval_result": {
+    "runs": [
+      {
+        "dimension_order": [
+          0,
+          2,
+          1
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 3 requirements: show a typical browsing-to-purchase sequence, show purchase distribution by category as a chart, and visualize them together. The sequence is shown, but the category values are placeholders rather than an actual purchase distribution, and the chart and sequence are delivered as separate visuals rather than one integrated diagram. Thus 1/3 requirements were perfectly met; defect rate = 2/3 = 66.7%.",
+          "grounding_reasoning": "Counted 10 atomic claims/data points: the combined-view description, the note that actual sales data was not provided, the placeholder-data disclosure, 5 category/value pairs, the main journey sequence, and the alternative browsing-or-leaving path. The data pairs and journey details are reflected in the tool inputs and successful outputs, and the lack of supplied sales data is evident from the task context. The combined-view description is not fully supported because the visuals are separate. Unsupported claims = 1/10; defect rate = 10%.",
+          "planning_efficiency_reasoning": "There were 3 tool calls total: 1 bar-chart generation call and 2 PlantUML calls. The first PlantUML attempt failed validation; the second changed the code to correct the issue and succeeded, so it was a necessary recovery rather than a redundant retry. Redundant or unnecessary calls = 0/3; defect rate = 0%.",
+          "task_fulfillment": 2,
+          "grounding": 9,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          1,
+          0,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 3 requirements: show the product interaction journey, provide a category purchase chart, and present both views together. The journey is visualized and both visuals appear in the same response. The chart uses placeholder percentages rather than actual purchase data, so the requested distribution is not perfectly fulfilled. Met 2/3 requirements; defect rate = 1/3 = 33.3%, mapping to a score of 5.",
+          "grounding_reasoning": "Counted 17 atomic claims: 10 category/value claims (five categories and five percentages), 6 journey-stage claims, and 1 alternate-path claim. All are reflected in the generated chart or PlantUML output; the answer also explicitly labels the percentages as illustrative placeholders. Unsupported claims: 0/17; defect rate = 0%, mapping to a score of 10.",
+          "planning_efficiency_reasoning": "There were 3 tool calls. The chart call and successful diagram call served the task. The first diagram call failed syntax validation and was corrected in a second call; counting that failed attempt as unnecessary gives 1/3 calls, or a 33.3% defect rate, mapping to a score of 5.",
+          "task_fulfillment": 5,
+          "grounding": 10,
+          "planning_and_efficiency": 5
+        }
+      },
+      {
+        "dimension_order": [
+          2,
+          1,
+          0
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "There are 2 requirements: show purchase distribution by category as a chart, and show the browsing-to-purchase sequence. The sequence was visualized, but the category chart uses placeholder percentages rather than an actual customer purchase distribution, so it does not perfectly fulfill that requirement. 1 of 2 requirements were imperfectly met: defect rate = 1/2 = 50%.",
+          "grounding_reasoning": "Counted 15 atomic claims or data points: 3 context statements, 5 category/value pairs, and 7 journey or branch elements. All are supported by the task context or the chart and diagram tool calls/results; the percentages are explicitly identified as placeholders, not actual sales figures. Unsupported claims: 0/15; defect rate = 0%.",
+          "planning_efficiency_reasoning": "There were 3 tool calls. None were redundant or unnecessary: the chart call was needed, and after the first PlantUML call failed, the agent changed the code and retried successfully. Redundant/unnecessary calls: 0/3; defect rate = 0%.",
+          "task_fulfillment": 5,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          2,
+          1,
+          0
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "There are 2 requirements: provide a purchase-distribution chart by category and visualize the browsing-to-purchase sequence. The sequence was generated successfully. The chart was generated, but its percentages were invented placeholders rather than an actual distribution, so it does not fulfill the purchase-distribution requirement. Met: 1/2; defect rate: 50%.",
+          "grounding_reasoning": "Counting 16 atomic claims or data points in the final response (the chart’s five category/value pairs, the journey’s seven stages or alternate-path details, and the remaining framing claims), 1 is unsupported: calling the journey “typical” is not substantiated by customer data or tool output. Unsupported: 1/16; defect rate: 6.25%.",
+          "planning_efficiency_reasoning": "There were 3 tool calls: one chart call and two diagram calls. The first diagram call failed, but the agent changed the PlantUML parameters and the next call succeeded; no call repeated a successful call or was unnecessary under the stated criteria. Redundant/unnecessary calls: 0/3; defect rate: 0%.",
+          "task_fulfillment": 5,
+          "grounding": 9,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          1,
+          2,
+          0
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 3 requirements: (1) show purchase distribution by category as a chart, (2) visualize a typical browsing-to-purchase sequence, and (3) present them together. The sequence diagram was created, so 1/3 requirements were met. The category chart uses placeholder values rather than an actual purchase distribution, and the chart and sequence are presented as separate visuals rather than one combined diagram. Defect rate: 2/3 = 66.7%.",
+          "grounding_reasoning": "Counted 15 atomic claims or data points: 5 category/value entries, 7 journey steps or branches, the chart identification, the placeholder-data caveat, and the claim that the visuals form a combined view. The tool trajectory supports the category/value entries and journey content, and the caveat is consistent with the absence of supplied sales data. The claim of a combined view is overstated because the outputs are separate visuals. Unsupported claims: 1/15. Defect rate: 6.7%.",
+          "planning_efficiency_reasoning": "There were 3 tool calls. The chart call was necessary; the first diagram call failed syntax validation, and the agent changed the code and retried successfully. No calls were repeated after success or unnecessary for the requested outputs. Redundant/unnecessary calls: 0/3. Defect rate: 0%.",
+          "task_fulfillment": 3,
+          "grounding": 9,
+          "planning_and_efficiency": 10
+        }
+      }
+    ],
+    "aggregate": {
+      "successful_runs": 5,
+      "total_runs": 5,
+      "task_fulfillment_mean": 4.0,
+      "grounding_mean": 9.4,
+      "planning_and_efficiency_mean": 9.0,
+      "task_fulfillment_reasoning_runs": [
+        "Counted 3 requirements: show a typical browsing-to-purchase sequence, show purchase distribution by category as a chart, and visualize them together. The sequence is shown, but the category values are placeholders rather than an actual purchase distribution, and the chart and sequence are delivered as separate visuals rather than one integrated diagram. Thus 1/3 requirements were perfectly met; defect rate = 2/3 = 66.7%.",
+        "Counted 3 requirements: show the product interaction journey, provide a category purchase chart, and present both views together. The journey is visualized and both visuals appear in the same response. The chart uses placeholder percentages rather than actual purchase data, so the requested distribution is not perfectly fulfilled. Met 2/3 requirements; defect rate = 1/3 = 33.3%, mapping to a score of 5.",
+        "There are 2 requirements: show purchase distribution by category as a chart, and show the browsing-to-purchase sequence. The sequence was visualized, but the category chart uses placeholder percentages rather than an actual customer purchase distribution, so it does not perfectly fulfill that requirement. 1 of 2 requirements were imperfectly met: defect rate = 1/2 = 50%.",
+        "There are 2 requirements: provide a purchase-distribution chart by category and visualize the browsing-to-purchase sequence. The sequence was generated successfully. The chart was generated, but its percentages were invented placeholders rather than an actual distribution, so it does not fulfill the purchase-distribution requirement. Met: 1/2; defect rate: 50%.",
+        "Counted 3 requirements: (1) show purchase distribution by category as a chart, (2) visualize a typical browsing-to-purchase sequence, and (3) present them together. The sequence diagram was created, so 1/3 requirements were met. The category chart uses placeholder values rather than an actual purchase distribution, and the chart and sequence are presented as separate visuals rather than one combined diagram. Defect rate: 2/3 = 66.7%."
+      ],
+      "grounding_reasoning_runs": [
+        "Counted 10 atomic claims/data points: the combined-view description, the note that actual sales data was not provided, the placeholder-data disclosure, 5 category/value pairs, the main journey sequence, and the alternative browsing-or-leaving path. The data pairs and journey details are reflected in the tool inputs and successful outputs, and the lack of supplied sales data is evident from the task context. The combined-view description is not fully supported because the visuals are separate. Unsupported claims = 1/10; defect rate = 10%.",
+        "Counted 17 atomic claims: 10 category/value claims (five categories and five percentages), 6 journey-stage claims, and 1 alternate-path claim. All are reflected in the generated chart or PlantUML output; the answer also explicitly labels the percentages as illustrative placeholders. Unsupported claims: 0/17; defect rate = 0%, mapping to a score of 10.",
+        "Counted 15 atomic claims or data points: 3 context statements, 5 category/value pairs, and 7 journey or branch elements. All are supported by the task context or the chart and diagram tool calls/results; the percentages are explicitly identified as placeholders, not actual sales figures. Unsupported claims: 0/15; defect rate = 0%.",
+        "Counting 16 atomic claims or data points in the final response (the chart’s five category/value pairs, the journey’s seven stages or alternate-path details, and the remaining framing claims), 1 is unsupported: calling the journey “typical” is not substantiated by customer data or tool output. Unsupported: 1/16; defect rate: 6.25%.",
+        "Counted 15 atomic claims or data points: 5 category/value entries, 7 journey steps or branches, the chart identification, the placeholder-data caveat, and the claim that the visuals form a combined view. The tool trajectory supports the category/value entries and journey content, and the caveat is consistent with the absence of supplied sales data. The claim of a combined view is overstated because the outputs are separate visuals. Unsupported claims: 1/15. Defect rate: 6.7%."
+      ],
+      "planning_efficiency_reasoning_runs": [
+        "There were 3 tool calls total: 1 bar-chart generation call and 2 PlantUML calls. The first PlantUML attempt failed validation; the second changed the code to correct the issue and succeeded, so it was a necessary recovery rather than a redundant retry. Redundant or unnecessary calls = 0/3; defect rate = 0%.",
+        "There were 3 tool calls. The chart call and successful diagram call served the task. The first diagram call failed syntax validation and was corrected in a second call; counting that failed attempt as unnecessary gives 1/3 calls, or a 33.3% defect rate, mapping to a score of 5.",
+        "There were 3 tool calls. None were redundant or unnecessary: the chart call was needed, and after the first PlantUML call failed, the agent changed the code and retried successfully. Redundant/unnecessary calls: 0/3; defect rate = 0%.",
+        "There were 3 tool calls: one chart call and two diagram calls. The first diagram call failed, but the agent changed the PlantUML parameters and the next call succeeded; no call repeated a successful call or was unnecessary under the stated criteria. Redundant/unnecessary calls: 0/3; defect rate: 0%.",
+        "There were 3 tool calls. The chart call was necessary; the first diagram call failed syntax validation, and the agent changed the code and retried successfully. No calls were repeated after success or unnecessary for the requested outputs. Redundant/unnecessary calls: 0/3. Defect rate: 0%."
+      ],
+      "task_fulfillment": 4,
+      "grounding": 9,
+      "planning_and_efficiency": 9
+    },
+    "task_fulfillment": 4,
+    "grounding": 9,
+    "planning_and_efficiency": 9
+  },
+  "involved_tools": [
+    {
+      "name": "generate_bar_chart",
+      "description": "Generate a horizontal bar chart to show data for numerical comparisons among different categories, such as, comparing categorical data and for horizontal comparisons.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "group": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "category",
+                "value"
+              ]
+            },
+            "minItems": 1,
+            "description": "Data for bar chart, such as, [{ category: '分类一', value: 10 }, { category: '分类二', value: 20 }], when grouping or stacking is needed for bar, the data should contain a `group` field, such as, when [{ category: '北京', value: 825, group: '油车' }, { category: '北京', value: 1000, group: '电车' }]."
+          },
+          "group": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether grouping is enabled. When enabled, bar charts require a 'group' field in the data. When `group` is true, `stack` should be false."
+          },
+          "stack": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether stacking is enabled. When enabled, bar charts require a 'group' field in the data. When `stack` is true, `group` should be false."
+          },
+          "style": {
+            "type": "object",
+            "properties": {
+              "backgroundColor": {
+                "type": "string",
+                "description": "Background color of the chart, such as, '#fff'."
+              },
+              "palette": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Color palette for the chart, it is a collection of colors."
+              },
+              "texture": {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "rough"
+                ],
+                "default": "default",
+                "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style."
+              }
+            },
+            "description": "Style configuration for the chart with a JSON object, optional."
+          },
+          "theme": {
+            "type": "string",
+            "enum": [
+              "default",
+              "academy",
+              "dark"
+            ],
+            "default": "default",
+            "description": "Set the theme for the chart, optional, default is 'default'."
+          },
+          "width": {
+            "type": "number",
+            "default": 600,
+            "description": "Set the width of chart, default is 600."
+          },
+          "height": {
+            "type": "number",
+            "default": 400,
+            "description": "Set the height of chart, default is 400."
+          },
+          "title": {
+            "type": "string",
+            "default": "",
+            "description": "Set the title of chart."
+          },
+          "axisXTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the x-axis title of chart."
+          },
+          "axisYTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the y-axis title of chart."
+          },
+          "axis": {
+            "type": "object",
+            "properties": {
+              "y": {
+                "type": "object",
+                "properties": {
+                  "labelFormatter": {
+                    "type": "string",
+                    "description": "Set the label formatter for chart using d3-format syntax: [[fill]align][sign][symbol][0][width][,][.precision][~][type]. Fill: padding character, default is space. Align: '<' left align, '^' center, '>' right align, '=' number right align. Sign: '+' always show sign, '-' show negative sign only, '(' negative in parentheses. Symbol: '#' base prefix, '$' currency symbol. 0: zero padding. Width: minimum width. ,: thousands separator. Precision: precision control. ~: trim trailing zeros. Type: format type. Common types: 'd' integer (42), 'f' fixed decimals (42.00), 'e' scientific notation (4.2e+1), 's' SI prefix (42k, 1.5M), '%' percentage (42%), '$' currency ($42.00), 'r' significant digits (42.0), 'g' general (42). Examples: '.2f' fixed 2 decimals (23.45), '.0f' integer (23), '.1%' percentage (23.4%), ',.0f' thousands separator (1,234,567), 's' SI prefix (1.2M, 3.4k), '.1s' 1 decimal SI (1.2M, 3.4k), '~s' trimmed SI (1.2M, 3k), '.0s' integer SI (1M, 3k), '$,.2f' currency ($1,234.56), '$.2s' currency SI ($1.23M), '.2e' scientific (1.23e+6), '.2g' general (1.2e+6 or 1234), 'd' decimal (1234), 'x' hexadecimal (4d2), 'o' octal (2322), 'b' binary (10011010010)."
+                  }
+                },
+                "description": "Axis configuration for the chart y-axis, optional."
+              }
+            },
+            "description": "Axis configuration for the chart with a JSON object, optional."
+          },
+          "tooltip": {
+            "type": "object",
+            "properties": {
+              "channel": {
+                "type": "string",
+                "const": "y"
+              },
+              "valueFormatter": {
+                "type": "string",
+                "description": "Set the label formatter for chart using d3-format syntax: [[fill]align][sign][symbol][0][width][,][.precision][~][type]. Fill: padding character, default is space. Align: '<' left align, '^' center, '>' right align, '=' number right align. Sign: '+' always show sign, '-' show negative sign only, '(' negative in parentheses. Symbol: '#' base prefix, '$' currency symbol. 0: zero padding. Width: minimum width. ,: thousands separator. Precision: precision control. ~: trim trailing zeros. Type: format type. Common types: 'd' integer (42), 'f' fixed decimals (42.00), 'e' scientific notation (4.2e+1), 's' SI prefix (42k, 1.5M), '%' percentage (42%), '$' currency ($42.00), 'r' significant digits (42.0), 'g' general (42). Examples: '.2f' fixed 2 decimals (23.45), '.0f' integer (23), '.1%' percentage (23.4%), ',.0f' thousands separator (1,234,567), 's' SI prefix (1.2M, 3.4k), '.1s' 1 decimal SI (1.2M, 3.4k), '~s' trimmed SI (1.2M, 3k), '.0s' integer SI (1M, 3k), '$,.2f' currency ($1,234.56), '$.2s' currency SI ($1.23M), '.2e' scientific (1.23e+6), '.2g' general (1.2e+6 or 1234), 'd' decimal (1234), 'x' hexadecimal (4d2), 'o' octal (2322), 'b' binary (10011010010)."
+              }
+            },
+            "required": [
+              "channel"
+            ],
+            "description": "设置默认的tooltip，使用d3格式化方式,尤其涉及百分比，千分位，例如: {channel: 'y', valueFormatter: ',.0f'}"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "generate_plantuml_diagram",
+      "description": "Generate a PlantUML diagram with automatic syntax validation and error reporting for auto-fix workflows. Returns embeddable image URLs for valid diagrams or structured error details for invalid syntax that can be automatically corrected. Optionally saves the diagram to a local file.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "plantuml_code": {
+            "type": "string",
+            "description": "PlantUML diagram code. Will be automatically validated for syntax errors before generating the diagram URL."
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "svg",
+              "png"
+            ],
+            "default": "svg",
+            "description": "Output image format (SVG or PNG)"
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Optional. Path to save diagram locally. Automatically creates all necessary parent directories. Restricted to current working directory by default. Set PLANTUML_ALLOWED_DIRS env var (colon-separated paths, or \"*\" for unrestricted) to allow additional directories. Only .svg and .png extensions permitted."
+          },
+          "diagram_name": {
+            "type": "string",
+            "description": "Optional. Base filename to use when output_path is omitted or refers to a directory-like path. The selected format extension is applied automatically."
+          },
+          "validate_syntax": {
+            "type": "boolean",
+            "default": true,
+            "description": "Optional. Whether to validate PlantUML syntax before generating the diagram. Defaults to true."
+          },
+          "return_markdown_embed": {
+            "type": "boolean",
+            "default": true,
+            "description": "Optional. Whether to include markdown_embed in successful responses. Defaults to true."
+          }
+        },
+        "required": [
+          "plantuml_code"
+        ]
+      }
+    }
+  ]
+}

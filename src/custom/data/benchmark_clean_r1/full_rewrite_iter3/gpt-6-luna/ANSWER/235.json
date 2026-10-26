@@ -1,0 +1,466 @@
+{
+  "response": "```xml\n<response>\n  <workflow_analysis>\n    This scenario involves creating a dashboard for analyzing regional sales performance. First, the chart server will generate a map showing sales distribution across Chinese provinces using sales data from CSV files. Then, the same server will create a time-series area chart showing sales trends over months. Finally, the chart server will generate a column chart comparing product category performance across regions. All three visualizations work together to provide comprehensive sales insights.\n  </workflow_analysis>\n  <target_servers>\n    <server name=\"@umengfe/mcp-server-chart\">\n      <tool>generate_district_map</tool>\n      <tool>generate_area_chart</tool>\n      <tool>generate_column_chart</tool>\n    </server>\n  </target_servers>\n  <question>\n    I need to create a sales performance dashboard for our Chinese regional teams. First, I want a map showing our 2025 sales distribution across provinces - we have data showing Guangdong had ¥15.8M, Jiangsu ¥12.3M, Zhejiang ¥9.7M, Shandong ¥8.4M, and Beijing ¥7.2M. Then create an area chart showing monthly sales trends from January to December 2025, with values: Jan: 1.2M, Feb: 1.1M, Mar: 1.4M, Apr: 1.6M, May: 1.8M, Jun: 2.1M, Jul: 2.3M, Aug: 2.2M, Sep: 2.5M, Oct: 2.7M, Nov: 3.0M, Dec: 3.5M. Finally, make a column chart comparing our top product categories across regions: Electronics (Guangdong: 6.2M, Jiangsu: 4.8M), Home Appliances (Guangdong: 4.5M, Jiangsu: 3.9M), and Clothing (Guangdong: 5.1M, Jiangsu: 3.6M).\n  </question>\n</response>\n```",
+  "question": "I need to create a sales performance dashboard for our Chinese regional teams. First, I want a map showing our 2025 sales distribution across provinces - we have data showing Guangdong had ¥15.8M, Jiangsu ¥12.3M, Zhejiang ¥9.7M, Shandong ¥8.4M, and Beijing ¥7.2M. Then create an area chart showing monthly sales trends from January to December 2025, with values: Jan: 1.2M, Feb: 1.1M, Mar: 1.4M, Apr: 1.6M, May: 1.8M, Jun: 2.1M, Jul: 2.3M, Aug: 2.2M, Sep: 2.5M, Oct: 2.7M, Nov: 3.0M, Dec: 3.5M. Finally, make a column chart comparing our top product categories across regions: Electronics (Guangdong: 6.2M, Jiangsu: 4.8M), Home Appliances (Guangdong: 4.5M, Jiangsu: 3.9M), and Clothing (Guangdong: 5.1M, Jiangsu: 3.6M).",
+  "tool_calls": [
+    {
+      "tool_name": "generate_district_map",
+      "parameters": {}
+    },
+    {
+      "tool_name": "generate_area_chart",
+      "parameters": {}
+    },
+    {
+      "tool_name": "generate_column_chart",
+      "parameters": {}
+    }
+  ],
+  "servers": {
+    "@umengfe/mcp-server-chart": [
+      "generate_district_map",
+      "generate_area_chart",
+      "generate_column_chart"
+    ]
+  },
+  "answer": "Created the three dashboard charts:\n\n1. **2025 provincial sales distribution** — Guangdong ¥15.8M, Jiangsu ¥12.3M, Zhejiang ¥9.7M, Shandong ¥8.4M, and Beijing ¥7.2M.\n2. **Monthly sales trend for 2025** — January through December.\n3. **Product category comparison** — Electronics, Home Appliances, and Clothing across Guangdong and Jiangsu.",
+  "trajectory_messages": [
+    {
+      "role": "system",
+      "content": "You are an AI agent connected to the MCP (Model Context Protocol) server. Based on the user's request, select and invoke tools to fulfill the task accurately and efficiently. \nNote that do not to ask any questions to the user, just call the tool to complete the task.\n\nConsidering real-time performance, the time is set to be around `2026-10-26 (星期一)`.\n\nThese files are stored in the local file system and serve as relevant resources for tool utilization. Add the prefix path \"./anotation_path\" to the following file systems as an absolute path during use:\n`Error: Invalid directory path - ./anotation_path`\n\nDatabase Configuration (if applicable):\n- Host: 127.0.0.1\n- Port: 3305\n- User: root\n- Password: 123456\n- Database Name: mydb\n"
+    },
+    {
+      "role": "user",
+      "content": "I need to create a sales performance dashboard for our Chinese regional teams. First, I want a map showing our 2025 sales distribution across provinces - we have data showing Guangdong had ¥15.8M, Jiangsu ¥12.3M, Zhejiang ¥9.7M, Shandong ¥8.4M, and Beijing ¥7.2M. Then create an area chart showing monthly sales trends from January to December 2025, with values: Jan: 1.2M, Feb: 1.1M, Mar: 1.4M, Apr: 1.6M, May: 1.8M, Jun: 2.1M, Jul: 2.3M, Aug: 2.2M, Sep: 2.5M, Oct: 2.7M, Nov: 3.0M, Dec: 3.5M. Finally, make a column chart comparing our top product categories across regions: Electronics (Guangdong: 6.2M, Jiangsu: 4.8M), Home Appliances (Guangdong: 4.5M, Jiangsu: 3.9M), and Clothing (Guangdong: 5.1M, Jiangsu: 3.6M)."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_iR28UMHtszDCOM85R4vBvVg7",
+          "function": {
+            "arguments": "{\"title\": \"2025省级销售分布\", \"data\": {\"name\": \"中国\", \"dataType\": \"number\", \"dataLabel\": \"销售额\", \"dataValueUnit\": \"百万元\", \"colors\": [\"#F0884D\"], \"fillColor\": \"#E8EEF5\", \"subdistricts\": [{\"name\": \"广东省\", \"dataValue\": \"15.8\"}, {\"name\": \"江苏省\", \"dataValue\": \"12.3\"}, {\"name\": \"浙江省\", \"dataValue\": \"9.7\"}, {\"name\": \"山东省\", \"dataValue\": \"8.4\"}, {\"name\": \"北京市\", \"dataValue\": \"7.2\"}]}, \"width\": 1200, \"height\": 800}",
+            "name": "generate_district_map"
+          },
+          "type": "function"
+        },
+        {
+          "id": "call_RUWQSjs4pzxzykk4005nTRXt",
+          "function": {
+            "arguments": "{\"data\": [{\"time\": \"Jan\", \"value\": 1.2}, {\"time\": \"Feb\", \"value\": 1.1}, {\"time\": \"Mar\", \"value\": 1.4}, {\"time\": \"Apr\", \"value\": 1.6}, {\"time\": \"May\", \"value\": 1.8}, {\"time\": \"Jun\", \"value\": 2.1}, {\"time\": \"Jul\", \"value\": 2.3}, {\"time\": \"Aug\", \"value\": 2.2}, {\"time\": \"Sep\", \"value\": 2.5}, {\"time\": \"Oct\", \"value\": 2.7}, {\"time\": \"Nov\", \"value\": 3.0}, {\"time\": \"Dec\", \"value\": 3.5}], \"title\": \"2025月度销售趋势\", \"axisXTitle\": \"月份\", \"axisYTitle\": \"销售额（百万元）\", \"width\": 1000, \"height\": 500}",
+            "name": "generate_area_chart"
+          },
+          "type": "function"
+        },
+        {
+          "id": "call_72VuPhWOVqaILqR4pT1oK7N4",
+          "function": {
+            "arguments": "{\"data\": [{\"category\": \"Electronics\", \"value\": 6.2, \"group\": \"Guangdong\"}, {\"category\": \"Electronics\", \"value\": 4.8, \"group\": \"Jiangsu\"}, {\"category\": \"Home Appliances\", \"value\": 4.5, \"group\": \"Guangdong\"}, {\"category\": \"Home Appliances\", \"value\": 3.9, \"group\": \"Jiangsu\"}, {\"category\": \"Clothing\", \"value\": 5.1, \"group\": \"Guangdong\"}, {\"category\": \"Clothing\", \"value\": 3.6, \"group\": \"Jiangsu\"}], \"group\": true, \"stack\": false, \"title\": \"区域产品类别销售对比\", \"axisXTitle\": \"产品类别\", \"axisYTitle\": \"销售额（百万元）\", \"width\": 900, \"height\": 500}",
+            "name": "generate_column_chart"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_iR28UMHtszDCOM85R4vBvVg7",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"district-map\",\"title\":\"2025省级销售分布\",\"data\":{\"name\":\"中国\",\"dataType\":\"number\",\"dataLabel\":\"销售额\",\"dataValueUnit\":\"百万元\",\"colors\":[\"#F0884D\"],\"fillColor\":\"#E8EEF5\",\"subdistricts\":[{\"name\":\"广东省\",\"dataValue\":\"15.8\"},{\"name\":\"江苏省\",\"dataValue\":\"12.3\"},{\"name\":\"浙江省\",\"dataValue\":\"9.7\"},{\"name\":\"山东省\",\"dataValue\":\"8.4\"},{\"name\":\"北京市\",\"dataValue\":\"7.2\"}]},\"width\":1200,\"height\":800}\\n```', annotations=None, meta=None)]..."
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_RUWQSjs4pzxzykk4005nTRXt",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"area\",\"data\":[{\"time\":\"Jan\",\"value\":1.2},{\"time\":\"Feb\",\"value\":1.1},{\"time\":\"Mar\",\"value\":1.4},{\"time\":\"Apr\",\"value\":1.6},{\"time\":\"May\",\"value\":1.8},{\"time\":\"Jun\",\"value\":2.1},{\"time\":\"Jul\",\"value\":2.3},{\"time\":\"Aug\",\"value\":2.2},{\"time\":\"Sep\",\"value\":2.5},{\"time\":\"Oct\",\"value\":2.7},{\"time\":\"Nov\",\"value\":3},{\"time\":\"Dec\",\"value\":3.5}],\"title\":\"2025月度销售趋势\",\"axisXTitle\":\"月份\",\"axisYTitle\":\"销售额（百万元）\",\"width\":1000,\"height\":500}\\n```', annotations..."
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_72VuPhWOVqaILqR4pT1oK7N4",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"column\",\"data\":[{\"category\":\"Electronics\",\"value\":6.2,\"group\":\"Guangdong\"},{\"category\":\"Electronics\",\"value\":4.8,\"group\":\"Jiangsu\"},{\"category\":\"Home Appliances\",\"value\":4.5,\"group\":\"Guangdong\"},{\"category\":\"Home Appliances\",\"value\":3.9,\"group\":\"Jiangsu\"},{\"category\":\"Clothing\",\"value\":5.1,\"group\":\"Guangdong\"},{\"category\":\"Clothing\",\"value\":3.6,\"group\":\"Jiangsu\"}],\"group\":true,\"stack\":false,\"title\":\"区域产品类别销售对比\",\"axisXTitle\":\"产品类别\",\"axisYTitl..."
+    },
+    {
+      "content": "Created the three dashboard charts:\n\n1. **2025 provincial sales distribution** — Guangdong ¥15.8M, Jiangsu ¥12.3M, Zhejiang ¥9.7M, Shandong ¥8.4M, and Beijing ¥7.2M.\n2. **Monthly sales trend for 2025** — January through December.\n3. **Product category comparison** — Electronics, Home Appliances, and Clothing across Guangdong and Jiangsu.",
+      "role": "assistant",
+      "annotations": []
+    }
+  ],
+  "stop": true,
+  "exceeded": false,
+  "idx": 235,
+  "eval_result": {
+    "is_success": true,
+    "reason": "The assistant correctly generated all three requested visualizations using the tools (map by province, monthly area chart, and grouped column chart by category and region) with the exact data provided, and the final answer clearly describes each chart. All key constraints (regions, months, categories, 2025 focus, Chinese context) are respected, so the core task is fulfilled."
+  },
+  "involved_tools": [
+    {
+      "name": "generate_area_chart",
+      "description": "Generate a area chart to show data trends under continuous independent variables and observe the overall data trend, such as, displacement = velocity (average or instantaneous) × time: s = v × t. If the x-axis is time (t) and the y-axis is velocity (v) at each moment, an area chart allows you to observe the trend of velocity over time and infer the distance traveled by the area's size.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "time": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "group": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "time",
+                "value"
+              ]
+            },
+            "minItems": 1,
+            "description": "Data for area chart, such as, [{ time: '2018', value: 99.9 }]."
+          },
+          "stack": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether stacking is enabled. When enabled, area charts require a 'group' field in the data."
+          },
+          "style": {
+            "type": "object",
+            "properties": {
+              "backgroundColor": {
+                "type": "string",
+                "description": "Background color of the chart, such as, '#fff'."
+              },
+              "palette": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Color palette for the chart, it is a collection of colors."
+              },
+              "texture": {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "rough"
+                ],
+                "default": "default",
+                "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style."
+              },
+              "lineWidth": {
+                "type": "number",
+                "description": "Line width for the lines of chart, such as 4."
+              }
+            },
+            "description": "Style configuration for the chart with a JSON object, optional."
+          },
+          "theme": {
+            "type": "string",
+            "enum": [
+              "default",
+              "academy",
+              "dark"
+            ],
+            "default": "default",
+            "description": "Set the theme for the chart, optional, default is 'default'."
+          },
+          "width": {
+            "type": "number",
+            "default": 600,
+            "description": "Set the width of chart, default is 600."
+          },
+          "height": {
+            "type": "number",
+            "default": 400,
+            "description": "Set the height of chart, default is 400."
+          },
+          "title": {
+            "type": "string",
+            "default": "",
+            "description": "Set the title of chart."
+          },
+          "axisXTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the x-axis title of chart."
+          },
+          "axisYTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the y-axis title of chart."
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "generate_column_chart",
+      "description": "Generate a column chart, which are best for comparing categorical data, such as, when values are close, column charts are preferable because our eyes are better at judging height than other visual elements like area or angles.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "group": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "category",
+                "value"
+              ]
+            },
+            "minItems": 1,
+            "description": "Data for column chart, such as, [{ category: '分类一', value: 10 }, { category: '分类二', value: 20 }], when grouping or stacking is needed for column, the data should contain a `group` field, such as, when [{ category: '北京', value: 825, group: '油车' }, { category: '北京', value: 1000, group: '电车' }]."
+          },
+          "group": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether grouping is enabled. When enabled, column charts require a 'group' field in the data. When `group` is true, `stack` should be false."
+          },
+          "stack": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether stacking is enabled. When enabled, column charts require a 'group' field in the data. When `stack` is true, `group` should be false."
+          },
+          "style": {
+            "type": "object",
+            "properties": {
+              "backgroundColor": {
+                "type": "string",
+                "description": "Background color of the chart, such as, '#fff'."
+              },
+              "palette": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Color palette for the chart, it is a collection of colors."
+              },
+              "texture": {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "rough"
+                ],
+                "default": "default",
+                "description": "Set the texture for the chart, optional, default is 'default'. 'rough' refers to hand-drawn style."
+              }
+            },
+            "description": "Style configuration for the chart with a JSON object, optional."
+          },
+          "theme": {
+            "type": "string",
+            "enum": [
+              "default",
+              "academy",
+              "dark"
+            ],
+            "default": "default",
+            "description": "Set the theme for the chart, optional, default is 'default'."
+          },
+          "width": {
+            "type": "number",
+            "default": 600,
+            "description": "Set the width of chart, default is 600."
+          },
+          "height": {
+            "type": "number",
+            "default": 400,
+            "description": "Set the height of chart, default is 400."
+          },
+          "title": {
+            "type": "string",
+            "default": "",
+            "description": "Set the title of chart."
+          },
+          "axisXTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the x-axis title of chart."
+          },
+          "axisYTitle": {
+            "type": "string",
+            "default": "",
+            "description": "Set the y-axis title of chart."
+          },
+          "axis": {
+            "type": "object",
+            "properties": {
+              "y": {
+                "type": "object",
+                "properties": {
+                  "labelFormatter": {
+                    "type": "string",
+                    "description": "Set the label formatter for chart using d3-format syntax: [[fill]align][sign][symbol][0][width][,][.precision][~][type]. Fill: padding character, default is space. Align: '<' left align, '^' center, '>' right align, '=' number right align. Sign: '+' always show sign, '-' show negative sign only, '(' negative in parentheses. Symbol: '#' base prefix, '$' currency symbol. 0: zero padding. Width: minimum width. ,: thousands separator. Precision: precision control. ~: trim trailing zeros. Type: format type. Common types: 'd' integer (42), 'f' fixed decimals (42.00), 'e' scientific notation (4.2e+1), 's' SI prefix (42k, 1.5M), '%' percentage (42%), '$' currency ($42.00), 'r' significant digits (42.0), 'g' general (42). Examples: '.2f' fixed 2 decimals (23.45), '.0f' integer (23), '.1%' percentage (23.4%), ',.0f' thousands separator (1,234,567), 's' SI prefix (1.2M, 3.4k), '.1s' 1 decimal SI (1.2M, 3.4k), '~s' trimmed SI (1.2M, 3k), '.0s' integer SI (1M, 3k), '$,.2f' currency ($1,234.56), '$.2s' currency SI ($1.23M), '.2e' scientific (1.23e+6), '.2g' general (1.2e+6 or 1234), 'd' decimal (1234), 'x' hexadecimal (4d2), 'o' octal (2322), 'b' binary (10011010010)."
+                  }
+                },
+                "description": "Axis configuration for the chart y-axis, optional."
+              }
+            },
+            "description": "Axis configuration for the chart with a JSON object, optional."
+          },
+          "tooltip": {
+            "type": "object",
+            "properties": {
+              "channel": {
+                "type": "string",
+                "const": "y"
+              },
+              "valueFormatter": {
+                "type": "string",
+                "description": "Set the label formatter for chart using d3-format syntax: [[fill]align][sign][symbol][0][width][,][.precision][~][type]. Fill: padding character, default is space. Align: '<' left align, '^' center, '>' right align, '=' number right align. Sign: '+' always show sign, '-' show negative sign only, '(' negative in parentheses. Symbol: '#' base prefix, '$' currency symbol. 0: zero padding. Width: minimum width. ,: thousands separator. Precision: precision control. ~: trim trailing zeros. Type: format type. Common types: 'd' integer (42), 'f' fixed decimals (42.00), 'e' scientific notation (4.2e+1), 's' SI prefix (42k, 1.5M), '%' percentage (42%), '$' currency ($42.00), 'r' significant digits (42.0), 'g' general (42). Examples: '.2f' fixed 2 decimals (23.45), '.0f' integer (23), '.1%' percentage (23.4%), ',.0f' thousands separator (1,234,567), 's' SI prefix (1.2M, 3.4k), '.1s' 1 decimal SI (1.2M, 3.4k), '~s' trimmed SI (1.2M, 3k), '.0s' integer SI (1M, 3k), '$,.2f' currency ($1,234.56), '$.2s' currency SI ($1.23M), '.2e' scientific (1.23e+6), '.2g' general (1.2e+6 or 1234), 'd' decimal (1234), 'x' hexadecimal (4d2), 'o' octal (2322), 'b' binary (10011010010)."
+              }
+            },
+            "required": [
+              "channel"
+            ],
+            "description": "设置默认的tooltip，使用d3格式化方式,尤其涉及百分比，千分位，例如: {channel: 'y', valueFormatter: ',.0f'}"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "generate_district_map",
+      "description": "Generates regional distribution maps, which are usually used to show the administrative divisions and coverage of a dataset. It is not suitable for showing the distribution of specific locations, such as urban administrative divisions, GDP distribution maps of provinces and cities across the country, etc. This tool is limited to generating data maps within China.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The map title should not exceed 16 characters. The content should be consistent with the information the map wants to convey and should be accurate, rich, creative, and attractive."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+              },
+              "style": {
+                "type": "object",
+                "properties": {
+                  "fillColor": {
+                    "type": "string",
+                    "description": "Fill color, rgb or rgba format."
+                  }
+                },
+                "description": "Style settings."
+              },
+              "colors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [
+                  "#1783FF",
+                  "#00C9C9",
+                  "#F0884D",
+                  "#D580FF",
+                  "#7863FF",
+                  "#60C42D",
+                  "#BD8F24",
+                  "#FF80CA",
+                  "#2491B3",
+                  "#17C76F"
+                ],
+                "description": "Data color list, in rgb or rgba format."
+              },
+              "dataType": {
+                "type": "string",
+                "enum": [
+                  "number",
+                  "enum"
+                ],
+                "description": "The type of the data value, numeric or enumeration type"
+              },
+              "dataLabel": {
+                "type": "string",
+                "description": "Data label, such as \"GDP\""
+              },
+              "dataValue": {
+                "type": "string",
+                "description": "Data value, numeric string or enumeration string."
+              },
+              "dataValueUnit": {
+                "type": "string",
+                "description": "Data unit, such as \"万亿\""
+              },
+              "showAllSubdistricts": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether to display all subdistricts."
+              },
+              "subdistricts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+                    },
+                    "dataValue": {
+                      "type": "string",
+                      "description": "Data value, numeric string or enumeration string."
+                    },
+                    "style": {
+                      "type": "object",
+                      "properties": {
+                        "fillColor": {
+                          "type": "string",
+                          "description": "Fill color, rgb or rgba format."
+                        }
+                      },
+                      "description": "Style settings."
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "description": "Sub-administrative regions are used to display the regional composition or regional distribution of related data."
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "description": "Administrative division data, lower-level administrative divisions are optional. There are usually two scenarios: one is to simply display the regional composition, only `fillColor` needs to be configured, and all administrative divisions are consistent, representing that all blocks are connected as one; the other is the regional data distribution scenario, first determine the `dataType`, `dataValueUnit` and `dataLabel` configurations, `dataValue` should be a meaningful value and consistent with the meaning of dataType, and then determine the style configuration. The `fillColor` configuration represents the default fill color for areas without data. Lower-level administrative divisions do not need `fillColor` configuration, and their fill colors are determined by the `colors` configuration (If `dataType` is \"number\", only one base color (warm color) is needed in the list to calculate the continuous data mapping color band; if `dataType` is \"enum\", the number of color values in the list is equal to the number of enumeration values (contrast colors)). If `subdistricts` has a value, `showAllSubdistricts` must be set to true. For example, {\"title\": \"陕西省地级市分布图\", \"data\": {\"name\": \"陕西省\", \"showAllSubdistricts\": true, \"dataLabel\": \"城市\", \"dataType\": \"enum\", \"colors\": [\"#4ECDC4\", \"#A5D8FF\"], \"subdistricts\": [{\"name\": \"西安市\", \"dataValue\": \"省会\"}, {\"name\": \"宝鸡市\", \"dataValue\": \"地级市\"}, {\"name\": \"咸阳市\", \"dataValue\": \"地级市\"}, {\"name\": \"铜川市\", \"dataValue\": \"地级市\"}, {\"name\": \"渭南市\", \"dataValue\": \"地级市\"}, {\"name\": \"延安市\", \"dataValue\": \"地级市\"}, {\"name\": \"榆林市\", \"dataValue\": \"地级市\"}, {\"name\": \"汉中市\", \"dataValue\": \"地级市\"}, {\"name\": \"安康市\", \"dataValue\": \"地级市\"}, {\"name\": \"商洛市\", \"dataValue\": \"地级市\"}]}, \"width\": 1000, \"height\": 1000}."
+          },
+          "width": {
+            "type": "number",
+            "default": 1600,
+            "description": "Set the width of map, default is 1600."
+          },
+          "height": {
+            "type": "number",
+            "default": 1000,
+            "description": "Set the height of map, default is 1000."
+          }
+        },
+        "required": [
+          "title",
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    }
+  ]
+}

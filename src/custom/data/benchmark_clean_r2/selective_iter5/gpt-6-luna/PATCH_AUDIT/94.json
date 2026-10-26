@@ -1,0 +1,66 @@
+{
+  "task_id": 94,
+  "strategy": "selective_patch",
+  "stage": "late",
+  "mutation_depth": 2,
+  "routing_events": [],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "@jinzcdev/leetcode-mcp-server",
+      "tool": "search_problems",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.properties.category.description",
+        "inputSchema.properties.difficulty.description",
+        "inputSchema.properties.limit.description",
+        "inputSchema.properties.offset.description",
+        "inputSchema.properties.orderBy",
+        "inputSchema.properties.premiumOnly",
+        "inputSchema.properties.searchKeywords.description",
+        "inputSchema.properties.status",
+        "inputSchema.properties.tags.description"
+      ],
+      "old_hash": "43e365f0f5477ca4b8606401b2dfcf4764bb4ef7340ebb72000a380db9ea5eea",
+      "candidate_hash": "665e7fbe7c3d49e6c01a5cc1e073919ceb23da22dbb5bd3a60a65368e0d168cf",
+      "live_hash": "665e7fbe7c3d49e6c01a5cc1e073919ceb23da22dbb5bd3a60a65368e0d168cf",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {}
+      },
+      "final_hash": "665e7fbe7c3d49e6c01a5cc1e073919ceb23da22dbb5bd3a60a65368e0d168cf"
+    }
+  ],
+  "changed_card_count": 1,
+  "changed_field_count": 10,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 2972,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 723,
+      "output_tokens": 41,
+      "latency_ms": 2967,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 1,
+    "input_tokens": 723,
+    "output_tokens": 41,
+    "latency_ms": 2967,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "4c4e998f619c02c014b5d26bc8d641d57287c07b5d70740b8f794b3244cacc6c"
+}

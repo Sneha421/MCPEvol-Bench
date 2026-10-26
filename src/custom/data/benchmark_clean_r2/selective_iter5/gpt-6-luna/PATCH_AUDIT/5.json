@@ -1,0 +1,25 @@
+{
+  "task_id": 5,
+  "strategy": "selective_patch",
+  "stage": "late",
+  "mutation_depth": 2,
+  "routing_events": [],
+  "warnings": [
+    "unresolved in source and target: @agent-infra/mcp-server-commands/run_process"
+  ],
+  "patch_records": [],
+  "changed_card_count": 0,
+  "changed_field_count": 0,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 4,
+  "cost_ledger": [],
+  "cost_summary": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_ms": 0,
+    "estimated_usd": 0,
+    "cost_status": "priced"
+  },
+  "final_tool_hash": "c4e9260186d2abbef7cfb210ed42fa8d77cdaa50ad4fe7d50b8ea6e562ceead1"
+}

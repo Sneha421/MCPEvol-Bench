@@ -2,6 +2,7 @@ import os
 import requests
 import concurrent.futures
 import json
+import logging
 import time
 import sys
 
@@ -9,15 +10,17 @@ sys.path.append('FastChat')
 # from ollama import chat
 # from ollama import ChatResponse
 from openai import OpenAI
+from dotenv import load_dotenv
 from typing import List, Dict, Optional
 
-from FastChat.fastchat.model.model_adapter import get_conversation_template
-from FastChat.fastchat.conversation import get_conv_template
 from requests.exceptions import Timeout, ConnectionError
 
 
-api_key = 'sk-xxxxx'
-base_url = 'https://api.huiyan-ai.cn/v1'
+load_dotenv()
+
+api_key = os.getenv("OPENAI_API_KEY")
+base_url = os.getenv("MODEL_URL") or None
+logger = logging.getLogger(__name__)
 
 def chat_with_openai(
     conversation: List[Dict[str, str]],
@@ -43,16 +46,22 @@ def chat_with_openai(
     # 创建客户端，base_url 可为 None（使用默认）
     client = OpenAI(api_key=api_key, base_url=base_url)
     try:
-        response = client.chat.completions.create(
+        request_options = dict(
             model=model,
             messages=conversation,
-            temperature=temperature,
-            max_tokens=max_tokens,
+            max_completion_tokens=max_tokens,
             timeout=2*60,
         )
+        # GPT-6 reasoning requests reject custom sampling parameters.
+        # Omitting temperature uses the model's supported default.
+        if not model.startswith("gpt-6"):
+            request_options["temperature"] = temperature
+
+        response = client.chat.completions.create(**request_options)
         content = response.choices[0].message.content
         return content.strip() if content else ""
     except Exception as e: # tool_name
+        logger.error("Judge API call failed for model %s: %s", model, e)
         return None
 
 
@@ -160,6 +169,10 @@ def transform_to_openai_messages(messages):
     return new_messages
 
 def continue_gen(model_name, messages, gen_continue=False) -> str:
+    # FastChat imports Transformers/PyTorch, so load it only for this local
+    # generation path rather than for API-based benchmark evaluation.
+    from FastChat.fastchat.model.model_adapter import get_conversation_template
+
     controller_addr = 'http://0.0.0.0:21001'
     gen_params = {
         "model": model_name,

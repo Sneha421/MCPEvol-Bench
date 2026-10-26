@@ -1,0 +1,115 @@
+{
+  "task_id": 225,
+  "strategy": "selective_patch",
+  "stage": "late",
+  "mutation_depth": 2,
+  "routing_events": [
+    {
+      "depth": 2,
+      "server": "plantuml-mcp-server",
+      "before": [
+        "generate_plantuml_diagram"
+      ],
+      "after": [
+        "generate_plantuml_diagram",
+        "batch_generate_plantuml_diagrams"
+      ],
+      "change_class": "TOOL"
+    }
+  ],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "plantuml-mcp-server",
+      "tool": "generate_plantuml_diagram",
+      "change_classes": [
+        "PARAM"
+      ],
+      "field_paths": [
+        "inputSchema.properties.diagram_name",
+        "inputSchema.properties.fetch_timeout_ms",
+        "inputSchema.properties.image_alt_text",
+        "inputSchema.properties.output_mode",
+        "inputSchema.properties.plantuml_server_url",
+        "inputSchema.properties.return_markdown_embed",
+        "inputSchema.properties.skip_fetch_check",
+        "inputSchema.properties.validate_syntax"
+      ],
+      "old_hash": "360b33cd4668fcb011937c3e3e18ede62183caaf2b5aaf51f0ddb2af71532f29",
+      "candidate_hash": "9771fedb640ea962acc961d08bfebf337ae1e0815af7eef70dc8f2abdbefb141",
+      "live_hash": "9771fedb640ea962acc961d08bfebf337ae1e0815af7eef70dc8f2abdbefb141",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "plantuml_code": "@startuml\n@enduml"
+        }
+      },
+      "final_hash": "9771fedb640ea962acc961d08bfebf337ae1e0815af7eef70dc8f2abdbefb141"
+    },
+    {
+      "server": "plantuml-mcp-server",
+      "tool": "batch_generate_plantuml_diagrams",
+      "change_classes": [
+        "TOOL"
+      ],
+      "field_paths": [
+        "$"
+      ],
+      "old_hash": null,
+      "candidate_hash": "e0c2f2c20599cb0af179fe7c56468a191caa8d4b9d0b0bd4fe11c9960dca26fb",
+      "live_hash": "e0c2f2c20599cb0af179fe7c56468a191caa8d4b9d0b0bd4fe11c9960dca26fb",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "diagrams": [
+            {
+              "plantuml_code": "@startuml\n@enduml"
+            }
+          ]
+        }
+      },
+      "final_hash": "e0c2f2c20599cb0af179fe7c56468a191caa8d4b9d0b0bd4fe11c9960dca26fb"
+    }
+  ],
+  "changed_card_count": 2,
+  "changed_field_count": 9,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 4384,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 552,
+      "output_tokens": 61,
+      "latency_ms": 2286,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 308,
+      "output_tokens": 75,
+      "latency_ms": 2087,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 2,
+    "input_tokens": 860,
+    "output_tokens": 136,
+    "latency_ms": 4373,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "d55fc1ab1fa4a1b0b9d4eae25fa2c2e32c0ed08bf2cb5856b0f6b5c91b93ac53"
+}

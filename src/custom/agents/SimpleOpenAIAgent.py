@@ -138,12 +138,12 @@ class ChatModel:
         self.extra_body = {"enable_thinking": True}
         # self.init_extra_body()
         self.chat = partial(
-            self.client.chat.completions.create,
-            model=model_name,
-            temperature=temperature,
-            max_completion_tokens=max_new_tokens,
-            # extra_body=self.extra_body,
-        )
+    self.client.chat.completions.create,
+    model=model_name,
+    temperature=temperature,
+    max_completion_tokens=max_new_tokens,
+    reasoning_effort="none",
+)
         self.tools = [
             {
                 "type": "function",
@@ -164,6 +164,7 @@ class ChatModel:
 }]
         self.max_round = max_round
         self.tool_server_map = tool_server_map
+        self.forced_finalization = False
 
     def init_extra_body(self):
         self.extra_body["enable_thinking"] = False
@@ -202,13 +203,13 @@ class ChatModel:
 
     def run_with_server(self, query, fschat_flag=False):
         self.messages.append({'role':'user', 'content':query})
-        no_tool_count = 0
+        self.forced_finalization = False
         final_text = []
         stop_flag = False
         exceeded_flag = False
         round_num = 0
         try:
-            while not stop_flag and round_num <= self.max_round:
+            while not stop_flag and round_num < self.max_round:
                 raw_messages = self.messages
                 if not fschat_flag:
                     request_payload = {
@@ -247,17 +248,11 @@ class ChatModel:
                         and not response_message.tool_calls
                         # and not response_message.function_call
                 ):
-                    no_tool_count += 1
-                    if no_tool_count == 3:
-                        final_text.append(content)
-                        stop_flag = True
-                    else:
-                        self.messages.append(
-                            {
-                                "role": "user",
-                                "content": 'Please call the tool directly to complete the task without asking me any questions.',
-                            }
-                        )
+                    # A content-only assistant response is the normal completion
+                    # after tool use. Keeping it ends the task instead of forcing
+                    # unnecessary calls until the round limit is exhausted.
+                    final_text.append(content)
+                    stop_flag = True
                 else:
                     tool_calls = response_message.tool_calls
                     if not tool_calls:
@@ -265,7 +260,6 @@ class ChatModel:
                             "Received empty response from LLM without content or tool calls."
                         )
                         break
-                    no_tool_count = 0
                     for tool_call in tool_calls:
                         try:
                             tool_name = tool_call.function.name
@@ -302,8 +296,43 @@ class ChatModel:
             logger.error(f"Error processing query '{query}': {e}")
             final_text.append(f"Error: {str(e)}")
             self.messages.append({"role": "assistant", "content": str(e)})
-        if round_num >= self.max_round:
+        if not stop_flag and round_num >= self.max_round:
             exceeded_flag = True
+            self.forced_finalization = True
+            finalization_prompt = (
+                "You have reached the tool-call limit. Do not call any more tools. "
+                "Using only the user request and the tool results already in this conversation, "
+                "provide the best complete final answer now. Be explicit about any missing data "
+                "or failed operations, and do not claim that an action succeeded unless a tool "
+                "result confirms it."
+            )
+            self.messages.append({"role": "user", "content": finalization_prompt})
+            try:
+                if not fschat_flag:
+                    # Keep the existing model configuration but explicitly prohibit
+                    # further function calls for this final synthesis request.
+                    response = self.complete_with_retry(
+                        messages=self.messages,
+                        tools=self.tools,
+                        tool_choice="none",
+                    )
+                    response_message = response.choices[0].message
+                else:
+                    response_message = chat_with_fastchat(
+                        this_messages=self.messages,
+                        model_name=self.model_name,
+                        tools=[],
+                    )
+
+                self.messages.append(response_message.model_dump(exclude_none=True))
+                content = getattr(response_message, "content", None)
+                if content:
+                    final_text.append(content)
+                    stop_flag = True
+                else:
+                    logger.warning("Forced finalization returned no content.")
+            except Exception as e:
+                logger.error(f"Forced finalization failed for query '{query}': {e}")
         return "\n".join(final_text), self.messages, stop_flag, exceeded_flag
 
 

@@ -1,0 +1,112 @@
+{
+  "task_id": 21,
+  "strategy": "selective_patch",
+  "stage": "middle",
+  "mutation_depth": 1,
+  "routing_events": [],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "@guanxiong/mcp-server-time",
+      "tool": "get_time_info",
+      "change_classes": [
+        "PARAM"
+      ],
+      "field_paths": [
+        "inputSchema.properties.hour12",
+        "inputSchema.properties.includeTimestamp",
+        "inputSchema.properties.locale"
+      ],
+      "old_hash": "288ced934a6260df413c9649991e78ea83c1bab4c43b2ac301c75618402455b4",
+      "candidate_hash": "ca9a3d6e75b649e149542c07c7b71cbd407f2b7523fb3936d10516dee1dd0d13",
+      "live_hash": "ca9a3d6e75b649e149542c07c7b71cbd407f2b7523fb3936d10516dee1dd0d13",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {}
+      },
+      "final_hash": "ca9a3d6e75b649e149542c07c7b71cbd407f2b7523fb3936d10516dee1dd0d13"
+    },
+    {
+      "server": "mcp-server-commands",
+      "tool": "run_process",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.additionalProperties",
+        "inputSchema.properties.argv.description",
+        "inputSchema.properties.argv.items.minLength",
+        "inputSchema.properties.command_line.description",
+        "inputSchema.properties.command_line.minLength",
+        "inputSchema.properties.cwd.description",
+        "inputSchema.properties.cwd.minLength",
+        "inputSchema.properties.dry_run",
+        "inputSchema.properties.mode",
+        "inputSchema.properties.stdin",
+        "inputSchema.properties.stdin_text",
+        "inputSchema.properties.timeout_ms.description",
+        "inputSchema.properties.timeout_ms.maximum",
+        "inputSchema.properties.timeout_ms.minimum",
+        "inputSchema.properties.timeout_ms.type",
+        "inputSchema.required"
+      ],
+      "old_hash": "a587f2992312ad845d2b80ac05026ef8fde4bb5f3a1525c97d01264e95bd5d6a",
+      "candidate_hash": "f614b9706bde76c0b724dc6398c03157f5cfd59381a34e8a773ef9b6cb1057ab",
+      "live_hash": "f614b9706bde76c0b724dc6398c03157f5cfd59381a34e8a773ef9b6cb1057ab",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "mode": "executable",
+          "cwd": "/",
+          "argv": [
+            "/usr/bin/true"
+          ]
+        }
+      },
+      "final_hash": "f614b9706bde76c0b724dc6398c03157f5cfd59381a34e8a773ef9b6cb1057ab"
+    }
+  ],
+  "changed_card_count": 2,
+  "changed_field_count": 20,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 3491,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 193,
+      "output_tokens": 39,
+      "latency_ms": 1646,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 434,
+      "output_tokens": 87,
+      "latency_ms": 1829,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 2,
+    "input_tokens": 627,
+    "output_tokens": 126,
+    "latency_ms": 3475,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "94ab6991206faa1b6d1b1e42031440694380fdc3689a37820f70dee350bdbb11"
+}

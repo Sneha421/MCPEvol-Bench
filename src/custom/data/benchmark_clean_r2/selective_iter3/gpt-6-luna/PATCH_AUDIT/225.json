@@ -1,0 +1,60 @@
+{
+  "task_id": 225,
+  "strategy": "selective_patch",
+  "stage": "middle",
+  "mutation_depth": 1,
+  "routing_events": [],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "plantuml-mcp-server",
+      "tool": "generate_plantuml_diagram",
+      "change_classes": [
+        "PARAM"
+      ],
+      "field_paths": [
+        "inputSchema.properties.diagram_name",
+        "inputSchema.properties.return_markdown_embed",
+        "inputSchema.properties.validate_syntax"
+      ],
+      "old_hash": "360b33cd4668fcb011937c3e3e18ede62183caaf2b5aaf51f0ddb2af71532f29",
+      "candidate_hash": "bc65e244d60ac84813b60ba07390c8c32282f06b37ad504cee7cc0b35b15ee81",
+      "live_hash": "bc65e244d60ac84813b60ba07390c8c32282f06b37ad504cee7cc0b35b15ee81",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "plantuml_code": "@startuml\n@enduml"
+        }
+      },
+      "final_hash": "bc65e244d60ac84813b60ba07390c8c32282f06b37ad504cee7cc0b35b15ee81"
+    }
+  ],
+  "changed_card_count": 1,
+  "changed_field_count": 3,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 1921,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 360,
+      "output_tokens": 59,
+      "latency_ms": 1900,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 1,
+    "input_tokens": 360,
+    "output_tokens": 59,
+    "latency_ms": 1900,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "028fe3fb30d529b94d9f6550f681355f220146281c4cc80ef079ef6a83b1118e"
+}

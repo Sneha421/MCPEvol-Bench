@@ -1,0 +1,328 @@
+{
+  "response": "```xml\n<response>\n  <workflow_analysis>\n    The scenario combines planning/analysis with sequential thinking and then uses command execution to inspect and extract data from an existing local CSV file. The user’s question requires reasoning through how to aggregate and join data based on requirements, followed by running a local command to preview and confirm the relevant file contents. Thus, it naturally engages the sequential-thinking server to plan the data-processing steps and the command-execution server to inspect the CSV file.\n  </workflow_analysis>\n  <target_servers>\n    <server name=\"@modelcontextprotocol/server-sequential-thinking\">\n      <tool>sequentialthinking</tool>\n    </server>\n    <server name=\"mcp-server-commands\">\n      <tool>run_process</tool>\n    </server>\n  </target_servers>\n  <question>\n    I need to summarize last month’s customer purchases by loading the customers-100.csv file in my workspace. Can you first figure out the steps needed to compute total spending per customer, and then show me a quick preview of the CSV so I can confirm the columns before proceeding?\n  </question>\n</response>\n```",
+  "question": "I need to summarize last month’s customer purchases by loading the customers-100.csv file in my workspace. Can you first figure out the steps needed to compute total spending per customer, and then show me a quick preview of the CSV so I can confirm the columns before proceeding?",
+  "tool_calls": [
+    {
+      "tool_name": "sequentialthinking",
+      "parameters": {}
+    },
+    {
+      "tool_name": "run_process",
+      "parameters": {}
+    }
+  ],
+  "servers": {
+    "@modelcontextprotocol/server-sequential-thinking": [
+      "sequentialthinking"
+    ],
+    "mcp-server-commands": [
+      "run_process"
+    ]
+  },
+  "answer": "I found `./anotation_path/csv/customers-100.csv`. It has **100 rows and 12 columns**.\n\n**Quick preview (first 5 rows):**\n\n```text\nIndex | Customer Id | First Name | Last Name | Company | City | Country | Phone 1 | Phone 2 | Email | Subscription Date | Website\n1 | DD37Cf93aecA6Dc | Sheryl | Baxter | Rasmussen Group | East Leonard | Chile | 229.077.5154 | 397.884.0519x718 | zunigavanessa@smith.info | 2020-08-24 | http://www.stephenson.com/\n2 | 1Ef7b82A4CAAD10 | Preston | Lozano | Vega-Gentry | East Jimmychester | Djibouti | 515... \n```\n\nThe columns are customer/contact details and subscription date; there are **no purchase date or purchase amount columns** in this file. To calculate last month’s spending per customer, we’d need a purchase dataset with at least a customer identifier, transaction date, and amount. The steps would be to filter transactions to last month, group by customer, and sum the amounts.",
+  "trajectory_messages": [
+    {
+      "role": "system",
+      "content": "You are an AI agent connected to the MCP (Model Context Protocol) server. Based on the user's request, select and invoke tools to fulfill the task accurately and efficiently. \nNote that do not to ask any questions to the user, just call the tool to complete the task.\n\nConsidering real-time performance, the time is set to be around `2026-10-26 (星期一)`.\n\nThese files are stored in the local file system and serve as relevant resources for tool utilization. Add the prefix path \"./anotation_path\" to the following file systems as an absolute path during use:\n`Error: Invalid directory path - ./anotation_path`\n\nDatabase Configuration (if applicable):\n- Host: 127.0.0.1\n- Port: 3305\n- User: root\n- Password: 123456\n- Database Name: mydb\n"
+    },
+    {
+      "role": "user",
+      "content": "I need to summarize last month’s customer purchases by loading the customers-100.csv file in my workspace. Can you first figure out the steps needed to compute total spending per customer, and then show me a quick preview of the CSV so I can confirm the columns before proceeding?"
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_A3pL1gyUbDnSaL2zRvMK9qTb",
+          "function": {
+            "arguments": "{\"command_line\":\"pwd; find . -maxdepth 3 -type f -name 'customers-100.csv' -print; find / -maxdepth 4 -type f -name 'customers-100.csv' -print 2>/dev/null | head -20\",\"timeout_ms\":30000}",
+            "name": "run_process"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_A3pL1gyUbDnSaL2zRvMK9qTb",
+      "content": "[TextContent(type='text', text='0', annotations=None, meta=None), TextContent(type='text', text='/Users/sneha/Python Projects/MCPEvol-Bench\\n./anotation_path/csv/customers-100.csv\\n', annotations=None, meta=None)]..."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_ex6ailNBtqhBNXJWw3N28kyG",
+          "function": {
+            "arguments": "{\"command_line\":\"python3 - <<'PY'\\nimport pandas as pd\\np='./anotation_path/csv/customers-100.csv'\\ndf=pd.read_csv(p)\\nprint('Shape:', df.shape)\\nprint('Columns:', list(df.columns))\\nprint('\\\\nPreview (first 5 rows):')\\nprint(df.head().to_string(index=False))\\nprint('\\\\nDtypes:')\\nprint(df.dtypes.to_string())\\nPY\",\"cwd\":\"/Users/sneha/Python Projects/MCPEvol-Bench\",\"timeout_ms\":30000}",
+            "name": "run_process"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_ex6ailNBtqhBNXJWw3N28kyG",
+      "content": "[TextContent(type='text', text='0', annotations=None, meta=None), TextContent(type='text', text=\"Shape: (100, 12)\\nColumns: ['Index', 'Customer Id', 'First Name', 'Last Name', 'Company', 'City', 'Country', 'Phone 1', 'Phone 2', 'Email', 'Subscription Date', 'Website']\\n\\nPreview (first 5 rows):\\n Index     Customer Id First Name Last Name                         Company              City                    Country                Phone 1               Phone 2                       Email Subscript..."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_KUklN4CMJOJTNSnfGC2l7asq",
+          "function": {
+            "arguments": "{\"command_line\":\"python3 - <<'PY'\\nimport csv\\np='./anotation_path/csv/customers-100.csv'\\nwith open(p, newline='', encoding='utf-8-sig') as f:\\n r=csv.reader(f)\\n for i,row in zip(range(6),r): print(' | '.join(row))\\nPY\",\"cwd\":\"/Users/sneha/Python Projects/MCPEvol-Bench\",\"timeout_ms\":30000}",
+            "name": "run_process"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_KUklN4CMJOJTNSnfGC2l7asq",
+      "content": "[TextContent(type='text', text='0', annotations=None, meta=None), TextContent(type='text', text='Index | Customer Id | First Name | Last Name | Company | City | Country | Phone 1 | Phone 2 | Email | Subscription Date | Website\\n1 | DD37Cf93aecA6Dc | Sheryl | Baxter | Rasmussen Group | East Leonard | Chile | 229.077.5154 | 397.884.0519x718 | zunigavanessa@smith.info | 2020-08-24 | http://www.stephenson.com/\\n2 | 1Ef7b82A4CAAD10 | Preston | Lozano | Vega-Gentry | East Jimmychester | Djibouti | 515..."
+    },
+    {
+      "content": "I found `./anotation_path/csv/customers-100.csv`. It has **100 rows and 12 columns**.\n\n**Quick preview (first 5 rows):**\n\n```text\nIndex | Customer Id | First Name | Last Name | Company | City | Country | Phone 1 | Phone 2 | Email | Subscription Date | Website\n1 | DD37Cf93aecA6Dc | Sheryl | Baxter | Rasmussen Group | East Leonard | Chile | 229.077.5154 | 397.884.0519x718 | zunigavanessa@smith.info | 2020-08-24 | http://www.stephenson.com/\n2 | 1Ef7b82A4CAAD10 | Preston | Lozano | Vega-Gentry | East Jimmychester | Djibouti | 515... \n```\n\nThe columns are customer/contact details and subscription date; there are **no purchase date or purchase amount columns** in this file. To calculate last month’s spending per customer, we’d need a purchase dataset with at least a customer identifier, transaction date, and amount. The steps would be to filter transactions to last month, group by customer, and sum the amounts.",
+      "role": "assistant",
+      "annotations": []
+    }
+  ],
+  "stop": true,
+  "exceeded": false,
+  "idx": 29,
+  "eval_result": {
+    "runs": [
+      {
+        "dimension_order": [
+          0,
+          1,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "There are 2 explicit requirements: describe the steps to calculate last month’s spending per customer, and show a CSV preview to confirm its columns. Both were met: the agent described filtering transactions by date, grouping by customer, and summing amounts; it also showed the column header and sample data. The agent appropriately noted that this file has no purchase date or amount columns. Defects: 0/2 = 0%.",
+          "grounding_reasoning": "There are 7 atomic claims: the file path, row and column counts, the label that the preview contains the first 5 rows, the description of the columns, the absence of purchase date and amount columns, the needed fields for a purchase dataset, and the proposed calculation steps. The tool outputs support the path, counts, column description, and absence of purchase fields; the dataset requirements and calculation steps are reasonable recommendations. The final answer labels the displayed preview as the first 5 rows, but it displays only one complete row and part of a second. Defects: 1/7 = 14.3%, mapping to score 7.",
+          "planning_efficiency_reasoning": "There were 3 tool calls: locating the file, inspecting it with pandas, and reading it with csv.reader for a more readable preview after the pandas output was clipped. None of the calls was redundant or unnecessary for the requested location, inspection, or preview. Defects: 0/3 = 0%.",
+          "task_fulfillment": 10,
+          "grounding": 7,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          2,
+          1,
+          0
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "There are 2 explicit requirements: explain the steps for computing spending per customer and show a quick CSV preview. Both were met: the agent described filtering transactions to last month, grouping by customer, and summing amounts; it also showed the column header and sample row. Defects: 0/2 = 0%.",
+          "grounding_reasoning": "Counted 12 atomic claims or data points in the final answer. Eight are supported by the tool outputs, including the file path, row and column counts, displayed columns and sample data, and the absence of purchase fields. Four claims about the needed transaction fields and calculation steps are not present in the tool outputs. Defects: 4/12 = 33%.",
+          "planning_efficiency_reasoning": "There were 3 tool calls. The initial call located the file, and the pandas call inspected its shape, columns, and preview. The subsequent CSV-reader call repeated the preview retrieval, so 1/3 calls was redundant. Defects: 33%.",
+          "task_fulfillment": 10,
+          "grounding": 5,
+          "planning_and_efficiency": 6
+        }
+      },
+      {
+        "dimension_order": [
+          2,
+          0,
+          1
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "There are 2 explicit requirements: explain the steps for computing total spending per customer and provide a quick CSV preview to confirm its columns. Both were met: the agent described filtering transactions to last month, grouping by customer, and summing amounts; it also showed the column header and a sample row. Defects: 0/2 = 0%.",
+          "grounding_reasoning": "Counting 9 atomic claims or data points: file path, row count, column count, column names, sample-row contents, description of the data, absence of purchase date and amount columns, needed transaction fields, and the proposed calculation steps. All are supported by the tool output or are recommendations consistent with the observed columns. Unsupported claims: 0/9 = 0%.",
+          "planning_efficiency_reasoning": "There were 3 tool calls. The first located the file; the second inspected its shape, columns, and preview; the third provided a readable CSV excerpt after the pandas output was truncated. Redundant or unnecessary calls: 0/3 = 0%.",
+          "task_fulfillment": 10,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          0,
+          1,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "There are 2 explicit requirements: explain the steps for computing total spending per customer, and show a CSV preview to confirm its columns. Both were met: the agent described filtering by transaction date, grouping by customer, and summing amounts; it also showed the CSV header and sample data. Defect rate: 0/2 = 0%.",
+          "grounding_reasoning": "Counted 11 atomic claims: file path, row count, column count, preview extent, column description, absence of purchase-date and purchase-amount columns, required fields for a purchase dataset, and the three computation steps. The claim that the preview shows the first 5 rows is not supported by the final response, which displays one complete data row and only a truncated second row. Defect rate: 1/11 = 9.1%.",
+          "planning_efficiency_reasoning": "There were 3 tool calls. None was wholly redundant or unnecessary: the first located the file, the second inspected its structure and preview, and the third provided a raw CSV preview after the prior output was truncated. Defect rate: 0/3 = 0%.",
+          "task_fulfillment": 10,
+          "grounding": 9,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          2,
+          0,
+          1
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "There are 2 explicit requirements: explain the steps to calculate total spending per customer, and provide a CSV preview so the columns can be confirmed. Both were met: the agent described filtering to last month, grouping by customer, and summing amounts, and it showed the column header and sample data. It also correctly noted that this file lacks purchase dates and amounts, so spending cannot be calculated from it alone. Defect rate: 0/2 = 0%.",
+          "grounding_reasoning": "Of 11 material claims, 1 is not fully supported: the preview is labeled as showing the first 5 rows, but the final response displays only one complete data row and a truncated second row. The file path, dimensions, columns, visible sample, and absence of purchase fields are supported by tool output. Defect rate: 1/11 = 9.1%.",
+          "planning_efficiency_reasoning": "There were 3 tool calls and 0 redundant or unnecessary calls. The first located the file, the second loaded it and inspected its structure, and the third provided a more readable CSV preview after the second tool output was truncated. Defect rate: 0/3 = 0%.",
+          "task_fulfillment": 10,
+          "grounding": 9,
+          "planning_and_efficiency": 10
+        }
+      }
+    ],
+    "aggregate": {
+      "successful_runs": 5,
+      "total_runs": 5,
+      "task_fulfillment_mean": 10.0,
+      "grounding_mean": 8.0,
+      "planning_and_efficiency_mean": 9.2,
+      "task_fulfillment_reasoning_runs": [
+        "There are 2 explicit requirements: describe the steps to calculate last month’s spending per customer, and show a CSV preview to confirm its columns. Both were met: the agent described filtering transactions by date, grouping by customer, and summing amounts; it also showed the column header and sample data. The agent appropriately noted that this file has no purchase date or amount columns. Defects: 0/2 = 0%.",
+        "There are 2 explicit requirements: explain the steps for computing spending per customer and show a quick CSV preview. Both were met: the agent described filtering transactions to last month, grouping by customer, and summing amounts; it also showed the column header and sample row. Defects: 0/2 = 0%.",
+        "There are 2 explicit requirements: explain the steps for computing total spending per customer and provide a quick CSV preview to confirm its columns. Both were met: the agent described filtering transactions to last month, grouping by customer, and summing amounts; it also showed the column header and a sample row. Defects: 0/2 = 0%.",
+        "There are 2 explicit requirements: explain the steps for computing total spending per customer, and show a CSV preview to confirm its columns. Both were met: the agent described filtering by transaction date, grouping by customer, and summing amounts; it also showed the CSV header and sample data. Defect rate: 0/2 = 0%.",
+        "There are 2 explicit requirements: explain the steps to calculate total spending per customer, and provide a CSV preview so the columns can be confirmed. Both were met: the agent described filtering to last month, grouping by customer, and summing amounts, and it showed the column header and sample data. It also correctly noted that this file lacks purchase dates and amounts, so spending cannot be calculated from it alone. Defect rate: 0/2 = 0%."
+      ],
+      "grounding_reasoning_runs": [
+        "There are 7 atomic claims: the file path, row and column counts, the label that the preview contains the first 5 rows, the description of the columns, the absence of purchase date and amount columns, the needed fields for a purchase dataset, and the proposed calculation steps. The tool outputs support the path, counts, column description, and absence of purchase fields; the dataset requirements and calculation steps are reasonable recommendations. The final answer labels the displayed preview as the first 5 rows, but it displays only one complete row and part of a second. Defects: 1/7 = 14.3%, mapping to score 7.",
+        "Counted 12 atomic claims or data points in the final answer. Eight are supported by the tool outputs, including the file path, row and column counts, displayed columns and sample data, and the absence of purchase fields. Four claims about the needed transaction fields and calculation steps are not present in the tool outputs. Defects: 4/12 = 33%.",
+        "Counting 9 atomic claims or data points: file path, row count, column count, column names, sample-row contents, description of the data, absence of purchase date and amount columns, needed transaction fields, and the proposed calculation steps. All are supported by the tool output or are recommendations consistent with the observed columns. Unsupported claims: 0/9 = 0%.",
+        "Counted 11 atomic claims: file path, row count, column count, preview extent, column description, absence of purchase-date and purchase-amount columns, required fields for a purchase dataset, and the three computation steps. The claim that the preview shows the first 5 rows is not supported by the final response, which displays one complete data row and only a truncated second row. Defect rate: 1/11 = 9.1%.",
+        "Of 11 material claims, 1 is not fully supported: the preview is labeled as showing the first 5 rows, but the final response displays only one complete data row and a truncated second row. The file path, dimensions, columns, visible sample, and absence of purchase fields are supported by tool output. Defect rate: 1/11 = 9.1%."
+      ],
+      "planning_efficiency_reasoning_runs": [
+        "There were 3 tool calls: locating the file, inspecting it with pandas, and reading it with csv.reader for a more readable preview after the pandas output was clipped. None of the calls was redundant or unnecessary for the requested location, inspection, or preview. Defects: 0/3 = 0%.",
+        "There were 3 tool calls. The initial call located the file, and the pandas call inspected its shape, columns, and preview. The subsequent CSV-reader call repeated the preview retrieval, so 1/3 calls was redundant. Defects: 33%.",
+        "There were 3 tool calls. The first located the file; the second inspected its shape, columns, and preview; the third provided a readable CSV excerpt after the pandas output was truncated. Redundant or unnecessary calls: 0/3 = 0%.",
+        "There were 3 tool calls. None was wholly redundant or unnecessary: the first located the file, the second inspected its structure and preview, and the third provided a raw CSV preview after the prior output was truncated. Defect rate: 0/3 = 0%.",
+        "There were 3 tool calls and 0 redundant or unnecessary calls. The first located the file, the second loaded it and inspected its structure, and the third provided a more readable CSV preview after the second tool output was truncated. Defect rate: 0/3 = 0%."
+      ],
+      "task_fulfillment": 10,
+      "grounding": 8,
+      "planning_and_efficiency": 9
+    },
+    "task_fulfillment": 10,
+    "grounding": 8,
+    "planning_and_efficiency": 9
+  },
+  "forced_finalization": false,
+  "involved_tools": [
+    {
+      "name": "sequentialthinking",
+      "description": "A detailed tool for dynamic and reflective problem-solving through thoughts.\nThis tool helps analyze problems through a flexible thinking process that can adapt and evolve.\nEach thought can build on, question, or revise previous insights as understanding deepens.\n\nWhen to use this tool:\n- Breaking down complex problems into steps\n- Planning and design with room for revision\n- Analysis that might need course correction\n- Problems where the full scope might not be clear initially\n- Problems that require a multi-step solution\n- Tasks that need to maintain context over multiple steps\n- Situations where irrelevant information needs to be filtered out\n\nKey features:\n- You can adjust total_thoughts up or down as you progress\n- You can question or revise previous thoughts\n- You can add more thoughts even after reaching what seemed like the end\n- You can express uncertainty and explore alternative approaches\n- Not every thought needs to build linearly - you can branch or backtrack\n- Generates a solution hypothesis\n- Verifies the hypothesis based on the Chain of Thought steps\n- Repeats the process until satisfied\n- Provides a correct answer\n\nParameters explained:\n- thought: Your current thinking step, which can include:\n  * Regular analytical steps\n  * Revisions of previous thoughts\n  * Questions about previous decisions\n  * Realizations about needing more analysis\n  * Changes in approach\n  * Hypothesis generation\n  * Hypothesis verification\n- nextThoughtNeeded: True if you need more thinking, even if at what seemed like the end\n- thoughtNumber: Current number in sequence (can go beyond initial total if needed)\n- totalThoughts: Current estimate of thoughts needed (can be adjusted up/down)\n- isRevision: A boolean indicating if this thought revises previous thinking\n- revisesThought: If is_revision is true, which thought number is being reconsidered\n- branchFromThought: If branching, which thought number is the branching point\n- branchId: Identifier for the current branch (if any)\n- needsMoreThoughts: If reaching end but realizing more thoughts needed\n\nYou should:\n1. Start with an initial estimate of needed thoughts, but be ready to adjust\n2. Feel free to question or revise previous thoughts\n3. Don't hesitate to add more thoughts if needed, even at the \"end\"\n4. Express uncertainty when present\n5. Mark thoughts that revise previous thinking or branch into new paths\n6. Ignore information that is irrelevant to the current step\n7. Generate a solution hypothesis when appropriate\n8. Verify the hypothesis based on the Chain of Thought steps\n9. Repeat the process until satisfied with the solution\n10. Provide a single, ideally correct answer as the final output\n11. Only set nextThoughtNeeded to false when truly done and a satisfactory answer is reached",
+      "inputSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "properties": {
+          "thought": {
+            "type": "string",
+            "description": "Your current thinking step"
+          },
+          "nextThoughtNeeded": {
+            "description": "Whether another thought step is needed",
+            "type": [
+              "boolean",
+              "string"
+            ]
+          },
+          "thoughtNumber": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991,
+            "description": "Current thought number (numeric value, e.g., 1, 2, 3)"
+          },
+          "totalThoughts": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991,
+            "description": "Estimated total thoughts needed (numeric value, e.g., 5, 10)"
+          },
+          "isRevision": {
+            "description": "Whether this revises previous thinking",
+            "type": [
+              "boolean",
+              "string"
+            ]
+          },
+          "revisesThought": {
+            "description": "Which thought is being reconsidered",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "branchFromThought": {
+            "description": "Branching point thought number",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "branchId": {
+            "description": "Branch identifier",
+            "type": "string"
+          },
+          "needsMoreThoughts": {
+            "description": "If more thoughts are needed",
+            "type": [
+              "boolean",
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "thought",
+          "nextThoughtNeeded",
+          "thoughtNumber",
+          "totalThoughts"
+        ]
+      }
+    },
+    {
+      "name": "run_process",
+      "description": "Run a process on this darwin machine",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "command_line": {
+            "type": "string",
+            "description": "Shell mode: a shell command line executed via the system's default shell. Supports pipes, redirects, globbing. Cannot be combined with 'argv'."
+          },
+          "argv": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Executable mode: directly spawn a process. argv[0] is the executable, followed by arguments passed verbatim (no shell interpretation). Cannot be combined with 'command_line'."
+          },
+          "cwd": {
+            "type": "string",
+            "description": "Optional to set working directory"
+          },
+          "stdin_text": {
+            "type": "string",
+            "description": "Optional text written to STDIN (written fully, then closed). Useful for heredoc-style input or file contents."
+          },
+          "timeout_ms": {
+            "type": "number",
+            "description": "Optional timeout in milliseconds, defaults to 30,000ms"
+          }
+        }
+      }
+    }
+  ],
+  "harness_strategy": "selective_patch",
+  "stage": "early",
+  "patch_audit": "/Users/sneha/Python Projects/MCPEvol-Bench/src/custom/data/benchmark_clean_r2/selective_original/gpt-6-luna/PATCH_AUDIT/29.json",
+  "adaptation_cost": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_ms": 0,
+    "estimated_usd": 0,
+    "cost_status": "priced"
+  },
+  "unchanged_hash_check": true
+}

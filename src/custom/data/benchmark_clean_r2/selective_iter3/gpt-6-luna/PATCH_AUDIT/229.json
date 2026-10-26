@@ -1,0 +1,61 @@
+{
+  "task_id": 229,
+  "strategy": "selective_patch",
+  "stage": "middle",
+  "mutation_depth": 1,
+  "routing_events": [],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "@next-ai-drawio/mcp-server",
+      "tool": "create_new_diagram",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.properties.screenshot",
+        "inputSchema.properties.xml.description"
+      ],
+      "old_hash": "ddcfed88248c91c04b2a11a454a9809e85e738303f94689d2948c90b4dd0a9e7",
+      "candidate_hash": "4f2dbc9554e6610126598cca3a7598bb8b56dafbbbf6160c2ea1d65d3121fb43",
+      "live_hash": "4f2dbc9554e6610126598cca3a7598bb8b56dafbbbf6160c2ea1d65d3121fb43",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "xml": "<mxGraphModel><root><mxCell id=\"0\"/><mxCell id=\"1\" parent=\"0\"/></root></mxGraphModel>"
+        }
+      },
+      "final_hash": "4f2dbc9554e6610126598cca3a7598bb8b56dafbbbf6160c2ea1d65d3121fb43"
+    }
+  ],
+  "changed_card_count": 1,
+  "changed_field_count": 3,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 2025,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 591,
+      "output_tokens": 74,
+      "latency_ms": 2009,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 1,
+    "input_tokens": 591,
+    "output_tokens": 74,
+    "latency_ms": 2009,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "cc63eef208cbb0e63bfa9a9d13001bc4ad9895777c005a71d536285553b7d87f"
+}

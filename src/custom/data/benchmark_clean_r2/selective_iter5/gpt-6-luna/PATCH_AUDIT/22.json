@@ -1,0 +1,72 @@
+{
+  "task_id": 22,
+  "strategy": "selective_patch",
+  "stage": "late",
+  "mutation_depth": 2,
+  "routing_events": [
+    {
+      "depth": 2,
+      "server": "mcp-calculator",
+      "before": [
+        "subtract"
+      ],
+      "after": [
+        "subtract",
+        "percentage_calculator"
+      ],
+      "change_class": "TOOL"
+    }
+  ],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "mcp-calculator",
+      "tool": "percentage_calculator",
+      "change_classes": [
+        "TOOL"
+      ],
+      "field_paths": [
+        "$"
+      ],
+      "old_hash": null,
+      "candidate_hash": "427809dec4a4937e8a7d3e77d60b690ddea03caecf98b3ed610d32228a571a74",
+      "live_hash": "427809dec4a4937e8a7d3e77d60b690ddea03caecf98b3ed610d32228a571a74",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "operation": "percent_change",
+          "value1": 0
+        }
+      },
+      "final_hash": "427809dec4a4937e8a7d3e77d60b690ddea03caecf98b3ed610d32228a571a74"
+    }
+  ],
+  "changed_card_count": 1,
+  "changed_field_count": 1,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 2096,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 291,
+      "output_tokens": 54,
+      "latency_ms": 2090,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 1,
+    "input_tokens": 291,
+    "output_tokens": 54,
+    "latency_ms": 2090,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "d059d32c1af680671b7733f11722e1abb21ca20697239df6a522a37ad8da7a2c"
+}

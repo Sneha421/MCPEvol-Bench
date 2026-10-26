@@ -1,0 +1,376 @@
+{
+  "response": "```xml\n<response>\n  <workflow_analysis>\n    This scenario involves visualizing sales trends across Chinese provinces while simultaneously documenting the analysis process. The chart server will generate geographic visualizations of sales data, while the Draw.io server creates a flowchart documenting the analysis methodology. Both outputs will be combined into a presentation-ready report.\n  </workflow_analysis>\n  <target_servers>\n    <server name=\"@umengfe/mcp-server-chart\">\n      <tool>generate_district_map</tool>\n    </server>\n    <server name=\"@next-ai-drawio/mcp-server\">\n      <tool>create_new_diagram</tool>\n    </server>\n  </target_servers>\n  <question>\n    \"I need to analyze our sales performance across different regions in China for last quarter. Can you create a geographic visualization showing sales distribution by province, with darker colors indicating higher sales volumes? Also, I'd like a companion flowchart illustrating our sales analysis methodology - starting with data collection, moving through cleaning and analysis, and ending with visualization.\"\n  </question>\n</response>\n```",
+  "question": "\"I need to analyze our sales performance across different regions in China for last quarter. Can you create a geographic visualization showing sales distribution by province, with darker colors indicating higher sales volumes? Also, I'd like a companion flowchart illustrating our sales analysis methodology - starting with data collection, moving through cleaning and analysis, and ending with visualization.\"",
+  "tool_calls": [
+    {
+      "tool_name": "generate_district_map",
+      "parameters": {}
+    },
+    {
+      "tool_name": "create_new_diagram",
+      "parameters": {}
+    }
+  ],
+  "servers": {
+    "@umengfe/mcp-server-chart": [
+      "generate_district_map"
+    ],
+    "@next-ai-drawio/mcp-server": [
+      "create_new_diagram",
+      "duplicate_diagram"
+    ]
+  },
+  "answer": "I created the China province sales-distribution map, but no sales figures were provided, so the map uses placeholder zero values and can’t show meaningful differences yet.\n\nI couldn’t create the companion flowchart because there’s no active diagram session. The intended flow is: **Data collection → Data cleaning → Sales analysis → Visualization**.",
+  "trajectory_messages": [
+    {
+      "role": "system",
+      "content": "You are an AI agent connected to the MCP (Model Context Protocol) server. Based on the user's request, select and invoke tools to fulfill the task accurately and efficiently. \nNote that do not to ask any questions to the user, just call the tool to complete the task.\n\nConsidering real-time performance, the time is set to be around `2026-10-26 (星期一)`.\n\nThese files are stored in the local file system and serve as relevant resources for tool utilization. Add the prefix path \"./anotation_path\" to the following file systems as an absolute path during use:\n`Error: Invalid directory path - ./anotation_path`\n\nDatabase Configuration (if applicable):\n- Host: 127.0.0.1\n- Port: 3305\n- User: root\n- Password: 123456\n- Database Name: mydb\n"
+    },
+    {
+      "role": "user",
+      "content": "\"I need to analyze our sales performance across different regions in China for last quarter. Can you create a geographic visualization showing sales distribution by province, with darker colors indicating higher sales volumes? Also, I'd like a companion flowchart illustrating our sales analysis methodology - starting with data collection, moving through cleaning and analysis, and ending with visualization.\""
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_iQCVgjn6EZ6YtyA3Kxpmc61D",
+          "function": {
+            "arguments": "{\"title\":\"上季度各省销售分布\",\"data\":{\"name\":\"中国\",\"dataType\":\"number\",\"dataLabel\":\"销售额\",\"dataValueUnit\":\"万元\",\"colors\":[\"#D94841\"],\"style\":{\"fillColor\":\"#F2F4F7\"},\"showAllSubdistricts\":true,\"subdistricts\":[{\"name\":\"北京市\",\"dataValue\":\"0\"},{\"name\":\"天津市\",\"dataValue\":\"0\"},{\"name\":\"上海市\",\"dataValue\":\"0\"},{\"name\":\"重庆市\",\"dataValue\":\"0\"},{\"name\":\"河北省\",\"dataValue\":\"0\"},{\"name\":\"山西省\",\"dataValue\":\"0\"},{\"name\":\"辽宁省\",\"dataValue\":\"0\"},{\"name\":\"吉林省\",\"dataValue\":\"0\"},{\"name\":\"黑龙江省\",\"dataValue\":\"0\"},{\"name\":\"江苏省\",\"dataValue\":\"0\"},{\"name\":\"浙江省\",\"dataValue\":\"0\"},{\"name\":\"安徽省\",\"dataValue\":\"0\"},{\"name\":\"福建省\",\"dataValue\":\"0\"},{\"name\":\"江西省\",\"dataValue\":\"0\"},{\"name\":\"山东省\",\"dataValue\":\"0\"},{\"name\":\"河南省\",\"dataValue\":\"0\"},{\"name\":\"湖北省\",\"dataValue\":\"0\"},{\"name\":\"湖南省\",\"dataValue\":\"0\"},{\"name\":\"广东省\",\"dataValue\":\"0\"},{\"name\":\"海南省\",\"dataValue\":\"0\"},{\"name\":\"四川省\",\"dataValue\":\"0\"},{\"name\":\"贵州省\",\"dataValue\":\"0\"},{\"name\":\"云南省\",\"dataValue\":\"0\"},{\"name\":\"陕西省\",\"dataValue\":\"0\"},{\"name\":\"甘肃省\",\"dataValue\":\"0\"},{\"name\":\"青海省\",\"dataValue\":\"0\"},{\"name\":\"台湾省\",\"dataValue\":\"0\"},{\"name\":\"内蒙古自治区\",\"dataValue\":\"0\"},{\"name\":\"广西壮族自治区\",\"dataValue\":\"0\"},{\"name\":\"西藏自治区\",\"dataValue\":\"0\"},{\"name\":\"宁夏回族自治区\",\"dataValue\":\"0\"},{\"name\":\"新疆维吾尔自治区\",\"dataValue\":\"0\"}]},\"width\":1200,\"height\":900}",
+            "name": "generate_district_map"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_iQCVgjn6EZ6YtyA3Kxpmc61D",
+      "content": "[TextContent(type='text', text='```vis-chart\\n{\"type\":\"district-map\",\"title\":\"上季度各省销售分布\",\"data\":{\"name\":\"中国\",\"dataType\":\"number\",\"dataLabel\":\"销售额\",\"dataValueUnit\":\"万元\",\"colors\":[\"#D94841\"],\"style\":{\"fillColor\":\"#F2F4F7\"},\"showAllSubdistricts\":true,\"subdistricts\":[{\"name\":\"北京市\",\"dataValue\":\"0\"},{\"name\":\"天津市\",\"dataValue\":\"0\"},{\"name\":\"上海市\",\"dataValue\":\"0\"},{\"name\":\"重庆市\",\"dataValue\":\"0\"},{\"name\":\"河北省\",\"dataValue\":\"0\"},{\"name\":\"山西省\",\"dataValue\":\"0\"},{\"name\":\"辽宁省\",\"dataValue\":\"0\"},{\"name\":\"吉林省\",\"data..."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_kVS2pLIxNffrVKEaUl3VOHZk",
+          "function": {
+            "arguments": "{\"diagram_type\":\"flowchart\",\"layout_direction\":\"LR\",\"style_preset\":\"professional\",\"xml\":\"<mxGraphModel><root><mxCell id=\\\"0\\\"/><mxCell id=\\\"1\\\" parent=\\\"0\\\"/><mxCell id=\\\"2\\\" value=\\\"销售分析方法\\\" style=\\\"text;html=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;align=center;\\\" vertex=\\\"1\\\" parent=\\\"1\\\"><mxGeometry x=\\\"280\\\" y=\\\"35\\\" width=\\\"240\\\" height=\\\"40\\\" as=\\\"geometry\\\"/></mxCell><mxCell id=\\\"3\\\" value=\\\"数据收集&#xa;订单、客户、地区、时间与销售额\\\" style=\\\"rounded=1;whiteSpace=wrap;html=1;fillColor=#DCEBFA;strokeColor=#5B8DB8;fontSize=14;\\\" vertex=\\\"1\\\" parent=\\\"1\\\"><mxGeometry x=\\\"40\\\" y=\\\"220\\\" width=\\\"160\\\" height=\\\"90\\\" as=\\\"geometry\\\"/></mxCell><mxCell id=\\\"4\\\" value=\\\"数据清洗&#xa;去重、处理缺失值与异常值&#xa;统一省份名称和统计口径\\\" style=\\\"rounded=1;whiteSpace=wrap;html=1;fillColor=#E5F3E8;strokeColor=#6AA579;fontSize=14;\\\" vertex=\\\"1\\\" parent=\\\"1\\\"><mxGeometry x=\\\"250\\\" y=\\\"220\\\" width=\\\"180\\\" height=\\\"90\\\" as=\\\"geometry\\\"/></mxCell><mxCell id=\\\"5\\\" value=\\\"销售分析&#xa;按省汇总上季度销售额&#xa;核验总量并比较区域表现\\\" style=\\\"rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF0D9;strokeColor=#D6A34A;fontSize=14;\\\" vertex=\\\"1\\\" parent=\\\"1\\\"><mxGeometry x=\\\"480\\\" y=\\\"220\\\" width=\\\"180\\\" height=\\\"90\\\" as=\\\"geometry\\\"/></mxCell><mxCell id=\\\"6\\\" value=\\\"可视化呈现&#xa;省级地图按销售额着色&#xa;颜色越深表示销量越高\\\" style=\\\"rounded=1;whiteSpace=wrap;html=1;fillColor=#F8E2E2;strokeColor=#C97878;fontSize=14;\\\" vertex=\\\"1\\\" parent=\\\"1\\\"><mxGeometry x=\\\"710\\\" y=\\\"220\\\" width=\\\"170\\\" height=\\\"90\\\" as=\\\"geometry\\\"/></mxCell><mxCell id=\\\"7\\\" value=\\\"\\\" style=\\\"edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#52677D;exitX=1;exitY=0.5;entryX=0;entryY=0.5;\\\" edge=\\\"1\\\" parent=\\\"1\\\" source=\\\"3\\\" target=\\\"4\\\"><mxGeometry relative=\\\"1\\\" as=\\\"geometry\\\"/></mxCell><mxCell id=\\\"8\\\" value=\\\"\\\" style=\\\"edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#52677D;exitX=1;exitY=0.5;entryX=0;entryY=0.5;\\\" edge=\\\"1\\\" parent=\\\"1\\\" source=\\\"4\\\" target=\\\"5\\\"><mxGeometry relative=\\\"1\\\" as=\\\"geometry\\\"/></mxCell><mxCell id=\\\"9\\\" value=\\\"\\\" style=\\\"edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#52677D;exitX=1;exitY=0.5;entryX=0;entryY=0.5;\\\" edge=\\\"1\\\" parent=\\\"1\\\" source=\\\"5\\\" target=\\\"6\\\"><mxGeometry relative=\\\"1\\\" as=\\\"geometry\\\"/></mxCell></root></mxGraphModel>\"}",
+            "name": "create_new_diagram"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_kVS2pLIxNffrVKEaUl3VOHZk",
+      "content": "[TextContent(type='text', text='Error: No active session. Please call start_session first.', annotations=None, meta=None)]..."
+    },
+    {
+      "content": "I created the China province sales-distribution map, but no sales figures were provided, so the map uses placeholder zero values and can’t show meaningful differences yet.\n\nI couldn’t create the companion flowchart because there’s no active diagram session. The intended flow is: **Data collection → Data cleaning → Sales analysis → Visualization**.",
+      "role": "assistant",
+      "annotations": []
+    }
+  ],
+  "stop": true,
+  "exceeded": false,
+  "idx": 229,
+  "eval_result": {
+    "runs": [
+      {
+        "dimension_order": [
+          0,
+          1,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "There are 2 explicit deliverables: a province-level sales map that meaningfully encodes higher sales with darker colors, and a companion flowchart. The map tool returned a map, but every province was assigned zero, so it does not show sales distribution or distinguish sales volumes. The flowchart call failed with “No active session,” so no flowchart was created. Neither deliverable was perfectly completed: 2/2 unmet, a 100% defect rate.",
+          "grounding_reasoning": "There are 6 atomic claims in the final response: that the map was created, no sales figures were supplied, the map uses zero placeholders, the map cannot show meaningful differences, the flowchart call failed for lack of an active session, and the intended sequence is collection → cleaning → analysis → visualization. Each is supported by the task or trajectory: the map tool returned a map, the call used zero values for all provinces, the diagram tool returned the stated error, and the attempted XML contains the listed stages. 0/6 unsupported claims, a 0% defect rate.",
+          "planning_efficiency_reasoning": "There were 2 tool calls. The map-generation call was needed for the map, and the diagram-creation call was needed for the flowchart. Neither call was redundant or unnecessary, and there were no repeated retries. 0/2 unnecessary calls, a 0% defect rate.",
+          "task_fulfillment": 1,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          1,
+          0,
+          2
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "There are 2 distinct requirements: (1) a province-level sales map with darker colors representing higher sales, and (2) a companion methodology flowchart. Met: 0/2 perfectly. The map tool returned a map, but every province was assigned zero, so it does not show sales distribution or meaningful differences. The flowchart was not created because the call failed with “No active session.” Defect rate: 2/2 = 100%.",
+          "grounding_reasoning": "There are 7 atomic factual claims in the final response: that the map was created, no sales figures were provided, the map uses placeholder zeros, it cannot show meaningful differences, the flowchart could not be created, the tool reported no active session, and the stated flow stages. All 7 are supported by the task input or tool trajectory; unsupported claims: 0/7. Defect rate: 0%.",
+          "planning_efficiency_reasoning": "There were 2 tool calls total: one map-generation call and one flowchart-creation call. Both were relevant attempts at requested deliverables; neither repeated a successful call or was unnecessary. Redundant/unnecessary calls: 0/2. Defect rate: 0%.",
+          "task_fulfillment": 1,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          2,
+          1,
+          0
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 3 explicit goals: analyze last-quarter regional sales, provide a province-level map that meaningfully encodes sales with darker colors for higher volumes, and create the methodology flowchart. 0 of 3 were perfectly met: the map used zero placeholders rather than sales figures, so it could not show the requested distribution; and the flowchart creation failed. Defect rate: 3/3 = 100%.",
+          "grounding_reasoning": "Counted 6 atomic claims in the final response: that the map was created, no sales figures were provided, the map uses zero placeholders, meaningful differences cannot be shown, flowchart creation failed because there was no active session, and the intended flow sequence. All 6 are supported by the task input or tool trajectory. Unsupported claims: 0/6. Defect rate: 0%.",
+          "planning_efficiency_reasoning": "There were 2 tool calls: one to generate the map and one to create the flowchart. Both addressed requested outputs; neither repeated a successful call nor was unnecessary. Redundant/unnecessary calls: 0/2. Defect rate: 0%.",
+          "task_fulfillment": 2,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          1,
+          2,
+          0
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 3 requirements: create a meaningful province-level sales visualization, encode higher sales with darker colors, and deliver the companion flowchart with the requested stages. 0 of 3 were perfectly met: the map used zero for every province, so it did not show sales differences or meaningfully encode sales volumes; the flowchart tool call failed and no diagram was delivered. Defect rate: 3/3 = 100%.",
+          "grounding_reasoning": "Counted 7 factual claims in the final response: that a map was created, no sales figures were supplied, placeholder zeros were used, the map cannot show meaningful differences, flowchart creation failed, there was no active session, and the stated sequence was the intended flow. All 7 are supported by the task context or tool trajectory; unsupported claims: 0/7. Defect rate: 0%.",
+          "planning_efficiency_reasoning": "There were 2 tool calls. Neither repeated a successful call or was unrelated to a requested subgoal; both attempted the requested artifacts. Redundant or unnecessary calls: 0/2. Defect rate: 0%.",
+          "task_fulfillment": 1,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      },
+      {
+        "dimension_order": [
+          0,
+          2,
+          1
+        ],
+        "result": {
+          "task_fulfillment_reasoning": "Counted 4 requirements: analyze last-quarter regional sales, create a province-level sales map, encode higher sales with darker colors, and create a flowchart with the requested stages. None was perfectly met: no sales figures were available and all provinces were assigned zero, so the map cannot show actual distribution or darker/higher differences; the flowchart creation failed with a no-active-session error. Defect rate: 4/4 = 100%.",
+          "grounding_reasoning": "Counted 6 factual claims in the final response: the map was created, sales figures were not provided, the map uses zero placeholders, those values cannot show meaningful differences, flowchart creation failed due to no active session, and the intended flow has the stated stages. All 6 are supported by the task context or tool trajectory. Defect rate: 0/6 = 0%.",
+          "planning_efficiency_reasoning": "There were 2 tool calls: one to generate the map and one to create the flowchart. Both targeted requested deliverables; neither was redundant or unnecessary, and no retry was made. The flowchart call failed, but the available tool information did not expose a session-start tool. Defect rate: 0/2 = 0%.",
+          "task_fulfillment": 1,
+          "grounding": 10,
+          "planning_and_efficiency": 10
+        }
+      }
+    ],
+    "aggregate": {
+      "successful_runs": 5,
+      "total_runs": 5,
+      "task_fulfillment_mean": 1.2,
+      "grounding_mean": 10.0,
+      "planning_and_efficiency_mean": 10.0,
+      "task_fulfillment_reasoning_runs": [
+        "There are 2 explicit deliverables: a province-level sales map that meaningfully encodes higher sales with darker colors, and a companion flowchart. The map tool returned a map, but every province was assigned zero, so it does not show sales distribution or distinguish sales volumes. The flowchart call failed with “No active session,” so no flowchart was created. Neither deliverable was perfectly completed: 2/2 unmet, a 100% defect rate.",
+        "There are 2 distinct requirements: (1) a province-level sales map with darker colors representing higher sales, and (2) a companion methodology flowchart. Met: 0/2 perfectly. The map tool returned a map, but every province was assigned zero, so it does not show sales distribution or meaningful differences. The flowchart was not created because the call failed with “No active session.” Defect rate: 2/2 = 100%.",
+        "Counted 3 explicit goals: analyze last-quarter regional sales, provide a province-level map that meaningfully encodes sales with darker colors for higher volumes, and create the methodology flowchart. 0 of 3 were perfectly met: the map used zero placeholders rather than sales figures, so it could not show the requested distribution; and the flowchart creation failed. Defect rate: 3/3 = 100%.",
+        "Counted 3 requirements: create a meaningful province-level sales visualization, encode higher sales with darker colors, and deliver the companion flowchart with the requested stages. 0 of 3 were perfectly met: the map used zero for every province, so it did not show sales differences or meaningfully encode sales volumes; the flowchart tool call failed and no diagram was delivered. Defect rate: 3/3 = 100%.",
+        "Counted 4 requirements: analyze last-quarter regional sales, create a province-level sales map, encode higher sales with darker colors, and create a flowchart with the requested stages. None was perfectly met: no sales figures were available and all provinces were assigned zero, so the map cannot show actual distribution or darker/higher differences; the flowchart creation failed with a no-active-session error. Defect rate: 4/4 = 100%."
+      ],
+      "grounding_reasoning_runs": [
+        "There are 6 atomic claims in the final response: that the map was created, no sales figures were supplied, the map uses zero placeholders, the map cannot show meaningful differences, the flowchart call failed for lack of an active session, and the intended sequence is collection → cleaning → analysis → visualization. Each is supported by the task or trajectory: the map tool returned a map, the call used zero values for all provinces, the diagram tool returned the stated error, and the attempted XML contains the listed stages. 0/6 unsupported claims, a 0% defect rate.",
+        "There are 7 atomic factual claims in the final response: that the map was created, no sales figures were provided, the map uses placeholder zeros, it cannot show meaningful differences, the flowchart could not be created, the tool reported no active session, and the stated flow stages. All 7 are supported by the task input or tool trajectory; unsupported claims: 0/7. Defect rate: 0%.",
+        "Counted 6 atomic claims in the final response: that the map was created, no sales figures were provided, the map uses zero placeholders, meaningful differences cannot be shown, flowchart creation failed because there was no active session, and the intended flow sequence. All 6 are supported by the task input or tool trajectory. Unsupported claims: 0/6. Defect rate: 0%.",
+        "Counted 7 factual claims in the final response: that a map was created, no sales figures were supplied, placeholder zeros were used, the map cannot show meaningful differences, flowchart creation failed, there was no active session, and the stated sequence was the intended flow. All 7 are supported by the task context or tool trajectory; unsupported claims: 0/7. Defect rate: 0%.",
+        "Counted 6 factual claims in the final response: the map was created, sales figures were not provided, the map uses zero placeholders, those values cannot show meaningful differences, flowchart creation failed due to no active session, and the intended flow has the stated stages. All 6 are supported by the task context or tool trajectory. Defect rate: 0/6 = 0%."
+      ],
+      "planning_efficiency_reasoning_runs": [
+        "There were 2 tool calls. The map-generation call was needed for the map, and the diagram-creation call was needed for the flowchart. Neither call was redundant or unnecessary, and there were no repeated retries. 0/2 unnecessary calls, a 0% defect rate.",
+        "There were 2 tool calls total: one map-generation call and one flowchart-creation call. Both were relevant attempts at requested deliverables; neither repeated a successful call or was unnecessary. Redundant/unnecessary calls: 0/2. Defect rate: 0%.",
+        "There were 2 tool calls: one to generate the map and one to create the flowchart. Both addressed requested outputs; neither repeated a successful call nor was unnecessary. Redundant/unnecessary calls: 0/2. Defect rate: 0%.",
+        "There were 2 tool calls. Neither repeated a successful call or was unrelated to a requested subgoal; both attempted the requested artifacts. Redundant or unnecessary calls: 0/2. Defect rate: 0%.",
+        "There were 2 tool calls: one to generate the map and one to create the flowchart. Both targeted requested deliverables; neither was redundant or unnecessary, and no retry was made. The flowchart call failed, but the available tool information did not expose a session-start tool. Defect rate: 0/2 = 0%."
+      ],
+      "task_fulfillment": 1,
+      "grounding": 10,
+      "planning_and_efficiency": 10
+    },
+    "task_fulfillment": 1,
+    "grounding": 10,
+    "planning_and_efficiency": 10
+  },
+  "involved_tools": [
+    {
+      "name": "generate_district_map",
+      "description": "Generates regional distribution maps, which are usually used to show the administrative divisions and coverage of a dataset. It is not suitable for showing the distribution of specific locations, such as urban administrative divisions, GDP distribution maps of provinces and cities across the country, etc. This tool is limited to generating data maps within China.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The map title should not exceed 16 characters. The content should be consistent with the information the map wants to convey and should be accurate, rich, creative, and attractive."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+              },
+              "style": {
+                "type": "object",
+                "properties": {
+                  "fillColor": {
+                    "type": "string",
+                    "description": "Fill color, rgb or rgba format."
+                  }
+                },
+                "description": "Style settings."
+              },
+              "colors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [
+                  "#1783FF",
+                  "#00C9C9",
+                  "#F0884D",
+                  "#D580FF",
+                  "#7863FF",
+                  "#60C42D",
+                  "#BD8F24",
+                  "#FF80CA",
+                  "#2491B3",
+                  "#17C76F"
+                ],
+                "description": "Data color list, in rgb or rgba format."
+              },
+              "dataType": {
+                "type": "string",
+                "enum": [
+                  "number",
+                  "enum"
+                ],
+                "description": "The type of the data value, numeric or enumeration type"
+              },
+              "dataLabel": {
+                "type": "string",
+                "description": "Data label, such as \"GDP\""
+              },
+              "dataValue": {
+                "type": "string",
+                "description": "Data value, numeric string or enumeration string."
+              },
+              "dataValueUnit": {
+                "type": "string",
+                "description": "Data unit, such as \"万亿\""
+              },
+              "showAllSubdistricts": {
+                "type": "boolean",
+                "default": false,
+                "description": "Whether to display all subdistricts."
+              },
+              "subdistricts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Keywords for the Chinese name of an administrative region (must be within China), and must be one of China, province, city, district, or county. The name should be more specific and add attributive descriptions, for example, \"西安市\" is better than \"西安\", \"杭州西湖区\" is better than \"西湖区\". It cannot be a specific place name or a vague name, such as \"其它\"."
+                    },
+                    "dataValue": {
+                      "type": "string",
+                      "description": "Data value, numeric string or enumeration string."
+                    },
+                    "style": {
+                      "type": "object",
+                      "properties": {
+                        "fillColor": {
+                          "type": "string",
+                          "description": "Fill color, rgb or rgba format."
+                        }
+                      },
+                      "description": "Style settings."
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                },
+                "description": "Sub-administrative regions are used to display the regional composition or regional distribution of related data."
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "description": "Administrative division data, lower-level administrative divisions are optional. There are usually two scenarios: one is to simply display the regional composition, only `fillColor` needs to be configured, and all administrative divisions are consistent, representing that all blocks are connected as one; the other is the regional data distribution scenario, first determine the `dataType`, `dataValueUnit` and `dataLabel` configurations, `dataValue` should be a meaningful value and consistent with the meaning of dataType, and then determine the style configuration. The `fillColor` configuration represents the default fill color for areas without data. Lower-level administrative divisions do not need `fillColor` configuration, and their fill colors are determined by the `colors` configuration (If `dataType` is \"number\", only one base color (warm color) is needed in the list to calculate the continuous data mapping color band; if `dataType` is \"enum\", the number of color values in the list is equal to the number of enumeration values (contrast colors)). If `subdistricts` has a value, `showAllSubdistricts` must be set to true. For example, {\"title\": \"陕西省地级市分布图\", \"data\": {\"name\": \"陕西省\", \"showAllSubdistricts\": true, \"dataLabel\": \"城市\", \"dataType\": \"enum\", \"colors\": [\"#4ECDC4\", \"#A5D8FF\"], \"subdistricts\": [{\"name\": \"西安市\", \"dataValue\": \"省会\"}, {\"name\": \"宝鸡市\", \"dataValue\": \"地级市\"}, {\"name\": \"咸阳市\", \"dataValue\": \"地级市\"}, {\"name\": \"铜川市\", \"dataValue\": \"地级市\"}, {\"name\": \"渭南市\", \"dataValue\": \"地级市\"}, {\"name\": \"延安市\", \"dataValue\": \"地级市\"}, {\"name\": \"榆林市\", \"dataValue\": \"地级市\"}, {\"name\": \"汉中市\", \"dataValue\": \"地级市\"}, {\"name\": \"安康市\", \"dataValue\": \"地级市\"}, {\"name\": \"商洛市\", \"dataValue\": \"地级市\"}]}, \"width\": 1000, \"height\": 1000}."
+          },
+          "width": {
+            "type": "number",
+            "default": 1600,
+            "description": "Set the width of map, default is 1600."
+          },
+          "height": {
+            "type": "number",
+            "default": 1000,
+            "description": "Set the height of map, default is 1000."
+          }
+        },
+        "required": [
+          "title",
+          "data"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "create_new_diagram",
+      "description": "Create a NEW diagram from mxGraphModel XML. Use this when creating a diagram from scratch or replacing the current diagram entirely.\n\nCRITICAL: You MUST provide the 'xml' argument in EVERY call. Do NOT call this tool without xml.\n\nWhen to use this tool:\n- Creating a new diagram from scratch\n- Replacing the current diagram with a completely different one\n- Major structural changes that require regenerating the diagram\n\nWhen to use edit_diagram instead:\n- Small modifications to existing diagram\n- Adding/removing individual elements\n- Changing labels, colors, or positions\n\nXML FORMAT - Full mxGraphModel structure:\n<mxGraphModel>\n  <root>\n    <mxCell id=\"0\"/>\n    <mxCell id=\"1\" parent=\"0\"/>\n    <mxCell id=\"2\" value=\"Shape\" style=\"rounded=1;\" vertex=\"1\" parent=\"1\">\n      <mxGeometry x=\"100\" y=\"100\" width=\"120\" height=\"60\" as=\"geometry\"/>\n    </mxCell>\n  </root>\n</mxGraphModel>\n\nLAYOUT CONSTRAINTS:\n- Keep all elements within x=0-800, y=0-600 (single page viewport)\n- Start from margins (x=40, y=40), keep elements grouped closely\n- Use unique IDs starting from \"2\" (0 and 1 are reserved)\n- Set parent=\"1\" for top-level shapes\n- Space shapes 150-200px apart for clear edge routing\n\nEDGE ROUTING RULES:\n- Never let multiple edges share the same path - use different exitY/entryY values\n- For bidirectional connections (A↔B), use OPPOSITE sides\n- Always specify exitX, exitY, entryX, entryY explicitly in edge style\n- Route edges AROUND obstacles using waypoints (add 20-30px clearance)\n- Use natural connection points based on flow (not corners)\n\nCOMMON STYLES:\n- Shapes: rounded=1; fillColor=#hex; strokeColor=#hex\n- Edges: endArrow=classic; edgeStyle=orthogonalEdgeStyle; curved=1\n- Text: fontSize=14; fontStyle=1 (bold); align=center",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "xml": {
+            "type": "string"
+          },
+          "diagram_type": {
+            "type": "string",
+            "enum": [
+              "flowchart",
+              "sequence",
+              "class",
+              "network"
+            ]
+          },
+          "layout_direction": {
+            "type": "string",
+            "enum": [
+              "TB",
+              "LR",
+              "RL",
+              "BT"
+            ]
+          },
+          "style_preset": {
+            "type": "string",
+            "enum": [
+              "default",
+              "colorful",
+              "minimal",
+              "professional"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "duplicate_diagram",
+      "description": "Duplicate the current diagram, optionally shifting all element positions by a given offset. Sets the duplicated diagram as the active diagram and returns its XML. Useful for creating variations of an existing diagram without starting from scratch.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "offset_x": {
+            "type": "number"
+          },
+          "offset_y": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  ]
+}

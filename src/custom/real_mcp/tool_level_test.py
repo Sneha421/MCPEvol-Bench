@@ -3,6 +3,8 @@ import os
 import json
 import random
 import sys
+from datetime import datetime, timezone
+from types import SimpleNamespace
 
 sys.path.append('/path/to/FastChat')
 import argparse
@@ -14,6 +16,51 @@ from custom.utils.test_utils import *
 from custom.utils.openai_llm import chat_with_openai
 from custom.utils.mcp_utils import *
 from custom.agents.SimpleOpenAIAgent import ChatModel
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+def save_harness_snapshot(tool_status, output_path, mcp_server_url):
+    """Save the tool knowledge currently exposed by 1MCP as a JSON snapshot."""
+    snapshot = {
+        "format_version": 1,
+        "captured_at_utc": datetime.now(timezone.utc).isoformat(),
+        "mcp_server_url": mcp_server_url,
+        "tools": [
+            {
+                "name": tool.name,
+                "description": tool.description or "",
+                "inputSchema": tool.inputSchema,
+            }
+            for tool in tool_status.tools
+        ],
+    }
+    parent = os.path.dirname(os.path.abspath(output_path))
+    os.makedirs(parent, exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as snapshot_file:
+        json.dump(snapshot, snapshot_file, ensure_ascii=False, indent=2)
+    print(f"Saved {len(snapshot['tools'])} frozen tools to {output_path}")
+
+
+def load_harness_snapshot(snapshot_path):
+    """Load a saved snapshot in the shape expected by get_1mcp_server_tools."""
+    with open(snapshot_path, "r", encoding="utf-8") as snapshot_file:
+        snapshot = json.load(snapshot_file)
+    if snapshot.get("format_version") != 1 or not isinstance(snapshot.get("tools"), list):
+        raise ValueError(f"Unsupported or invalid harness snapshot: {snapshot_path}")
+
+    tools = []
+    for tool in snapshot["tools"]:
+        required_keys = {"name", "description", "inputSchema"}
+        if not required_keys.issubset(tool):
+            raise ValueError(f"Malformed tool entry in harness snapshot: {snapshot_path}")
+        tools.append(SimpleNamespace(**tool))
+    print(
+        f"Loaded {len(tools)} frozen tools from {snapshot_path} "
+        f"(captured {snapshot.get('captured_at_utc', 'at unknown time')})"
+    )
+    return SimpleNamespace(tools=tools), snapshot
 
 
 def get_all_evolution_status(mutation_path):
@@ -39,38 +86,55 @@ def change_test_case_servers(_test_case, args):
         return _test_case
     new_test_case = copy.deepcopy(_test_case)
 
-    with open(args.mutation_path+'/evolution.json', 'r', encoding='utf-8') as f:
-       _evolutions = json.load(f)
+    # get_all_evolution_status returns newest-to-oldest. Apply the chain in
+    # chronological order so later stages inherit earlier tool additions,
+    # removals, and renames just like the selective-patch runner does.
+    for _evolutions in get_all_evolution_status(args.mutation_path)[::-1]:
+        for _server_name, _tool_list in new_test_case['servers'].items():
+            evolution = _evolutions.get(_server_name)
+            if not evolution or evolution.get('mutation_type') != 'TOOL':
+                continue
 
-    for _server_name, _tool_list in _test_case['servers'].items():
-        if _server_name in _evolutions.keys():
-            if _evolutions[_server_name]['mutation_type'] != 'TOOL':
-                return _test_case
+            before = list(_tool_list)
             mutation_tools = get_1mcp_server_tools(tool_status, _server_name)
             mutation_tool_names = [tool.name for tool in mutation_tools]
-            modified_tool_name = None
-            if 'new_tool_config' in _evolutions[_server_name].keys():
-                modified_tool_name = _evolutions[_server_name]['new_tool_config']['name']
-                new_test_case['servers'][_server_name].append(modified_tool_name)
-            elif 'auto_optimizations' in _evolutions[_server_name].keys():
-                modified_tool_name = _evolutions[_server_name]['new_tool_name']
-                new_test_case['servers'][_server_name].append(modified_tool_name)
-                for _optimization in _evolutions[_server_name]['auto_optimizations']:
-                    new_test_case['servers'][_server_name].append(_optimization['tool_name'])
-            elif 'deleted_tool_name' in _evolutions[_server_name].keys():
-                if _evolutions[_server_name]['deleted_tool_name'] in new_test_case['servers'][_server_name]:
-                    new_test_case['servers'][_server_name].remove(_evolutions[_server_name]['deleted_tool_name'])
-                new_test_case['servers'][_server_name].append(_evolutions[_server_name]['migration_target_tool'])
-                modified_tool_name = _evolutions[_server_name]['migration_target_tool']
-            elif 'old_tool_name' in _evolutions[_server_name].keys():
-                if _evolutions[_server_name]['old_tool_name'] in new_test_case['servers'][_server_name]:
-                    new_test_case['servers'][_server_name].remove(_evolutions[_server_name]['old_tool_name'])
-                new_test_case['servers'][_server_name].append(_evolutions[_server_name]['new_tool_config']['name'])
-                modified_tool_name = _evolutions[_server_name]['new_tool_config']['name']
-            else:
-                raise ValueError('Unknown tool name')
-            if modified_tool_name not in mutation_tool_names:
-                print(_server_name, modified_tool_name)
+            modified_tool_names = []
+
+            if evolution.get('old_tool_name') and isinstance(evolution.get('new_tool_config'), dict):
+                old_name = evolution['old_tool_name']
+                new_name = evolution['new_tool_config'].get('name')
+                if old_name in _tool_list:
+                    _tool_list.remove(old_name)
+                    if new_name and new_name not in _tool_list:
+                        _tool_list.append(new_name)
+                        modified_tool_names.append(new_name)
+            elif isinstance(evolution.get('new_tool_config'), dict):
+                new_name = evolution['new_tool_config'].get('name')
+                if new_name and new_name not in _tool_list:
+                    _tool_list.append(new_name)
+                    modified_tool_names.append(new_name)
+            elif evolution.get('auto_optimizations') is not None:
+                new_name = evolution.get('new_tool_name')
+                if new_name and new_name not in _tool_list:
+                    _tool_list.append(new_name)
+                    modified_tool_names.append(new_name)
+                for optimization in evolution.get('auto_optimizations', []):
+                    optimized_name = optimization.get('tool_name')
+                    if optimized_name and optimized_name in before and optimized_name not in _tool_list:
+                        _tool_list.append(optimized_name)
+                        modified_tool_names.append(optimized_name)
+            elif evolution.get('deleted_tool_name'):
+                deleted_name = evolution['deleted_tool_name']
+                replacement = evolution.get('migration_target_tool')
+                if deleted_name in _tool_list:
+                    _tool_list.remove(deleted_name)
+                    if replacement and replacement not in _tool_list:
+                        _tool_list.append(replacement)
+                        modified_tool_names.append(replacement)
+
+            for modified_tool_name in modified_tool_names:
+                if modified_tool_name not in mutation_tool_names:
+                    print(_server_name, modified_tool_name)
     return new_test_case
 
 def return_involved_tool_status(involved_server_and_tools, this_tool_status):
@@ -477,10 +541,34 @@ if __name__ == "__main__":
         "--mutation_path", default='custom/data/mutation/HYBRID', type=str
     )
     parser.add_argument(
+        "--changed_only",
+        action='store_true',
+        help=(
+            "For step 4, run only cases involving changed tools. By default, "
+            "step 4 runs the complete selected subset so recovery and retention "
+            "use the same task IDs."
+        ),
+    )
+    parser.add_argument(
         "--test_case_file", default='custom/data/test_cases/test_cases.json', type=str
     )
     parser.add_argument(
         "--mcp_server_url", default='http://127.0.0.1:3050/mcp', type=str
+    )
+    parser.add_argument(
+        "--save_harness_snapshot",
+        type=str,
+        default=None,
+        help="Save the currently running server's tool definitions to JSON and exit."
+    )
+    parser.add_argument(
+        "--harness_snapshot",
+        type=str,
+        default=None,
+        help=(
+            "Use frozen tool definitions from this JSON file for Step 3 while "
+            "executing calls against --mcp_server_url. This implements no-update."
+        )
     )
     #  python custom/real_mcp/tool_level_test.py --test_case_file custom/data/test_cases/test_cases.json --model_name gpt-5.4 --step 4 --mcp_server_url http://127.0.0.1:4060/mcp --output_path custom/data/exp_output/ --mutation_path custom/data/mutation/HYBRID/HYBRID --part_num 4 --part_idx 1
     parser.add_argument(
@@ -493,6 +581,17 @@ if __name__ == "__main__":
 
     # output_number = 0
     tool_status, tool_names = asyncio.run(get_1mcp_status(args.mcp_server_url))
+
+    if args.save_harness_snapshot:
+        save_harness_snapshot(tool_status, args.save_harness_snapshot, args.mcp_server_url)
+        sys.exit(0)
+
+    harness_tool_status = tool_status
+    harness_snapshot_metadata = None
+    if args.harness_snapshot:
+        if args.step != '3':
+            parser.error("--harness_snapshot is currently supported only with --step 3")
+        harness_tool_status, harness_snapshot_metadata = load_harness_snapshot(args.harness_snapshot)
 
     server_name_set = set()
     for tool_name in tool_names:
@@ -579,7 +678,7 @@ if __name__ == "__main__":
             else:
                 raise KeyError
             involved_servers = test_case['servers']
-            involved_tools = return_involved_tool_status(involved_servers, tool_status)
+            involved_tools = return_involved_tool_status(involved_servers, harness_tool_status)
             # if len(involved_tools) > 8:
             #     continue
 
@@ -590,8 +689,8 @@ if __name__ == "__main__":
 
             openai_agent = ChatModel(
                 model_name=args.model_name,
-                api_key='your api key',
-                model_url='your api base url',
+                api_key=os.getenv('OPENAI_API_KEY'),
+                model_url=os.getenv('MODEL_URL'),
                 tools=involved_tools,
                 max_round=10 if 2*len(involved_tools) < 10 else 2*len(involved_tools),
                 tool_server_map=reverse_mapping(involved_servers),
@@ -607,20 +706,29 @@ if __name__ == "__main__":
             test_case['trajectory_messages'] = trajectory_messages
             test_case['stop'] = stop_flag
             test_case['exceeded'] = exceeded_flag
+            test_case['forced_finalization'] = openai_agent.forced_finalization
             test_case['involved_tools'] = involved_tools
+            test_case['harness_strategy'] = 'no_update' if args.harness_snapshot else 'live'
+            if harness_snapshot_metadata is not None:
+                test_case['harness_snapshot'] = {
+                    'path': os.path.abspath(args.harness_snapshot),
+                    'captured_at_utc': harness_snapshot_metadata.get('captured_at_utc'),
+                    'tool_count': len(harness_snapshot_metadata['tools']),
+                }
 
             with open(RESULT_OUTPUT + f'/ANSWER/{real_idx}.json', "w", encoding="utf-8") as f:
                 json.dump(test_case, f, ensure_ascii=False, indent=2)
     elif args.step == '4': # --mutation_path custom/data/mutation/HYBRID
-        RESULT_OUTPUT = args.mutation_path
-        os.makedirs(RESULT_OUTPUT+f'/ANSWER-{args.model_name}/', exist_ok=True)
-        existing_ids = os.listdir(RESULT_OUTPUT+f'/ANSWER-{args.model_name}/')
+        answer_output = os.path.join(RESULT_OUTPUT, 'ANSWER')
+        os.makedirs(answer_output, exist_ok=True)
+        existing_ids = os.listdir(answer_output)
         involved_tool_numbers = []
         with open(args.test_case_file, 'r', encoding='utf-8') as f:
             all_test_cases = json.load(f)
         all_test_cases = clean_all_test_cases(all_test_cases)
 
-        all_test_cases = return_involved_mutated_test_cases(all_test_cases, args)
+        if args.changed_only:
+            all_test_cases = return_involved_mutated_test_cases(all_test_cases, args)
         if args.part_num == -1:
             bias_number = 0
             pass
@@ -648,8 +756,8 @@ if __name__ == "__main__":
                 continue
             openai_agent = ChatModel(
                 model_name=args.model_name,
-                api_key='your api key',
-                model_url='your api base url',
+                api_key=os.getenv('OPENAI_API_KEY'),
+                model_url=os.getenv('MODEL_URL'),
                 tools=involved_tools,
                 max_round=10 if 2*origin_tool_number<10 else 2*origin_tool_number,
                 tool_server_map=reverse_mapping(test_case['servers']),
@@ -664,7 +772,8 @@ if __name__ == "__main__":
             test_case['trajectory_messages'] = trajectory_messages
             test_case['stop'] = stop_flag
             test_case['exceeded'] = exceeded_flag
+            test_case['forced_finalization'] = openai_agent.forced_finalization
             test_case['involved_tools'] = involved_tools
 
-            with open(RESULT_OUTPUT + f'/ANSWER-{args.model_name}/{real_idx}.json', "w", encoding="utf-8") as f:
+            with open(os.path.join(answer_output, f'{real_idx}.json'), "w", encoding="utf-8") as f:
                 json.dump(test_case, f, ensure_ascii=False, indent=2)

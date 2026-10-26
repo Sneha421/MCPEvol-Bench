@@ -1,0 +1,161 @@
+{
+  "task_id": 21,
+  "strategy": "selective_patch",
+  "stage": "late",
+  "mutation_depth": 2,
+  "routing_events": [
+    {
+      "depth": 2,
+      "server": "math-mcp",
+      "before": [
+        "evaluate"
+      ],
+      "after": [
+        "evaluate",
+        "batch_evaluate"
+      ],
+      "change_class": "TOOL"
+    }
+  ],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "@guanxiong/mcp-server-time",
+      "tool": "get_time_info",
+      "change_classes": [
+        "PARAM"
+      ],
+      "field_paths": [
+        "inputSchema.properties.hour12",
+        "inputSchema.properties.includeTimestamp",
+        "inputSchema.properties.locale"
+      ],
+      "old_hash": "288ced934a6260df413c9649991e78ea83c1bab4c43b2ac301c75618402455b4",
+      "candidate_hash": "ca9a3d6e75b649e149542c07c7b71cbd407f2b7523fb3936d10516dee1dd0d13",
+      "live_hash": "ca9a3d6e75b649e149542c07c7b71cbd407f2b7523fb3936d10516dee1dd0d13",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {}
+      },
+      "final_hash": "ca9a3d6e75b649e149542c07c7b71cbd407f2b7523fb3936d10516dee1dd0d13"
+    },
+    {
+      "server": "math-mcp",
+      "tool": "batch_evaluate",
+      "change_classes": [
+        "TOOL"
+      ],
+      "field_paths": [
+        "$"
+      ],
+      "old_hash": null,
+      "candidate_hash": "f72aaaef94d9ed41da01dee51f45f37859099ab0f8428dad078298d024a2cfde",
+      "live_hash": "f72aaaef94d9ed41da01dee51f45f37859099ab0f8428dad078298d024a2cfde",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "expressions": []
+        }
+      },
+      "final_hash": "f72aaaef94d9ed41da01dee51f45f37859099ab0f8428dad078298d024a2cfde"
+    },
+    {
+      "server": "mcp-server-commands",
+      "tool": "run_process",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.additionalProperties",
+        "inputSchema.properties.argv.description",
+        "inputSchema.properties.argv.items.minLength",
+        "inputSchema.properties.capture_output",
+        "inputSchema.properties.command_line.description",
+        "inputSchema.properties.command_line.minLength",
+        "inputSchema.properties.cwd.description",
+        "inputSchema.properties.cwd.minLength",
+        "inputSchema.properties.dry_run",
+        "inputSchema.properties.env",
+        "inputSchema.properties.kill_signal",
+        "inputSchema.properties.max_output_bytes",
+        "inputSchema.properties.memory_limit_mb",
+        "inputSchema.properties.mode",
+        "inputSchema.properties.stdin",
+        "inputSchema.properties.stdin_text",
+        "inputSchema.properties.timeout_ms.description",
+        "inputSchema.properties.timeout_ms.maximum",
+        "inputSchema.properties.timeout_ms.minimum",
+        "inputSchema.properties.timeout_ms.type",
+        "inputSchema.required"
+      ],
+      "old_hash": "a587f2992312ad845d2b80ac05026ef8fde4bb5f3a1525c97d01264e95bd5d6a",
+      "candidate_hash": "621a6fd9e631bc854eedab53956c96f49a0457e48343894f49f8b2f4c5879dc2",
+      "live_hash": "621a6fd9e631bc854eedab53956c96f49a0457e48343894f49f8b2f4c5879dc2",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "mode": "shell",
+          "cwd": "/",
+          "command_line": "true"
+        }
+      },
+      "final_hash": "621a6fd9e631bc854eedab53956c96f49a0457e48343894f49f8b2f4c5879dc2"
+    }
+  ],
+  "changed_card_count": 3,
+  "changed_field_count": 26,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 8341,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 193,
+      "output_tokens": 43,
+      "latency_ms": 2160,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 143,
+      "output_tokens": 41,
+      "latency_ms": 2865,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 644,
+      "output_tokens": 82,
+      "latency_ms": 3309,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 3,
+    "input_tokens": 980,
+    "output_tokens": 166,
+    "latency_ms": 8334,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "0e00e9a7d4f794712ef51a07028454247b5ab0529c33dfa5a407cc11341c8ce1"
+}

@@ -1,0 +1,134 @@
+{
+  "question": "I’m preparing a small info poster for an outdoor event. Can you check the weather forecast for the coordinates 37.7749 latitude and -122.4194 longitude, and then generate a QR code that links to a page where attendees can check detailed weather updates for that area?",
+  "tool_calls": [
+    {
+      "tool_name": "get-forecast",
+      "parameters": {}
+    },
+    {
+      "tool_name": "generate_qr_code",
+      "parameters": {}
+    }
+  ],
+  "servers": {
+    "mcp-weather-demo": [
+      "get-forecast"
+    ],
+    "qr-mcp-service": [
+      "generate_qr_code"
+    ]
+  },
+  "idx": 30,
+  "answer": "**Forecast for 37.7749, -122.4194 (San Francisco):**\n- **Overnight:** 55°F, partly cloudy; wind 5 mph W\n- **Monday:** 65°F, sunny; wind 5–15 mph W\n- **Monday night:** 53°F, mostly clear\n- **Tuesday:** 64°F, mostly sunny\n- **Wednesday:** 65°F, sunny\n\nThe forecast tool returned additional periods beyond those shown here. For detailed updates, scan the QR code below or visit the [National Weather Service forecast page](https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194).\n\n[QR code generated for the forecast page]",
+  "trajectory_messages": [
+    {
+      "role": "system",
+      "content": "You are an AI agent connected to the MCP (Model Context Protocol) server. Based on the user's request, select and invoke tools to fulfill the task accurately and efficiently. \nNote that do not to ask any questions to the user, just call the tool to complete the task.\n\nConsidering real-time performance, the time is set to be around `2026-10-26 (星期一)`.\n\nThese files are stored in the local file system and serve as relevant resources for tool utilization. Add the prefix path \"./anotation_path\" to the following file systems as an absolute path during use:\n`Error: Invalid directory path - ./anotation_path`\n\nDatabase Configuration (if applicable):\n- Host: 127.0.0.1\n- Port: 3305\n- User: root\n- Password: 123456\n- Database Name: mydb\n"
+    },
+    {
+      "role": "user",
+      "content": "I’m preparing a small info poster for an outdoor event. Can you check the weather forecast for the coordinates 37.7749 latitude and -122.4194 longitude, and then generate a QR code that links to a page where attendees can check detailed weather updates for that area?"
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_1gDgFmuDacILgOcjPJ3LE2aP",
+          "function": {
+            "arguments": "{\"latitude\":37.7749,\"longitude\":-122.4194}",
+            "name": "get-forecast"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_1gDgFmuDacILgOcjPJ3LE2aP",
+      "content": "[TextContent(type='text', text='Forecast for 37.7749, -122.4194:\\n\\nOvernight:\\nTemperature: 55°F\\nWind: 5 mph W\\nPartly Cloudy\\n---\\nMonday:\\nTemperature: 65°F\\nWind: 5 to 15 mph W\\nSunny\\n---\\nMonday Night:\\nTemperature: 53°F\\nWind: 3 to 14 mph WNW\\nMostly Clear\\n---\\nTuesday:\\nTemperature: 64°F\\nWind: 3 to 12 mph WNW\\nMostly Sunny\\n---\\nTuesday Night:\\nTemperature: 51°F\\nWind: 0 to 12 mph NNW\\nMostly Clear\\n---\\nWednesday:\\nTemperature: 65°F\\nWind: 2 to 9 mph N\\nSunny\\n---\\nWednesday Night:\\n..."
+    },
+    {
+      "role": "assistant",
+      "annotations": [],
+      "tool_calls": [
+        {
+          "id": "call_A6kfOQ3DSpzXJsZ0UmTYP9Hn",
+          "function": {
+            "arguments": "{\"url\":\"https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194\",\"size\":300}",
+            "name": "generate_qr_code"
+          },
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_A6kfOQ3DSpzXJsZ0UmTYP9Hn",
+      "content": "[TextContent(type='text', text='QR code generated successfully for URL: https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194', annotations=None, meta=None), ImageContent(type='image', data='iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAAAAklEQVR4AewaftIAAAojSURBVO3BgW0dSxIEwaoG/Xc5Tw7MHjDikq/1M6L8EUlaYCJJS0wkaYmJJC0xkaQlJpK0xESSlphI0hITSVpiIklLTCRpiYkkLTGRpCUmkrTERJKW+MpfaJt/BZBP0za3gJy0zRuA6D1t868AcmMiSUtMJGmJiSQtMZGkJSaStMREkpb4ykuAfJq2eUPbnAB5A5DfAOS7tc0TICdt8wYgJ23zBiC3gHyatvl..."
+    },
+    {
+      "content": "**Forecast for 37.7749, -122.4194 (San Francisco):**\n- **Overnight:** 55°F, partly cloudy; wind 5 mph W\n- **Monday:** 65°F, sunny; wind 5–15 mph W\n- **Monday night:** 53°F, mostly clear\n- **Tuesday:** 64°F, mostly sunny\n- **Wednesday:** 65°F, sunny\n\nThe forecast tool returned additional periods beyond those shown here. For detailed updates, scan the QR code below or visit the [National Weather Service forecast page](https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194).\n\n[QR code generated for the forecast page]",
+      "role": "assistant",
+      "annotations": []
+    }
+  ],
+  "stop": true,
+  "exceeded": false,
+  "involved_tools": [
+    {
+      "name": "get-forecast",
+      "description": "Get weather forecast for a location",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90,
+            "description": "Latitude of the location"
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180,
+            "description": "Longitude of the location"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude"
+        ],
+        "additionalProperties": false,
+        "$schema": "http://json-schema.org/draft-07/schema#"
+      }
+    },
+    {
+      "name": "generate_qr_code",
+      "description": "Generate a QR code for a given URL",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The URL to encode in QR code"
+          },
+          "size": {
+            "type": "integer",
+            "description": "Size of QR code image (pixels)",
+            "default": 200
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
+  ],
+  "harness_strategy": "no_update",
+  "harness_snapshot": {
+    "path": "/Users/sneha/Python Projects/MCPEvol-Bench/src/custom/data/harness_snapshots/original.json",
+    "captured_at_utc": "2026-10-24T06:59:09.327320+00:00",
+    "tool_count": 1384
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "task_id": 29,
+  "strategy": "selective_patch",
+  "stage": "late",
+  "mutation_depth": 2,
+  "routing_events": [
+    {
+      "depth": 2,
+      "server": "@modelcontextprotocol/server-sequential-thinking",
+      "before": [
+        "sequentialthinking"
+      ],
+      "after": [
+        "sequentialthinking",
+        "convergent-synthesis"
+      ],
+      "change_class": "TOOL"
+    }
+  ],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "@modelcontextprotocol/server-sequential-thinking",
+      "tool": "sequentialthinking",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.$schema",
+        "inputSchema.additionalProperties",
+        "inputSchema.properties.branchFromThought.maximum",
+        "inputSchema.properties.confidenceScore",
+        "inputSchema.properties.isRevision.type",
+        "inputSchema.properties.needsMoreThoughts.type",
+        "inputSchema.properties.nextThoughtNeeded.type",
+        "inputSchema.properties.revisesThought.maximum",
+        "inputSchema.properties.thoughtNumber.maximum",
+        "inputSchema.properties.thoughtPriority",
+        "inputSchema.properties.totalThoughts.maximum"
+      ],
+      "old_hash": "160770158ec159730d775f737c36244516c2f0e21301035a09e6de2be04bc1f7",
+      "candidate_hash": "5f72d959044ce4ed762f01a46efef2089d76e0a28a8de3cd9c8d064e280a21b0",
+      "live_hash": "5f72d959044ce4ed762f01a46efef2089d76e0a28a8de3cd9c8d064e280a21b0",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "thought": "Initial step.",
+          "nextThoughtNeeded": true,
+          "thoughtNumber": 1,
+          "totalThoughts": 1
+        }
+      },
+      "final_hash": "5f72d959044ce4ed762f01a46efef2089d76e0a28a8de3cd9c8d064e280a21b0"
+    },
+    {
+      "server": "@modelcontextprotocol/server-sequential-thinking",
+      "tool": "convergent-synthesis",
+      "change_classes": [
+        "TOOL"
+      ],
+      "field_paths": [
+        "$"
+      ],
+      "old_hash": null,
+      "candidate_hash": "e53cc2c4ba4738a6ab86fe24e59d4e64143b6dab2d080ae953508078ebc34b27",
+      "live_hash": "e53cc2c4ba4738a6ab86fe24e59d4e64143b6dab2d080ae953508078ebc34b27",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "synthesisId": "s",
+          "sourcePaths": [
+            "p1"
+          ],
+          "convergencePoints": [],
+          "evidenceWeighting": {
+            "p1": "weak"
+          },
+          "resolutionStrategy": "consensus",
+          "synthesizedConclusion": "Insufficient information.",
+          "confidenceLevel": "low"
+        }
+      },
+      "final_hash": "e53cc2c4ba4738a6ab86fe24e59d4e64143b6dab2d080ae953508078ebc34b27"
+    },
+    {
+      "server": "mcp-server-commands",
+      "tool": "run_process",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.additionalProperties",
+        "inputSchema.properties.argv.description",
+        "inputSchema.properties.argv.items.minLength",
+        "inputSchema.properties.capture_output",
+        "inputSchema.properties.command_line.description",
+        "inputSchema.properties.command_line.minLength",
+        "inputSchema.properties.cwd.description",
+        "inputSchema.properties.cwd.minLength",
+        "inputSchema.properties.dry_run",
+        "inputSchema.properties.env",
+        "inputSchema.properties.kill_signal",
+        "inputSchema.properties.max_output_bytes",
+        "inputSchema.properties.memory_limit_mb",
+        "inputSchema.properties.mode",
+        "inputSchema.properties.stdin",
+        "inputSchema.properties.stdin_text",
+        "inputSchema.properties.timeout_ms.description",
+        "inputSchema.properties.timeout_ms.maximum",
+        "inputSchema.properties.timeout_ms.minimum",
+        "inputSchema.properties.timeout_ms.type",
+        "inputSchema.required"
+      ],
+      "old_hash": "a587f2992312ad845d2b80ac05026ef8fde4bb5f3a1525c97d01264e95bd5d6a",
+      "candidate_hash": "621a6fd9e631bc854eedab53956c96f49a0457e48343894f49f8b2f4c5879dc2",
+      "live_hash": "621a6fd9e631bc854eedab53956c96f49a0457e48343894f49f8b2f4c5879dc2",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "mode": "executable",
+          "cwd": "/",
+          "argv": [
+            "true"
+          ]
+        }
+      },
+      "final_hash": "621a6fd9e631bc854eedab53956c96f49a0457e48343894f49f8b2f4c5879dc2"
+    }
+  ],
+  "changed_card_count": 3,
+  "changed_field_count": 35,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 13105,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 1045,
+      "output_tokens": 80,
+      "latency_ms": 2651,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 921,
+      "output_tokens": 255,
+      "latency_ms": 5323,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 644,
+      "output_tokens": 129,
+      "latency_ms": 5121,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 3,
+    "input_tokens": 2610,
+    "output_tokens": 464,
+    "latency_ms": 13095,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "ff22246d8989dbd8b6323966ec9bc8e73382b94fdec057a10f98dfe58c1c7924"
+}

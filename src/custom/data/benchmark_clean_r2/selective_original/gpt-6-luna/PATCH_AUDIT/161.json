@@ -1,0 +1,23 @@
+{
+  "task_id": 161,
+  "strategy": "selective_patch",
+  "stage": "early",
+  "mutation_depth": 0,
+  "routing_events": [],
+  "warnings": [],
+  "patch_records": [],
+  "changed_card_count": 0,
+  "changed_field_count": 0,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 5,
+  "cost_ledger": [],
+  "cost_summary": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_ms": 0,
+    "estimated_usd": 0,
+    "cost_status": "priced"
+  },
+  "final_tool_hash": "53c394225a6f64dd90f816f01bcf8d452c7e379a49ffc256ae6a618e97c08671"
+}

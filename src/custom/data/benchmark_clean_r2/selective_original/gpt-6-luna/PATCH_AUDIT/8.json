@@ -1,0 +1,26 @@
+{
+  "task_id": 8,
+  "strategy": "selective_patch",
+  "stage": "early",
+  "mutation_depth": 0,
+  "routing_events": [],
+  "warnings": [
+    "unresolved in source and target: fixparser-plugin-mcp/verifyOrder",
+    "unresolved in source and target: fixparser-plugin-mcp/executeOrder"
+  ],
+  "patch_records": [],
+  "changed_card_count": 0,
+  "changed_field_count": 0,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 72,
+  "cost_ledger": [],
+  "cost_summary": {
+    "model_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_ms": 0,
+    "estimated_usd": 0,
+    "cost_status": "priced"
+  },
+  "final_tool_hash": "a8b3278340e843bf1fc5c690b1c6de440779071215e8211a7fc6317ba4f5f81f"
+}

@@ -17,7 +17,26 @@ from custom.prompt.eval_error_prompt import build_mcp_bench_judge_prompt
 from custom.utils.test_utils import load_all_json_files, format_tools_to_string, get_1mcp_server_tools
 from custom.utils.mcp_utils import get_1mcp_status
 from custom.utils.openai_llm import chat_with_openai
-from custom.analysis.mutation.utils import extract_json_from_markdown
+
+
+def extract_json_from_markdown(text: str) -> Optional[Dict[str, Any]]:
+    """Parse a JSON object returned either directly or inside a Markdown fence."""
+    candidate = text.strip()
+    if candidate.startswith("```"):
+        lines = candidate.splitlines()
+        candidate = "\n".join(lines[1:-1]).strip()
+    try:
+        parsed = json.loads(candidate)
+        return parsed if isinstance(parsed, dict) else None
+    except json.JSONDecodeError:
+        start = candidate.find("{")
+        if start < 0:
+            return None
+        try:
+            parsed, _ = json.JSONDecoder().raw_decode(candidate[start:])
+            return parsed if isinstance(parsed, dict) else None
+        except json.JSONDecodeError:
+            return None
 
 tool_status, _ = asyncio.run(get_1mcp_status('http://127.0.0.1:3050/mcp'))
 
@@ -362,10 +381,23 @@ def evaluate_list(
             if not isinstance(packed, dict) or "aggregate" not in packed:
                 continue
 
-        total_scores["task_fulfillment_mean"] += packed["aggregate"]["task_fulfillment_mean"]
-        total_scores["grounding_mean"] += packed["aggregate"]["grounding_mean"]
-        total_scores["planning_and_efficiency_mean"] += packed["aggregate"]["planning_and_efficiency_mean"]
+        aggregate = packed["aggregate"]
+        score_values = (
+            aggregate.get("task_fulfillment_mean"),
+            aggregate.get("grounding_mean"),
+            aggregate.get("planning_and_efficiency_mean"),
+        )
+        if not all(isinstance(value, (int, float)) for value in score_values):
+            continue
+        total_scores["task_fulfillment_mean"] += score_values[0]
+        total_scores["grounding_mean"] += score_values[1]
+        total_scores["planning_and_efficiency_mean"] += score_values[2]
         total_number += 1
+    if total_number == 0:
+        raise RuntimeError(
+            "No judge calls produced valid scores. Check the Judge API errors above, "
+            "OPENAI_API_KEY, MODEL_URL, and judge model compatibility."
+        )
     print(f"task_fulfillment: {total_scores['task_fulfillment_mean'] / total_number:.3f}")
     print(f"grounding: {total_scores['grounding_mean'] / total_number:.3f}")
     print(f"planning_and_efficiency: {total_scores['planning_and_efficiency_mean'] / total_number:.3f}")
@@ -410,7 +442,10 @@ if __name__ == "__main__":
 
     cases = load_all_json_files(answer_path)
 
-    with open(f'custom/data/test_cases/real.json', 'r', encoding='utf-8') as f:
+    real_test_case_path = 'custom/data/test_cases/real.json'
+    if not os.path.exists(real_test_case_path):
+        real_test_case_path = 'custom/data/test_cases/chosen_idx.json'
+    with open(real_test_case_path, 'r', encoding='utf-8') as f:
         real_test_cases = json.load(f)
     real_test_case_ids = [item['idx'] for item in real_test_cases['samples']]
 

@@ -1,0 +1,109 @@
+{
+  "task_id": 229,
+  "strategy": "selective_patch",
+  "stage": "late",
+  "mutation_depth": 2,
+  "routing_events": [
+    {
+      "depth": 2,
+      "server": "@next-ai-drawio/mcp-server",
+      "before": [
+        "create_new_diagram"
+      ],
+      "after": [
+        "create_new_diagram",
+        "duplicate_diagram"
+      ],
+      "change_class": "TOOL"
+    }
+  ],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "@next-ai-drawio/mcp-server",
+      "tool": "create_new_diagram",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.properties.diagram_type",
+        "inputSchema.properties.layout_direction",
+        "inputSchema.properties.screenshot",
+        "inputSchema.properties.style_preset",
+        "inputSchema.properties.xml.description",
+        "inputSchema.required"
+      ],
+      "old_hash": "ddcfed88248c91c04b2a11a454a9809e85e738303f94689d2948c90b4dd0a9e7",
+      "candidate_hash": "def410b4140703a1cafa2a6902335ae17a7375138bfc42a02a861dcfd2a6c665",
+      "live_hash": "def410b4140703a1cafa2a6902335ae17a7375138bfc42a02a861dcfd2a6c665",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "xml": "<mxGraphModel><root><mxCell id=\"0\"/><mxCell id=\"1\" parent=\"0\"/></root></mxGraphModel>"
+        }
+      },
+      "final_hash": "def410b4140703a1cafa2a6902335ae17a7375138bfc42a02a861dcfd2a6c665"
+    },
+    {
+      "server": "@next-ai-drawio/mcp-server",
+      "tool": "duplicate_diagram",
+      "change_classes": [
+        "TOOL"
+      ],
+      "field_paths": [
+        "$"
+      ],
+      "old_hash": null,
+      "candidate_hash": "683656fe66037bba64657326e9fdadb32dbab782ed6b1dc381ccfe15421b7bcd",
+      "live_hash": "683656fe66037bba64657326e9fdadb32dbab782ed6b1dc381ccfe15421b7bcd",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {}
+      },
+      "final_hash": "683656fe66037bba64657326e9fdadb32dbab782ed6b1dc381ccfe15421b7bcd"
+    }
+  ],
+  "changed_card_count": 2,
+  "changed_field_count": 8,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 3868,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 646,
+      "output_tokens": 130,
+      "latency_ms": 2641,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 142,
+      "output_tokens": 31,
+      "latency_ms": 1220,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 2,
+    "input_tokens": 788,
+    "output_tokens": 161,
+    "latency_ms": 3861,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "892a5956a8e18837c8243acf9a762d7855d85fbe0a427dd7eb61598efe52135c"
+}

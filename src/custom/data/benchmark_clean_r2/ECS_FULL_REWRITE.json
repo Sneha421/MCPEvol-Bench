@@ -1,0 +1,298 @@
+{
+  "meta": {
+    "dirs": {
+      "a": "custom/data/benchmark_clean_r2/full_rewrite_original/gpt-6-luna/EVAL",
+      "b": "custom/data/benchmark_clean_r1/full_rewrite_iter3/gpt-6-luna/EVAL",
+      "c": "custom/data/benchmark_clean_r1/full_rewrite_iter5/gpt-6-luna/EVAL"
+    },
+    "prefer": "mean",
+    "counts": {
+      "a_total": 20,
+      "b_total": 20,
+      "c_total": 20,
+      "a_scored": 20,
+      "b_scored": 20,
+      "c_scored": 20,
+      "common_scored": 20
+    },
+    "skipped": {
+      "a": [],
+      "b": [],
+      "c": []
+    },
+    "missing_in": {
+      "a": [
+        "161.json",
+        "2.json",
+        "21.json",
+        "22.json",
+        "225.json",
+        "229.json",
+        "235.json",
+        "249.json",
+        "26.json",
+        "281.json",
+        "29.json",
+        "291.json",
+        "30.json",
+        "34.json",
+        "385.json",
+        "40.json",
+        "448.json",
+        "5.json",
+        "8.json",
+        "94.json"
+      ],
+      "b": [
+        "161.json",
+        "2.json",
+        "21.json",
+        "22.json",
+        "225.json",
+        "229.json",
+        "235.json",
+        "249.json",
+        "26.json",
+        "281.json",
+        "29.json",
+        "291.json",
+        "30.json",
+        "34.json",
+        "385.json",
+        "40.json",
+        "448.json",
+        "5.json",
+        "8.json",
+        "94.json"
+      ],
+      "c": [
+        "161.json",
+        "2.json",
+        "21.json",
+        "22.json",
+        "225.json",
+        "229.json",
+        "235.json",
+        "249.json",
+        "26.json",
+        "281.json",
+        "29.json",
+        "291.json",
+        "30.json",
+        "34.json",
+        "385.json",
+        "40.json",
+        "448.json",
+        "5.json",
+        "8.json",
+        "94.json"
+      ]
+    }
+  },
+  "rows": [
+    {
+      "filename": "161.json",
+      "score_a": 10.0,
+      "score_b": 10.0,
+      "score_c": 10.0,
+      "mean": 10.0,
+      "stdev": 0.0,
+      "variance": 0.0,
+      "range": 0.0
+    },
+    {
+      "filename": "2.json",
+      "score_a": 5.2,
+      "score_b": 7.0,
+      "score_c": 6.4,
+      "mean": 6.2,
+      "stdev": 0.7483314773547882,
+      "variance": 0.5599999999999999,
+      "range": 1.7999999999999998
+    },
+    {
+      "filename": "21.json",
+      "score_a": 5.0,
+      "score_b": 5.2,
+      "score_c": 10.0,
+      "mean": 6.733333333333333,
+      "stdev": 2.3113247764479623,
+      "variance": 5.342222222222222,
+      "range": 5.0
+    },
+    {
+      "filename": "22.json",
+      "score_a": 5.2,
+      "score_b": 5.0,
+      "score_c": 5.4,
+      "mean": 5.2,
+      "stdev": 0.16329931618554536,
+      "variance": 0.026666666666666713,
+      "range": 0.40000000000000036
+    },
+    {
+      "filename": "225.json",
+      "score_a": 3.8,
+      "score_b": 4.0,
+      "score_c": 5.6,
+      "mean": 4.466666666666666,
+      "stdev": 0.8055363982396381,
+      "variance": 0.6488888888888887,
+      "range": 1.7999999999999998
+    },
+    {
+      "filename": "229.json",
+      "score_a": 1.2,
+      "score_b": 2.6,
+      "score_c": 1.2,
+      "mean": 1.6666666666666667,
+      "stdev": 0.6599663291074445,
+      "variance": 0.43555555555555564,
+      "range": 1.4000000000000001
+    },
+    {
+      "filename": "235.json",
+      "score_a": 10.0,
+      "score_b": 5.4,
+      "score_c": 10.0,
+      "mean": 8.466666666666667,
+      "stdev": 2.1684607956387456,
+      "variance": 4.702222222222222,
+      "range": 4.6
+    },
+    {
+      "filename": "249.json",
+      "score_a": 6.0,
+      "score_b": 2.6,
+      "score_c": 6.4,
+      "mean": 5.0,
+      "stdev": 1.7048949136725895,
+      "variance": 2.9066666666666667,
+      "range": 3.8000000000000003
+    },
+    {
+      "filename": "26.json",
+      "score_a": 2.0,
+      "score_b": 2.2,
+      "score_c": 2.2,
+      "mean": 2.1333333333333333,
+      "stdev": 0.09428090415820642,
+      "variance": 0.008888888888888904,
+      "range": 0.20000000000000018
+    },
+    {
+      "filename": "281.json",
+      "score_a": 9.0,
+      "score_b": 8.2,
+      "score_c": 9.0,
+      "mean": 8.733333333333333,
+      "stdev": 0.3771236166328257,
+      "variance": 0.14222222222222247,
+      "range": 0.8000000000000007
+    },
+    {
+      "filename": "29.json",
+      "score_a": 10.0,
+      "score_b": 4.4,
+      "score_c": 5.0,
+      "mean": 6.466666666666666,
+      "stdev": 2.5104227178350307,
+      "variance": 6.3022222222222215,
+      "range": 5.6
+    },
+    {
+      "filename": "291.json",
+      "score_a": 2.8,
+      "score_b": 3.8,
+      "score_c": 2.2,
+      "mean": 2.9333333333333336,
+      "stdev": 0.6599663291074442,
+      "variance": 0.43555555555555536,
+      "range": 1.5999999999999996
+    },
+    {
+      "filename": "30.json",
+      "score_a": 10.0,
+      "score_b": 10.0,
+      "score_c": 10.0,
+      "mean": 10.0,
+      "stdev": 0.0,
+      "variance": 0.0,
+      "range": 0.0
+    },
+    {
+      "filename": "34.json",
+      "score_a": 10.0,
+      "score_b": 5.0,
+      "score_c": 2.6,
+      "mean": 5.866666666666667,
+      "stdev": 3.0825674724525047,
+      "variance": 9.502222222222223,
+      "range": 7.4
+    },
+    {
+      "filename": "385.json",
+      "score_a": 8.6,
+      "score_b": 8.4,
+      "score_c": 8.8,
+      "mean": 8.6,
+      "stdev": 0.16329931618554536,
+      "variance": 0.026666666666666713,
+      "range": 0.40000000000000036
+    },
+    {
+      "filename": "40.json",
+      "score_a": 5.0,
+      "score_b": 5.0,
+      "score_c": 5.0,
+      "mean": 5.0,
+      "stdev": 0.0,
+      "variance": 0.0,
+      "range": 0.0
+    },
+    {
+      "filename": "448.json",
+      "score_a": 5.0,
+      "score_b": 4.0,
+      "score_c": 3.8,
+      "mean": 4.266666666666667,
+      "stdev": 0.5249338582674541,
+      "variance": 0.2755555555555556,
+      "range": 1.2000000000000002
+    },
+    {
+      "filename": "5.json",
+      "score_a": 1.0,
+      "score_b": 1.0,
+      "score_c": 1.0,
+      "mean": 1.0,
+      "stdev": 0.0,
+      "variance": 0.0,
+      "range": 0.0
+    },
+    {
+      "filename": "8.json",
+      "score_a": 10.0,
+      "score_b": 10.0,
+      "score_c": 10.0,
+      "mean": 10.0,
+      "stdev": 0.0,
+      "variance": 0.0,
+      "range": 0.0
+    },
+    {
+      "filename": "94.json",
+      "score_a": 10.0,
+      "score_b": 9.2,
+      "score_c": 10.0,
+      "mean": 9.733333333333333,
+      "stdev": 0.3771236166328257,
+      "variance": 0.14222222222222247,
+      "range": 0.8000000000000007
+    }
+  ],
+  "summary": {
+    "ecs": 5.305756741437405,
+    "tasks_count": 20
+  }
+}

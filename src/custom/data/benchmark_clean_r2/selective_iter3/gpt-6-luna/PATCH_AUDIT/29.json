@@ -1,0 +1,123 @@
+{
+  "task_id": 29,
+  "strategy": "selective_patch",
+  "stage": "middle",
+  "mutation_depth": 1,
+  "routing_events": [],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "@modelcontextprotocol/server-sequential-thinking",
+      "tool": "sequentialthinking",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.$schema",
+        "inputSchema.additionalProperties",
+        "inputSchema.properties.branchFromThought.maximum",
+        "inputSchema.properties.isRevision.type",
+        "inputSchema.properties.needsMoreThoughts.type",
+        "inputSchema.properties.nextThoughtNeeded.type",
+        "inputSchema.properties.revisesThought.maximum",
+        "inputSchema.properties.thoughtNumber.maximum",
+        "inputSchema.properties.totalThoughts.maximum"
+      ],
+      "old_hash": "160770158ec159730d775f737c36244516c2f0e21301035a09e6de2be04bc1f7",
+      "candidate_hash": "60b8f7534e63dc0b2cef559f4aa84db0c79ac09399ebf0d48f2fe4d1e28df0ed",
+      "live_hash": "60b8f7534e63dc0b2cef559f4aa84db0c79ac09399ebf0d48f2fe4d1e28df0ed",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "thought": "Initial assessment complete.",
+          "nextThoughtNeeded": false,
+          "thoughtNumber": 1,
+          "totalThoughts": 1
+        }
+      },
+      "final_hash": "60b8f7534e63dc0b2cef559f4aa84db0c79ac09399ebf0d48f2fe4d1e28df0ed"
+    },
+    {
+      "server": "mcp-server-commands",
+      "tool": "run_process",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.additionalProperties",
+        "inputSchema.properties.argv.description",
+        "inputSchema.properties.argv.items.minLength",
+        "inputSchema.properties.command_line.description",
+        "inputSchema.properties.command_line.minLength",
+        "inputSchema.properties.cwd.description",
+        "inputSchema.properties.cwd.minLength",
+        "inputSchema.properties.dry_run",
+        "inputSchema.properties.mode",
+        "inputSchema.properties.stdin",
+        "inputSchema.properties.stdin_text",
+        "inputSchema.properties.timeout_ms.description",
+        "inputSchema.properties.timeout_ms.maximum",
+        "inputSchema.properties.timeout_ms.minimum",
+        "inputSchema.properties.timeout_ms.type",
+        "inputSchema.required"
+      ],
+      "old_hash": "a587f2992312ad845d2b80ac05026ef8fde4bb5f3a1525c97d01264e95bd5d6a",
+      "candidate_hash": "f614b9706bde76c0b724dc6398c03157f5cfd59381a34e8a773ef9b6cb1057ab",
+      "live_hash": "f614b9706bde76c0b724dc6398c03157f5cfd59381a34e8a773ef9b6cb1057ab",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "mode": "shell",
+          "cwd": "/",
+          "command_line": "true"
+        }
+      },
+      "final_hash": "f614b9706bde76c0b724dc6398c03157f5cfd59381a34e8a773ef9b6cb1057ab"
+    }
+  ],
+  "changed_card_count": 2,
+  "changed_field_count": 27,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 3825,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 925,
+      "output_tokens": 105,
+      "latency_ms": 2043,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 434,
+      "output_tokens": 76,
+      "latency_ms": 1763,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 2,
+    "input_tokens": 1359,
+    "output_tokens": 181,
+    "latency_ms": 3806,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "d6b1f4371e43b61ae6d6309a8c9af58b5960608e2a142117158b64419d676103"
+}

@@ -1,0 +1,98 @@
+{
+  "task_id": 26,
+  "strategy": "selective_patch",
+  "stage": "middle",
+  "mutation_depth": 1,
+  "routing_events": [],
+  "warnings": [],
+  "patch_records": [
+    {
+      "server": "mcp-weather-demo",
+      "tool": "get-forecast",
+      "change_classes": [
+        "PARAM"
+      ],
+      "field_paths": [
+        "inputSchema.properties.includeDetails",
+        "inputSchema.properties.periods"
+      ],
+      "old_hash": "24a1b79660683359f53a3b8a2f503694f525395e1af03c829227c3a0aa0121de",
+      "candidate_hash": "601edc26825b8d684a942111091ca161bcfbe87f7fd405bea6afabd56b17ddc1",
+      "live_hash": "601edc26825b8d684a942111091ca161bcfbe87f7fd405bea6afabd56b17ddc1",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "latitude": 0,
+          "longitude": 0
+        }
+      },
+      "final_hash": "601edc26825b8d684a942111091ca161bcfbe87f7fd405bea6afabd56b17ddc1"
+    },
+    {
+      "server": "@pimzino/agentic-tools-mcp",
+      "tool": "create_project",
+      "change_classes": [
+        "DESC",
+        "PARAM"
+      ],
+      "field_paths": [
+        "description",
+        "inputSchema.properties.repoUrl",
+        "inputSchema.properties.tags"
+      ],
+      "old_hash": "f1752bfeef072c6e6647f237cb7ccb4e410440f2d0d853cc3d549ec792c5533f",
+      "candidate_hash": "c55773f1851fc3644f18851be2252e1879b8a664c2224a5cda3b178b15374169",
+      "live_hash": "c55773f1851fc3644f18851be2252e1879b8a664c2224a5cda3b178b15374169",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "workingDirectory": "/tmp",
+          "name": "Project",
+          "description": "A new project."
+        }
+      },
+      "final_hash": "c55773f1851fc3644f18851be2252e1879b8a664c2224a5cda3b178b15374169"
+    }
+  ],
+  "changed_card_count": 2,
+  "changed_field_count": 5,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 3257,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 193,
+      "output_tokens": 40,
+      "latency_ms": 1308,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 352,
+      "output_tokens": 76,
+      "latency_ms": 1906,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 2,
+    "input_tokens": 545,
+    "output_tokens": 116,
+    "latency_ms": 3214,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "9fc6c3cf322c7d81410dffc0ff94b44173f3e82171a3773c67f970caefd38eac"
+}

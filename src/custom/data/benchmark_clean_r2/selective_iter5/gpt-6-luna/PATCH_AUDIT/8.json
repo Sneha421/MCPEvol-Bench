@@ -1,0 +1,97 @@
+{
+  "task_id": 8,
+  "strategy": "selective_patch",
+  "stage": "late",
+  "mutation_depth": 2,
+  "routing_events": [],
+  "warnings": [
+    "unresolved in source and target: fixparser-plugin-mcp/verifyOrder",
+    "unresolved in source and target: fixparser-plugin-mcp/executeOrder"
+  ],
+  "patch_records": [
+    {
+      "server": "time-mcp",
+      "tool": "convert_time",
+      "change_classes": [
+        "PARAM"
+      ],
+      "field_paths": [
+        "inputSchema.properties.sourceTimezone.description",
+        "inputSchema.properties.targetTimezone.description",
+        "inputSchema.properties.time.description"
+      ],
+      "old_hash": "2f78c3f5500cb2bc2d0ae1913037f07a69a0e563ecd91d2dd400f8d6022d96f0",
+      "candidate_hash": "92aef518d9112a2265451b8c72513e2b74a92ad203121c72f71d98f5488a3783",
+      "live_hash": "92aef518d9112a2265451b8c72513e2b74a92ad203121c72f71d98f5488a3783",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {
+          "sourceTimezone": "UTC",
+          "targetTimezone": "UTC",
+          "time": "00:00"
+        }
+      },
+      "final_hash": "92aef518d9112a2265451b8c72513e2b74a92ad203121c72f71d98f5488a3783"
+    },
+    {
+      "server": "time-mcp",
+      "tool": "current_time",
+      "change_classes": [
+        "PARAM"
+      ],
+      "field_paths": [
+        "inputSchema.properties.format.description",
+        "inputSchema.properties.timezone.description"
+      ],
+      "old_hash": "ed967309901024e8f4f38cd7665c953e031a7baa2cf53eb24a8faa40f7dbe198",
+      "candidate_hash": "9363a825a3c33ace4d885f387d2abf6a88f2710554949962d040a213ed878666",
+      "live_hash": "9363a825a3c33ace4d885f387d2abf6a88f2710554949962d040a213ed878666",
+      "status": "promoted",
+      "initial_probe": {
+        "status": "pass",
+        "reason": "generated arguments satisfy the patched schema",
+        "arguments": {}
+      },
+      "final_hash": "9363a825a3c33ace4d885f387d2abf6a88f2710554949962d040a213ed878666"
+    }
+  ],
+  "changed_card_count": 2,
+  "changed_field_count": 5,
+  "unchanged_hash_check": true,
+  "adaptation_time_ms": 3932,
+  "cost_ledger": [
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 124,
+      "output_tokens": 68,
+      "latency_ms": 2264,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    },
+    {
+      "phase": "controlled_probe",
+      "model": "gpt-6-luna",
+      "input_tokens": 156,
+      "output_tokens": 33,
+      "latency_ms": 1663,
+      "status": "ok",
+      "estimated_usd": null,
+      "cost_status": "unknown",
+      "error": null
+    }
+  ],
+  "cost_summary": {
+    "model_calls": 2,
+    "input_tokens": 280,
+    "output_tokens": 101,
+    "latency_ms": 3927,
+    "estimated_usd": null,
+    "cost_status": "unknown"
+  },
+  "final_tool_hash": "3bdd1b548d5752539cbe8c9c22c12412d50fef2e795b58e7965edb84e2480b4a"
+}
